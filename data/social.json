@@ -1,0 +1,22 @@
+{
+    "kick": {
+        "self": "You kicked yourself in the nuts! Good job!",
+        "target": "You kick %1 in the nuts. They squeal like a pig!"
+    },
+    "punch": {
+        "self": "You punched your own lights out! That's talent!",
+        "target": "You punch %1 in the nose. Crack!"
+    },
+    "fap": {
+        "self": "You fap and get a blister.",
+        "target": "You spooge all over %1"
+    },
+    "wave": {
+        "self": "You crash into the sandy shore.",
+        "target": "You wave at %1. They stare at you as if you're insane."
+    },
+    "smile": {
+        "self": "What's so funny, asshole?",
+        "target": "You smile at %1. They punch you in the face."
+    }
+}
