@@ -73,11 +73,9 @@ class SocialInterpreter
 			return value['self']
 		else
 			found = false
-			$sockets.each do |connection|
-				pp connection
-				pp connection.user
+			$sockets.each do |socket, connection|
 				user = connection.user
-				if (user.name == target)
+				if (user && user.username == target)
 					found = true
 				end
 			end
