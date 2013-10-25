@@ -25,8 +25,6 @@ class Interpreter
 
 		actions.each do |key, value|
 			if (key == command)
-				p key
-				p value
 				return SocialInterpreter.interpret(value, target)
 			end
 		end
@@ -74,8 +72,21 @@ class SocialInterpreter
 		if (target.length == 0)
 			return value['self']
 		else
-			return value['target'].gsub('%1', target)
+			found = false
+			$sockets.each do |connection|
+				pp connection
+				pp connection.user
+				user = connection.user
+				if (user.name == target)
+					found = true
+				end
+			end
+
+			if (found)
+				return value['target'].gsub('%1', target)
+			else
+				return "#{target} is not in the room, dummy!"
+			end
 		end
 	end
-
 end
