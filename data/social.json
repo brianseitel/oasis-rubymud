@@ -1,22 +1,27 @@
 {
     "kick": {
+        "general": "You kick the air and pull a muscle in your groin.",
         "self": "You kicked yourself in the nuts! Good job!",
         "target": "You kick %1 in the nuts. They squeal like a pig!"
     },
     "punch": {
+        "general": "You punch a nearby wall and shatter your knuckles.",
         "self": "You punched your own lights out! That's talent!",
         "target": "You punch %1 in the nose. Crack!"
     },
     "fap": {
+        "general": "You fap and get a blister.",
         "self": "You fap and get a blister.",
         "target": "You spooge all over %1"
     },
     "wave": {
-        "self": "You crash into the sandy shore.",
+        "general": "You crash into the sandy shore.",
+        "self": "You crash into yourself somehow.",
         "target": "You wave at %1. They stare at you as if you're insane."
     },
     "smile": {
-        "self": "What's so funny, asshole?",
+        "general": "What's so funny, asshole?",
+        "self": "You smile at yourself. Yourself smiles back.",
         "target": "You smile at %1. They punch you in the face."
     }
 }
