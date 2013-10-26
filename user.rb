@@ -2,13 +2,6 @@ require 'active_record'
 
 class User < ActiveRecord::Base
 
-	attr_accessor :username
-	attr_accessor :room_id
-	attr_accessor :area_id
-	attr_accessor :password
-
-	@room_id = 1
-	
 	def self.do_new(username)
 		@input = ""
 		while (@input.downcase != "y" && @input.downcase != "n")
@@ -32,8 +25,8 @@ class User < ActiveRecord::Base
 			@confirm = MudServer.socket.gets.chomp("\r\n")
 		end
 
-		@user = User.create(username => username, password => @password, area_id => 1, room_id => 1)
-		return @user
+		user = User.create(:username => username, :password => @password, :area_id => 1, :room_id => 1)
+		return user
 	end
 
 	def self.login
@@ -53,7 +46,7 @@ class User < ActiveRecord::Base
 					MudServer.socket.puts "Invalid password.\n\n"
 				end
 			else
-				@user = User.do_new
+				@user = User.do_new(@input)
 				if (@user)
 					found = true
 				end
