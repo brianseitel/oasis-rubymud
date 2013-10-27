@@ -56,32 +56,56 @@ class CommandInterpreter
 	end
 
 	def self.do_exit
-		MudServer.socket.puts "Bye bye"
-		MudServer.socket.close
+		current_client.puts "Bye bye"
+		current_client.close
 	end
 
 	def self.do_kill
 		return "You attempt to kill yourself with a spatula. You fail spectacularly."
 	end
 
+	def self.do_look
+		output = []
+		begin
+			MudServer.clients.each do |connection|
+				if (connection.user)
+					output << connection.user.username
+				end
+			end
+		rescue Exception => e
+			pp e
+		end
+
+		return output.join("\n")
+	end
 end
 
 class SocialInterpreter
 
 	def self.interpret(value, target)
-		if (target.length == 0)
+		if (target.length == 0 || target == current_user.username)
 			return value['self']
 		else
 			found = false
-			$sockets.each do |socket, connection|
+			@target = nil
+			MudServer.clients.each do |connection|
 				user = connection.user
 				if (user && user.username == target)
 					found = true
+					@target = connection
+					break;
 				end
 			end
 
 			if (found)
-				return value['target'].gsub('%1', target)
+				current_client.puts value['target'].gsub('%1', target)
+				if (@target)
+					begin
+						@target.client.puts value['other'].gsub('%1', current_thread.user.username)
+					rescue Exception => e
+						pp e
+					end
+				end
 			else
 				return "#{target} is not in the room, dummy!"
 			end

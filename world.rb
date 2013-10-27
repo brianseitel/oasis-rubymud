@@ -9,7 +9,7 @@ class World
 
 		while (true)
 			sleep 3
-			MudServer.socket.puts "\n... tick tock ...\n"
+			current_client.puts "\n... tick tock ...\n"
 		end
 
 		@@last_time = Time.now

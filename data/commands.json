@@ -1,5 +1,6 @@
 {
 	"attack": { "method": "do_attack" },
 	"kill": { "method": "do_kill" },
-	"quit": { "method": "do_exit" }
+	"quit": { "method": "do_exit" },
+	"look": { "method": "do_look" }
 }

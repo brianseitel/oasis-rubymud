@@ -5,8 +5,8 @@ class User < ActiveRecord::Base
 	def self.do_new(username)
 		@input = ""
 		while (@input.downcase != "y" && @input.downcase != "n")
-			MudServer.socket.puts "Are you a new user? [y/n]\n"
-			@input = MudServer.socket.gets.chomp("\r\n")
+			current_client.puts "Are you a new user? [y/n]\n"
+			@input = current_client.gets.chomp("\r\n")
 		end
 
 		if (@input == "n")
@@ -18,11 +18,11 @@ class User < ActiveRecord::Base
 		@confirm = ""
 
 		while (@password != @confirm)
-			MudServer.socket.puts "Choose a password:"
-			@password = MudServer.socket.gets.chomp("\r\n")
+			current_client.puts "Choose a password:"
+			@password = current_client.gets.chomp("\r\n")
 
-			MudServer.socket.puts "Confirm your password"
-			@confirm = MudServer.socket.gets.chomp("\r\n")
+			current_client.puts "Confirm your password"
+			@confirm = current_client.gets.chomp("\r\n")
 		end
 
 		user = User.create(:username => username, :password => @password, :area_id => 1, :room_id => 1)
@@ -32,18 +32,19 @@ class User < ActiveRecord::Base
 	def self.login
 		found = false
 		while (!found)
-			MudServer.socket.puts "What's your name?\n"
-			@input = MudServer.socket.gets.chomp("\r\n")
+			current_client.puts "What's your name?\n"
+			@input = current_client.gets.chomp("\r\n")
 			@user = User.find_by username: @input
 			if (@user)
-				MudServer.socket.puts "Enter password: "
-				@password = MudServer.socket.gets.chomp("\r\n")
+				current_client.puts "Enter password: "
+				@password = current_client.gets.chomp("\r\n")
+
 				@user = User.find_by username: @input, password: @password
 
 				if (@user)
 					found = true
 				else
-					MudServer.socket.puts "Invalid password.\n\n"
+					current_client.puts "Invalid password.\n\n"
 				end
 			else
 				@user = User.do_new(@input)
@@ -52,7 +53,6 @@ class User < ActiveRecord::Base
 				end
 			end
 		end
-
 		return @user
 	end
 end
