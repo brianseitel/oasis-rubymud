@@ -1,0 +1,103 @@
+{
+    "Shrader": {
+        "id": 1,
+        "rooms": [
+            {
+                "id": 1,
+                "exits": {
+                    "north": 2,
+                    "west": 9
+                },
+                "description": "You are standing in the hallway to 1510 Shrader St. This is Theresa's house."
+            },
+            {
+                "id": 2,
+                "exits": {
+                    "north": 3,
+                    "east": 12,
+                    "west": 8,
+                    "south": 1
+                },
+                "description": "You are still in the hallway."
+            },
+            {
+                "id": 3,
+                "exits": {
+                    "north": 4,
+                    "east": 11,
+                    "south": 2
+                },
+                "description": "You are still in the hallway. A stink emanates from the bathroom to the east."
+            },
+            {
+                "id": 4,
+                "exits": {
+                    "north": 5,
+                    "east": 10,
+                    "south": 3,
+                    "west": 6
+                },
+                "description": "You are at the end of the hallway. The kitchen is to the west, and a bedroom to the north. A shower is running to the east."
+            },
+            {
+                "id": 5,
+                "exits": {
+                    "south": 4
+                },
+                "description": "This is Lori's room. It's a mess."
+            },
+            {
+                "id": 6,
+                "exits": {
+                    "east": 4,
+                    "south": 7
+                },
+                "description": "A pot of milk is warming on the stove. Someone is making cheese!"
+            },
+            {
+                "id": 7,
+                "exits": {
+                    "north": 6
+                },
+                "description": "The pantry is full of canned goods. Better not eat those just yet."
+            },
+            {
+                "id": 8,
+                "exits": {
+                    "east": 2,
+                    "south": 9
+                },
+                "description": "This is a bedroom. It is clean and tidy. What a nice place."
+            },
+            {
+                "id": 9,
+                "exits": {
+                    "east": 1,
+                    "north": 8
+                },
+                "description": "The TV blares Doctor Who in the corner, and the couch is occupied by a pile of dirty clothes. Probably Lori's."
+            },
+            {
+                "id": 10,
+                "exits": {
+                    "west": 4
+                },
+                "description": "The shower is running and a voice yodels from behind the curtain. Better not disturb them."
+            },
+            {
+                "id": 11,
+                "exits": {
+                    "west": 3
+                },
+                "description": "A massive stink permeates the air. The window is closed, keeping the stink inside."
+            },
+            {
+                "id": 12,
+                "exits": {
+                    "west": 2
+                },
+                "description": "This closet is built for midgets. Tall people need not apply."
+            }
+        ]
+    }
+}

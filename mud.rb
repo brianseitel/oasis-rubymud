@@ -2,7 +2,9 @@ require 'rubygems'
 require 'bundler/setup'
 require 'socket'
 
+
 require File.dirname(__FILE__) + '/interpreter'
+require File.dirname(__FILE__) + '/area'
 require File.dirname(__FILE__) + '/user'
 require File.dirname(__FILE__) + '/db'
 require File.dirname(__FILE__) + '/world'
@@ -64,10 +66,13 @@ class MudServer
 	def self.game_loop()
 		input = nil
 		world = nil
+
+		Area.display_room
+
 		while (!@@game_over)
 			# Wait for input
 			if (!input)
-				input = Thread.new(self.await_input)
+				input = self.await_input
 			end
 		end
 	end
@@ -86,7 +91,9 @@ class MudServer
 end
 
 class Client
+	attr_accessor :area
 	attr_accessor :client
+	attr_accessor :room
 	attr_accessor :user
 
 	def initialize(client_arg)
