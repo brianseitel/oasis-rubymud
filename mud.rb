@@ -35,6 +35,9 @@ class MudServer
 		puts "Starting up server..."
 		server = TCPServer.new(4000)
 
+		# Initialize DB
+		DB.load_data
+
 		loop do 
 			Thread.new(server.accept) do |client|
 				@connection = Client.new(client)
@@ -48,6 +51,8 @@ class MudServer
 					@user = User.login
 					if (@user)
 						@connection.user = @user
+						@connection.room = Room.find(@user.room_id)
+						@connection.area = Area.find(@user.area_id)
 					end
 				end
 
@@ -67,7 +72,7 @@ class MudServer
 		input = nil
 		world = nil
 
-		Area.display_room
+		Room.display current_thread.room
 
 		while (!@@game_over)
 			# Wait for input
