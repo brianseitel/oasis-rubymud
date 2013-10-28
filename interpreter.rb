@@ -69,7 +69,7 @@ class CommandInterpreter
 	end
 
 	def self.do_move(direction)
-		room = Area.current_room
+		room = current_thread.room
 
 		case direction
 		when "n"
@@ -82,21 +82,35 @@ class CommandInterpreter
 			direction = "west"
 		end
 
-		if (room['exits'][direction])
-			new_room = Area.find_room_by_id(current_user.area_id, room['exits'][direction])
+		if (room.exits.has_key? direction)
+			new_room = Room.find(room.exits.values_at direction).first
+
 			if (new_room)
 				current_thread.room = new_room
-				current_user.room_id = new_room['id']
+				current_user.room_id = new_room.id
 			end
 		else
 			current_client.puts "You can't move that way, dummy!\n"
 		end
 
-		Area.display_room
+		case direction
+			when "up"
+				cardinality = "above"
+			when "down"
+				cardinality = "down"
+			else
+				cardinality = "the #{direction}"
+		end
+		room.broadcast "#{current_user.username} leaves to #{cardinality}.\n"
+		Room.display new_room
+		new_room.broadcast "#{current_user.username} enters from #{cardinality}.\n"
 	end
 
-	def self.do_look
-		Area.display_room
+	def self.do_look(room = nil)
+		if (!room)
+			room = current_thread.room
+		end
+		Room.display room
 	end
 end
 
