@@ -23,7 +23,11 @@ def current_client
 end
 
 def current_user
-	return current_thread.user
+	if current_thread
+		return current_thread.user
+	else
+		return false
+	end
 end
 
 class MudServer
@@ -38,9 +42,16 @@ class MudServer
 		puts "Starting up server..."
 		server = TCPServer.new(4000)
 
-		# Initialize DB
+		# Big bang
 		DB.load_data
+		World.spawn_mobs
 
+		# Time starts now
+		Thread.start do
+			World.update
+		end
+
+		# Wait for users!
 		loop do 
 			Thread.new(server.accept) do |client|
 				@connection = Client.new(client)
@@ -63,18 +74,12 @@ class MudServer
 
 				self.game_loop
 			end
-
-			Thread.start do
-				World.update
-			end
-
 		end
+
 	end
 
 	def self.game_loop()
 		input = nil
-		world = nil
-
 		Room.display current_thread.room
 
 		while (!@@game_over)

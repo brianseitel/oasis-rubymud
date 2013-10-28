@@ -1,0 +1,10 @@
+{
+	"mobs": [
+		{
+			"name": "Miko",
+			"area_id": 1,
+			"starting_room_id": 9,
+			"short_description": "A fierce ball of fluff attacks a squeaky toy."
+		}
+	]
+}

@@ -8,7 +8,21 @@ class Room < ActiveRecord::Base
 		current_client.puts room.title
 		current_client.puts room.description + "\n"
 		self.show_exits room
+		self.show_mobs room
 		self.show_people room
+	end
+
+	def self.show_mobs(room)
+		results = []
+		World.mobs.each do |mob|
+			if (mob.room.id == room.id)
+				results << mob
+			end
+		end
+
+		results.each do |mob|
+			current_client.puts "#{mob.short_description}\n"
+		end
 	end
 
 	def self.show_exits(room)
@@ -42,13 +56,14 @@ class Room < ActiveRecord::Base
 		return users
 	end
 
-	def broadcast(message)
+	def broadcast(message, mob = false)
 		connections = []
 		MudServer.clients.each do |connection|
 			user = connection.user
-			if (user.id != current_user.id && 
-				user.room_id == self.id)
-				connection.client.puts message
+			if (user.room_id == self.id)
+				if (mob || (current_user && current_user.id != user.id))
+					connection.client.puts message
+				end
 			end
 		end
 
