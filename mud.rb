@@ -8,9 +8,12 @@ require File.dirname(__FILE__) + '/area'
 require File.dirname(__FILE__) + '/user'
 require File.dirname(__FILE__) + '/db'
 require File.dirname(__FILE__) + '/world'
+require File.dirname(__FILE__) + '/room'
+require File.dirname(__FILE__) + '/mob'
 
-Logger::new(STDOUT)
-
+logger = Logger::new(STDOUT)
+logger.sev_threshold = Logger::DEBUG
+Thread.abort_on_exception = true
 def current_thread
 	return Thread.current[:connection]
 end
