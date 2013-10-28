@@ -8,6 +8,7 @@
                     "north": 2,
                     "west": 9
                 },
+                "title": "The Entrance",
                 "description": "You are standing in the hallway to 1510 Shrader St. This is Theresa's house."
             },
             {
@@ -18,6 +19,7 @@
                     "west": 8,
                     "south": 1
                 },
+                "title": "The Hallway",
                 "description": "You are still in the hallway."
             },
             {
@@ -27,6 +29,7 @@
                     "east": 11,
                     "south": 2
                 },
+                "title": "The Hallway",
                 "description": "You are still in the hallway. A stink emanates from the bathroom to the east."
             },
             {
@@ -37,6 +40,7 @@
                     "south": 3,
                     "west": 6
                 },
+                "title": "The Hallway",
                 "description": "You are at the end of the hallway. The kitchen is to the west, and a bedroom to the north. A shower is running to the east."
             },
             {
@@ -44,6 +48,7 @@
                 "exits": {
                     "south": 4
                 },
+                "title": "Lori's Room",
                 "description": "This is Lori's room. It's a mess."
             },
             {
@@ -52,6 +57,7 @@
                     "east": 4,
                     "south": 7
                 },
+                "title": "The Kitchen",
                 "description": "A pot of milk is warming on the stove. Someone is making cheese!"
             },
             {
@@ -59,6 +65,7 @@
                 "exits": {
                     "north": 6
                 },
+                "title": "The Pantry",
                 "description": "The pantry is full of canned goods. Better not eat those just yet."
             },
             {
@@ -67,6 +74,7 @@
                     "east": 2,
                     "south": 9
                 },
+                "title": "Theresa's Room",
                 "description": "This is a bedroom. It is clean and tidy. What a nice place."
             },
             {
@@ -75,6 +83,7 @@
                     "east": 1,
                     "north": 8
                 },
+                "title": "The Living Room",
                 "description": "The TV blares Doctor Who in the corner, and the couch is occupied by a pile of dirty clothes. Probably Lori's."
             },
             {
@@ -82,6 +91,7 @@
                 "exits": {
                     "west": 4
                 },
+                "title": "The Bathroom",
                 "description": "The shower is running and a voice yodels from behind the curtain. Better not disturb them."
             },
             {
@@ -89,6 +99,7 @@
                 "exits": {
                     "west": 3
                 },
+                "title": "The Toilet",
                 "description": "A massive stink permeates the air. The window is closed, keeping the stink inside."
             },
             {
@@ -96,6 +107,7 @@
                 "exits": {
                     "west": 2
                 },
+                "title": "The Closet",
                 "description": "This closet is built for midgets. Tall people need not apply."
             }
         ]
