@@ -1,7 +1,17 @@
 require 'active_record'
 
+# 
+# The User model that keeps track of everything a player does.
+# 
+# @author [brianseitel]
+# 
 class User < ActiveRecord::Base
 
+	# 
+	# This is the logic that signs up a new user
+	# @param  username String username
+	# 
+	# @return User the newly created user
 	def self.do_new(username)
 		@input = ""
 		while (@input.downcase != "y" && @input.downcase != "n")
@@ -29,6 +39,10 @@ class User < ActiveRecord::Base
 		return user
 	end
 
+	# 
+	# The logic that asks a user to log in. If not found, it redirects to the New User flow. If found, it returns a User type.
+	# 
+	# @return User the user that logged in
 	def self.login
 		found = false
 		while (!found)

@@ -1,5 +1,15 @@
+# 
+# Accept input for social actions and process them accordingly. Socials are generally for aesthetic, not important interactions, such as smiling, waving, etc.
+# 
+# @author [brianseitel]
+# 
 class SocialInterpreter
 
+	# 
+	# Interprets the input and executes the social command
+	# @param  value [String] The social action to execute
+	# @param  target [User OR Mob] The target entity upon which to perform the social action
+	#
 	def self.interpret(value, target)
 		if (target.length == 0 || target == current_user.username)
 			current_client.puts value['self']

@@ -10,8 +10,16 @@ ActiveRecord::Base.establish_connection(
   password: ''
 )
 
+# 
+# A class to handle most DB and DB-like actions, such as loading data, populating DB, etc.
+# 
+# @author [brianseitel]
+# 
 class DB
 
+	# 
+	# Set up the database upon load. We truncate and re-populate certain tables on app load to ensure that we have the latest, greatest data
+	# 
 	def self.load_data
 		# Drop all tables
 		
@@ -21,6 +29,9 @@ class DB
 		# self.load_socials
 	end
 
+	# 
+	# Load the areas from the areas.json file in the DATA_DIR directory. This truncates the ```areas``` and ```rooms``` tables and fills them up again.
+	# 
 	def self.load_areas
 		conn = ActiveRecord::Base.connection
 		conn.execute("TRUNCATE areas")
@@ -38,6 +49,9 @@ class DB
 		end
 	end
 
+	# 
+	# Load the mobs from the mobs.json file in the DATA_DIR directory. This truncates the ```mobs``` table and fills it up again.
+	# 
 	def self.load_mobs
 		conn = ActiveRecord::Base.connection
 		conn.execute("TRUNCATE mobs")

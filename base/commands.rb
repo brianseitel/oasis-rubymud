@@ -1,18 +1,30 @@
+# 
+# Accept commands and interpret them accordingly. Commands generally require custom functions, as opposed to socials, which have a regular, predictable structure.
+# 
+# @author [brianseitel]
+# 
 class CommandInterpreter
 
-	def self.do_attack
-		current_client.puts "You attack yourself with a knife. You die!"
-	end
-
+	# 
+	# The player quits the game
+	# 
 	def self.do_exit
 		current_client.puts "Bye bye"
 		current_client.close
 	end
 
-	def self.do_kill
+	# 
+	# Start a fight sequence between user and a target
+	# @param target [Mob or User] the entity the player wishes to fight
+	# 
+	def self.do_attack(target)
 		current_client.puts "You attempt to kill yourself with a spatula. You fail spectacularly."
 	end
 
+	# 
+	# Move the user from one room to another.
+	# @param  direction [string] The direction through which to move. Acceptable values include: north, south, east, west, up, down
+	# 
 	def self.do_move(direction)
 		room = current_thread.room
 
@@ -51,6 +63,9 @@ class CommandInterpreter
 		new_room.broadcast "#{current_user.username} enters from #{cardinality}.\n"
 	end
 
+	# 
+	# Allow the user to look at a target. Targets may be Mobs or Users.
+	# @param  target = nil [Mob or User] the target at which the user wishes to look
 	def self.do_look(target = nil)
 		targObj = nil
 		# if it's a room or there's no target, just display the room 
