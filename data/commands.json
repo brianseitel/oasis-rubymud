@@ -1,6 +1,62 @@
 {
-	"attack": { "method": "do_attack" },
-	"kill": { "method": "do_kill" },
-	"quit": { "method": "do_exit" },
-	"look": { "method": "do_look" }
+    "attack": {
+        "method": "do_attack"
+    },
+    "kill": {
+        "method": "do_kill"
+    },
+    "quit": {
+        "method": "do_exit"
+    },
+    "look": {
+        "method": "do_look"
+    },
+    "n": {
+        "method": "do_move",
+        "arg": "north"
+    },
+    "north": {
+        "method": "do_move",
+        "arg": "north"
+    },
+    "e": {
+        "method": "do_move",
+        "arg": "east"
+    },
+    "east": {
+        "method": "do_move",
+        "arg": "east"
+    },
+    "s": {
+        "method": "do_move",
+        "arg": "south"
+    },
+    "south": {
+        "method": "do_move",
+        "arg": "south"
+    },
+    "w": {
+        "method": "do_move",
+        "arg": "west"
+    },
+    "west": {
+        "method": "do_move",
+        "arg": "west"
+    },
+    "u": {
+        "method": "do_move",
+        "arg": "up"
+    },
+    "up": {
+        "method": "do_move",
+        "arg": "up"
+    },
+    "d": {
+        "method": "do_move",
+        "arg": "down"
+    },
+    "down": {
+        "method": "do_move",
+        "arg": "down"
+    }
 }

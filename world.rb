@@ -8,8 +8,8 @@ class World
 		# @ticks = (@@current_time - @@last_time / @@tick_length).to_i
 
 		while (true)
-			sleep 3
-			current_client.puts "\n... tick tock ...\n"
+			sleep 15
+			p "\n... tick tock ...\n"
 		end
 
 		@@last_time = Time.now

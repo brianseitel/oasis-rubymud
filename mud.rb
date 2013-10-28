@@ -79,8 +79,7 @@ class MudServer
 
 	def self.await_input
 		while (@input = current_client.gets.chomp("\r\n"))
-			@output = Interpreter.interpret(@input);
-			current_client.puts @output
+			Interpreter.interpret(@input);
 		end
 	end
 

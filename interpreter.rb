@@ -16,7 +16,11 @@ class Interpreter
 
 		actions.each do |key, value|
 			if (key == command && CommandInterpreter.respond_to?(value['method']))
-				return CommandInterpreter.send(value['method'])
+				if (value['arg'])
+					return CommandInterpreter.send(value['method'], value['arg'])
+				else
+					return CommandInterpreter.send(value['method'])
+				end
 			end
 		end
 
@@ -29,7 +33,7 @@ class Interpreter
 			end
 		end
 
-		return "I don't know what that means"
+		current_client.puts "I don't know what that means"
 	end
 
 	def self.loadCommands()
@@ -52,7 +56,7 @@ end
 class CommandInterpreter
 
 	def self.do_attack
-		return "You attack yourself with a knife. You die!"
+		current_client.puts "You attack yourself with a knife. You die!"
 	end
 
 	def self.do_exit
@@ -61,22 +65,38 @@ class CommandInterpreter
 	end
 
 	def self.do_kill
-		return "You attempt to kill yourself with a spatula. You fail spectacularly."
+		current_client.puts "You attempt to kill yourself with a spatula. You fail spectacularly."
+	end
+
+	def self.do_move(direction)
+		room = Area.current_room
+
+		case direction
+		when "n"
+			direction = "north"
+		when "e"
+			direction = "east"
+		when "s"
+			direction = "south"
+		when "w"
+			direction = "west"
+		end
+
+		if (room['exits'][direction])
+			new_room = Area.find_room_by_id(current_user.area_id, room['exits'][direction])
+			if (new_room)
+				current_thread.room = new_room
+				current_user.room_id = new_room['id']
+			end
+		else
+			current_client.puts "You can't move that way, dummy!\n"
+		end
+
+		Area.display_room
 	end
 
 	def self.do_look
-		output = []
-		begin
-			MudServer.clients.each do |connection|
-				if (connection.user)
-					output << connection.user.username
-				end
-			end
-		rescue Exception => e
-			pp e
-		end
-
-		return output.join("\n")
+		Area.display_room
 	end
 end
 
@@ -84,7 +104,7 @@ class SocialInterpreter
 
 	def self.interpret(value, target)
 		if (target.length == 0 || target == current_user.username)
-			return value['self']
+			current_client.puts value['self']
 		else
 			found = false
 			@target = nil
@@ -100,14 +120,10 @@ class SocialInterpreter
 			if (found)
 				current_client.puts value['target'].gsub('%1', target)
 				if (@target)
-					begin
-						@target.client.puts value['other'].gsub('%1', current_thread.user.username)
-					rescue Exception => e
-						pp e
-					end
+					@target.client.puts value['other'].gsub('%1', current_user.username)
 				end
 			else
-				return "#{target} is not in the room, dummy!"
+				current_client.puts "#{target} is not in the room, dummy!"
 			end
 		end
 	end

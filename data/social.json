@@ -22,6 +22,7 @@
     "smile": {
         "general": "What's so funny, asshole?",
         "self": "You smile at yourself. Yourself smiles back.",
-        "target": "You smile at %1. They punch you in the face."
+        "target": "You smile at %1. They punch you in the face.",
+        "other": "%1 smiles at you. How creepy."
     }
 }
