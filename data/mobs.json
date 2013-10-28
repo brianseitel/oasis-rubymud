@@ -4,7 +4,8 @@
 			"name": "Miko",
 			"area_id": 1,
 			"starting_room_id": 9,
-			"short_description": "A fierce ball of fluff attacks a squeaky toy."
+			"short_description": "A fierce ball of fluff attacks a squeaky toy.",
+			"long_description": "Miko is a derpy little shit-poo, a cross between a shitzu and a poodle. His tongue hangs out as he cocks his head sideways at you. Where's the food?"
 		}
 	]
 }

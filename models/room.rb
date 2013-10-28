@@ -12,13 +12,17 @@ class Room < ActiveRecord::Base
 		self.show_people room
 	end
 
-	def self.show_mobs(room)
+	def self.mobs_in_room(room)
 		results = []
 		World.mobs.each do |mob|
 			if (mob.room.id == room.id)
 				results << mob
 			end
 		end
+		return results
+	end
+	def self.show_mobs(room)
+		results = self.mobs_in_room room
 
 		results.each do |mob|
 			current_client.puts "#{mob.short_description}\n"
