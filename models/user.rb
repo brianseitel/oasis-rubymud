@@ -42,6 +42,13 @@ class User < ActiveRecord::Base
 		end
 
 		# 
+		# Return enhanced stats
+		# 
+		def enhanced_stats
+			self.stats
+		end
+		
+		# 
 		# Show a list of player's stats in a table format
 		# 
 		def show_stats
