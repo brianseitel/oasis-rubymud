@@ -77,6 +77,7 @@ class Interpreter
 
 		command
 	end
+	
 	# 
 	# Load commands from commands.json file
 	# 
