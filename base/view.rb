@@ -7,7 +7,7 @@ class View
 		@args = args
 		if (File.exists? path)
 			template = File.open(path).read
-			erb = ERB.new(template)
+			erb = ERB.new(template, nil, '-')
 			return erb.result(binding)
 		end
 	end

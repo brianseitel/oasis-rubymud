@@ -7,6 +7,7 @@ end
 
 DATA_DIR = File.expand_path(File.dirname(__FILE__)) + "/data/"
 VIEW_DIR = File.expand_path(File.dirname(__FILE__)) + '/views/'
+MAX_WIDTH = 80
 
 logger = Logger::new(STDOUT)
 logger.sev_threshold = Logger::DEBUG

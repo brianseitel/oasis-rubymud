@@ -18,27 +18,27 @@ class User < ActiveRecord::Base
 			output = []
 
 			## Set the vars
-			username 		= " #{self.username}"
-			level 			= "Level #{self.level}"
-			exp 			= "#{self.experience} XP "
-			split 			= (40 - username.length - level.length - exp.length) / 2
-			hitpoints 		= " Hitpoints: #{self.hit_points}/#{self.max_hit_points}"
-			mana 			= "Mana: #{self.mana}/#{self.max_mana} "
-				
-			# Generate output
-			output << username + " " * split + level + " " * split + exp
-			output << "-" * 40
-			output << hitpoints + " " * (40 - hitpoints.length - mana.length) + mana
-			output << "-" * 40
-			self.stats.each do |name, value|
-				enhanced = self.enhanced_stats.values_at(name).first
-				spaces = 40 - name.length - value.to_s.length - enhanced.to_s.length - 4
-				output << " #{name}" + (" " * spaces) + "#{enhanced} (#{value}) "
-			end
-			output << "-" * 40
+			tnl = ((self.level * 1000) - self.experience)
+			params = {
+				:username => self.username,
+				:level => "Level #{self.level}",
+				:tnl => "#{tnl} TNL",
+				:stats => self.stats,
+				:dashes => "-" * MAX_WIDTH
+			}
 
-			# Display output to screen
-			current_client.puts output.join("\n")
+			# Calculate distance between words at top of table
+			params[:spaces1] = " " * ((MAX_WIDTH - params[:username].to_s.length - params[:level].to_s.length - params[:tnl].to_s.length) / 2).floor
+
+			# Calculate the distance between stat and value on table
+			splits = {}
+			self.stats.each do |name, value|
+				splits[name] = " " * (MAX_WIDTH - name.to_s.length - value.to_s.length)
+			end
+			params[:splits] = splits
+
+			# output to socket
+			current_client.puts "\n" + View.render_template('user.score', params) + "\n"
 		end
 
 		# 
@@ -76,7 +76,7 @@ class User < ActiveRecord::Base
 				:max_mana => self.max_mana,
 				:tnl => (self.level * 1000) - self.experience
 			}
-			current_client.print "\n" + View.render_template('status_prompt', stats) + " "
+			current_client.print "\n" + View.render_template('user.status_prompt', stats) + " "
 		end
 
 	private
