@@ -24,6 +24,8 @@ class Interpreter
 		command = self.getCommand(input)
 		target  = self.getTarget(input)
 
+		command = self.guess_command command, actions
+
 		actions.each do |key, value|
 			if (key == command && CommandInterpreter.respond_to?(value['method']))
 				if (value['arg'])
@@ -38,6 +40,7 @@ class Interpreter
 
 		# Check socials
 		actions = JSON.parse(socials)
+		command = self.guess_command command, actions
 
 		actions.each do |key, value|
 			if (key == command)
@@ -48,6 +51,25 @@ class Interpreter
 		current_client.puts "I don't know what that means"
 	end
 
+	# 
+	# Guess the command, given an input and a list of possible actions
+	# @param  command String the input command
+	# @param  actions Array a list of possible actions
+	# 
+	# @return String the final command to execute
+	def self.guess_command(command, actions)
+		commandkeys = actions.keys
+		commandkeys.sort.each do |key|
+			len = command.length - 1
+			shortkey = key[0..len]
+			if (shortkey == command)
+				command = key
+				break;
+			end
+		end
+
+		command
+	end
 	# 
 	# Load commands from commands.json file
 	# 
