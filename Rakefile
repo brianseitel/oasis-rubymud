@@ -3,6 +3,7 @@ require "bundler/setup"
 
 require 'active_record'
 require 'yaml'
+require 'pp'
 
 namespace :db do
 
@@ -16,8 +17,9 @@ namespace :db do
   desc "Create the db"
   task :create do
     connection_details = YAML::load(File.open('config/database.yml'))
-    ActiveRecord::Base.establish_connection(connection_details)
-    ActiveRecord::Base.connection.create_database(connection_details.fetch('database'))
+    db = connection_details.fetch('database')
+    ActiveRecord::Base.establish_connection(connection_details.except('database'))
+    ActiveRecord::Base.connection.create_database(db)
   end
 
   desc "drop the db"
