@@ -59,6 +59,13 @@ class Interpreter
 	# @return String the final command to execute
 	def self.guess_command(command, actions)
 		commandkeys = actions.keys
+
+		# See if we have an exact match first
+		if (actions.has_key? command)
+			return command
+		end
+
+		# If not, do a fuzzy search
 		commandkeys.sort.each do |key|
 			len = command.length - 1
 			shortkey = key[0..len]
