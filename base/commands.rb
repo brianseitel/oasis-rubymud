@@ -64,17 +64,6 @@ class CommandInterpreter
 	def self.do_move(direction)
 		room = current_thread.room
 
-		case direction
-		when "n"
-			direction = "north"
-		when "e"
-			direction = "east"
-		when "s"
-			direction = "south"
-		when "w"
-			direction = "west"
-		end
-
 		if (room.exits.has_key? direction)
 			new_room = Room.find(room.exits.values_at direction).first
 
@@ -84,6 +73,7 @@ class CommandInterpreter
 			end
 		else
 			current_client.puts "You can't move that way, dummy!\n"
+			return
 		end
 
 		case direction
