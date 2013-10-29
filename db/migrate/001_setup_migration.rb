@@ -33,6 +33,7 @@ class SetupMigration < ActiveRecord::Migration
   		t.string :long_description
       t.integer :level
       t.integer :hit_points
+      t.integer :max_hit_points
   	end
 
   end
