@@ -13,6 +13,10 @@ class CommandInterpreter
 		current_client.puts "You attempt to kill yourself with a spatula. You fail spectacularly."
 	end
 
+	def self.do_colors
+		current_client.puts String.colors
+	end
+
 	# 
 	# The player quits the game
 	# 

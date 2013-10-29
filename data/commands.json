@@ -64,5 +64,8 @@
     },
     "score": {
         "method": "do_score"
+    },
+    "colors": {
+        "method": "do_colors"
     }
 }

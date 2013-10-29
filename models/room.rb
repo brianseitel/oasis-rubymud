@@ -13,11 +13,14 @@ class Room < ActiveRecord::Base
 	# @param  room Room The room to display
 	# 
 	def self.display(room)
-		current_client.puts room.title
-		current_client.puts room.description + "\n"
-		self.show_exits room
-		self.show_mobs room
-		self.show_people room
+		params = {
+			:title => room.title,
+			:description => room.description,
+			:exits => self.show_exits(room),
+			:mobs => self.show_mobs(room),
+			:people => self.show_people(room)
+		}
+		current_client.puts View.render_template('room.display_room', params)
 	end
 
 	# 
@@ -42,9 +45,12 @@ class Room < ActiveRecord::Base
 	def self.show_mobs(room)
 		results = self.mobs_in_room room
 
+		output = []
 		results.each do |mob|
-			current_client.puts "#{mob.short_description}\n"
+			output << "#{mob.short_description}\n"
 		end
+
+		return output.join("\n")
 	end
 
 	# 
@@ -57,7 +63,7 @@ class Room < ActiveRecord::Base
 			results << direction
 		end
 
-		current_client.puts "Exits: " + results.join(" ")
+		return "Exits: " + results.join(" ")
 	end
 
 	# 
@@ -66,11 +72,15 @@ class Room < ActiveRecord::Base
 	# 
 	def self.show_people(room)
 		users = self.people_in room
+
+		output = []
 		if (users.uniq.length > 0)
 			users.each do |u|
-				current_client.puts "#{u.username} is here.\n"
+				output << "#{u.username} is here."
 			end
 		end
+
+		return output.join("\n")
 	end
 
 	# 
