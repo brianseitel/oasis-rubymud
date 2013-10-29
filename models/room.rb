@@ -47,7 +47,7 @@ class Room < ActiveRecord::Base
 
 		output = []
 		results.each do |mob|
-			output << "#{mob.short_description}\n"
+			output << "#{mob.short_description}"
 		end
 
 		return output.join("\n")
