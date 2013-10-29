@@ -27,8 +27,8 @@ class CommandInterpreter
 	def self.do_look(target = nil)
 		targObj = nil
 		# if it's a room or there's no target, just display the room 
-		if (!target or target.instance_of? Room)
-			Room.display room
+		if (target.nil? or target.instance_of? Room)
+			Room.display (target.nil? ? current_thread.room : target)
 			return
 
 		# if we have a target, try and find it
