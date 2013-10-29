@@ -10,7 +10,7 @@ namespace :db do
   task :migrate do
     connection_details = YAML::load(File.open('config/database.yml'))
     ActiveRecord::Base.establish_connection(connection_details)
-    ActiveRecord::Migrator.migrate("db/migrate/")
+    ActiveRecord::Migrator.migrate('db/migrate', ENV["VERSION"] ? ENV["VERSION"].to_i : nil )
   end
 
   desc "Create the db"
