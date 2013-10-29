@@ -58,5 +58,11 @@
     "down": {
         "method": "do_move",
         "arg": "down"
+    },
+    "stats": {
+        "method": "do_stats"
+    },
+    "score": {
+        "method": "do_score"
     }
 }

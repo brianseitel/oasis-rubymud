@@ -9,7 +9,9 @@ class SetupMigration < ActiveRecord::Migration
       t.integer :experience
       t.integer :level
       t.integer :hit_points
+      t.integer :max_hit_points
       t.integer :mana
+      t.integer :max_mana
   	end
 
   	create_table :areas do |t|

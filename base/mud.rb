@@ -149,7 +149,7 @@ class MudServer
 			@confirm = current_client.gets.chomp("\r\n")
 		end
 
-		user = User.create(:username => username, :password => @password, :area_id => 1, :room_id => 1)
+		user = User.create(:username => username, :password => @password, :stats => [])
 		return user
 	end
 
