@@ -6,6 +6,7 @@ Dir["models/*.rb"].each do |file|
 end
 
 DATA_DIR = File.expand_path(File.dirname(__FILE__)) + "/data/"
+VIEW_DIR = File.expand_path(File.dirname(__FILE__)) + '/views/'
 
 logger = Logger::new(STDOUT)
 logger.sev_threshold = Logger::DEBUG
