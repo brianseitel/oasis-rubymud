@@ -65,6 +65,20 @@ class User < ActiveRecord::Base
 			current_client.puts output.join("\n") + "\n"
 		end
 
+		# 
+		# Show status prompt to the user.
+		# 
+		def show_status_prompt
+			stats = {
+				:hp => self.hit_points,
+				:maxhp => self.max_hit_points,
+				:mana => self.mana,
+				:max_mana => self.max_mana,
+				:tnl => (self.level * 1000) - self.experience
+			}
+			current_client.print "\n" + View.render_template('status_prompt', stats) + " "
+		end
+
 	private
 		# 
 		# Set up player with default values

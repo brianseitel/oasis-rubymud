@@ -109,8 +109,10 @@ class MudServer
 	# Accepts input and then passes that input into the Interpreter class
 	# 
 	def self.await_input
+		current_user.show_status_prompt
 		while (@input = current_client.gets.chomp("\r\n"))
 			Interpreter.interpret(@input);
+			current_user.show_status_prompt
 		end
 	end
 
