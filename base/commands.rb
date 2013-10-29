@@ -6,6 +6,14 @@
 class CommandInterpreter
 
 	# 
+	# Start a fight sequence between user and a target
+	# @param target [Mob or User] the entity the player wishes to fight
+	# 
+	def self.do_attack(target)
+		current_client.puts "You attempt to kill yourself with a spatula. You fail spectacularly."
+	end
+
+	# 
 	# The player quits the game
 	# 
 	def self.do_exit
@@ -14,11 +22,39 @@ class CommandInterpreter
 	end
 
 	# 
-	# Start a fight sequence between user and a target
-	# @param target [Mob or User] the entity the player wishes to fight
-	# 
-	def self.do_attack(target)
-		current_client.puts "You attempt to kill yourself with a spatula. You fail spectacularly."
+	# Allow the user to look at a target. Targets may be Mobs or Users.
+	# @param  target = nil [Mob or User] the target at which the user wishes to look
+	def self.do_look(target = nil)
+		targObj = nil
+		# if it's a room or there's no target, just display the room 
+		if (!target or target.instance_of? Room)
+			Room.display room
+			return
+
+		# if we have a target, try and find it
+		elsif (target.instance_of? String)
+			mobs = Room.mobs_in_room current_thread.room
+			mobs.each do |mob|
+				if (mob.name.downcase == target.downcase)
+					targObj = mob
+				end
+			end
+
+			if (!targObj)
+				people = Room.people_in current_thread.room
+				people.each do |person|
+					if (person.username.downcase == target.downcase)
+						targObj = person
+					end
+				end
+			end
+		end
+
+		if (targObj)
+			current_client.puts targObj.long_description
+		else
+			current_client.puts "Look at what?"
+		end
 	end
 
 	# 

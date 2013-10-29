@@ -28,7 +28,7 @@ class Interpreter
 			if (key == command && CommandInterpreter.respond_to?(value['method']))
 				if (value['arg'])
 					return CommandInterpreter.send(value['method'], value['arg'])
-				elsif (target)
+				elsif (target.length > 0)
 					return CommandInterpreter.send(value['method'], target)
 				else
 					return CommandInterpreter.send(value['method'])
