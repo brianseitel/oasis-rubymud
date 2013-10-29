@@ -15,6 +15,9 @@ class Interpreter
 	# 
 	# @return String the output of the action, if applicable
 	def self.interpret(input)
+		if (input.length == 0)
+			return
+		end
 		commands = self.loadCommands()
 		socials  = self.loadSocials()
 
