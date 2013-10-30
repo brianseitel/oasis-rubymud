@@ -37,6 +37,7 @@ class World
 				mob.update
 			end
 
+			World.respawn_mobs
 			Combat.update_violence
 		end
 
@@ -49,6 +50,21 @@ class World
 	def self.spawn_mobs
 		Mob.find_each do |mob|
 			mob.spawn
+		end
+	end
+
+	# 
+	# Respawn any mobs that were killed. Only one mob per ID can exist at any given time. Maybe rethink this later, but for now it makes sense.
+	# 
+	def self.respawn_mobs
+		Mob.find_each do |mob|
+			if (!World.mobs.include? mob)
+				# 50/50 shot it gets respawned this tick
+				if (Random.rand(2) == 1)
+					mob.spawn
+					mob.room.broadcast "#{mob.name} appears in a poof of smoke!", true
+				end
+			end
 		end
 	end
 end
