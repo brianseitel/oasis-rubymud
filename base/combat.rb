@@ -80,6 +80,15 @@ class Combat
 			do_damage(@victim, @player, room)
 			do_damage(@player, @victim, room)
 		end
+
+		if (@victim.is_dead?)
+			@player.gain_exp @victim
+			@victim.die
+			World.combats.delete self
+		elsif (@player.is_dead)
+			@player.die
+			World.combat.delete self
+		end
 	end
 
 	# 
@@ -90,6 +99,10 @@ class Combat
 	# 
 	# @return [type] [description]
 	def do_damage(attacker, defender, room)
+		if (defender.is_dead? || attacker.is_dead?) 
+			return
+		end
+
 		attacker_dmg = attacker.stats['strength'] + Random.rand(attacker.stats['strength'])
 		diff = attacker.level - defender.level > 0 ? attacker.level - defender.level : 2 
 		its_a_hit = Random.rand(diff)
@@ -114,6 +127,7 @@ class Combat
 		if (defender.hit_points <= 0)
 			attacker.gain_exp defender
 			defender.die
+			World.combats.delete(self)
 		end
 	end
 end

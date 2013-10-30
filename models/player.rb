@@ -13,6 +13,36 @@ class Player < ActiveRecord::Base
 
 	public
 
+		def die
+			if (MudServer.logged_in? self)
+				self.client.puts "You have DIED!!! Fuck!"
+				self.hit_points = 1
+				self.mana = 1
+
+				# take a hit in XP for dying. 1/2 of TNL usually.
+				tnl = ((self.level+1) * 1000) - self.experience
+				tnl = tnl > 1000 ? 250 : tnl
+
+				self.experience -= tnl / 2
+				self.save
+
+				self.goto_room(1)
+			end
+		end
+
+		def is_dead?
+			return self.hit_points <= 0
+		end
+
+		def goto_room(room)
+			if (!room.instance_of? Room)
+				room = Room.find(room)
+			end
+
+			self.room_id = room.id
+			room.broadcast "#{self.name} appears in a ray of light from the sky.\n"
+			Room.display room
+		end
 		# 
 		# Display score screen, including name, race, class, gender, health, mana, stats, armor, etc
 		# 

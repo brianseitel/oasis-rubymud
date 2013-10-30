@@ -29,6 +29,10 @@ class CommandInterpreter
 		current_client.puts String.colors
 	end
 
+	def self.do_die
+		current_player.die
+	end
+
 	# 
 	# The player quits the game
 	# 

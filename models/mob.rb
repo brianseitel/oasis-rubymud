@@ -13,11 +13,9 @@ class Mob < ActiveRecord::Base
 	# 
 	# @return Boolean whether the mob is dead or not
 	def is_dead?
-		if (self.hit_points <= 0)
-			return true
-		end
-		return false
+		return self.hit_points <= 0
 	end
+
 
 	# 
 	# Broadcast to the room that this mob is dead, then delete the mob from the world.
@@ -36,7 +34,7 @@ class Mob < ActiveRecord::Base
 	# Mobs don't gain experience, so this is just a placeholder for now.
 	# 
 	# @todo Change it so that Mobs don't even get this far
-	def gain_exp
+	def gain_exp(victim)
 
 	end
 

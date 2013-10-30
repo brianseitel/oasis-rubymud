@@ -49,6 +49,10 @@ class MudServer
 		@@clients
 	end
 
+	def self.logged_in?(player)
+		MudServer.players.include? player
+	end
+
 	# 
 	# A global accessor for the list of all players connected to the MudServer
 	# 
@@ -85,7 +89,7 @@ class MudServer
 
 				while (!@connection.player)
 					@player = self.login
-					@player.client = @connection
+					@player.client = client
 					self.players << @player
 					if (@player)
 						@connection.player = @player
