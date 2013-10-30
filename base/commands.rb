@@ -114,4 +114,12 @@ class CommandInterpreter
 	def self.do_stats
 		current_player.show_stats
 	end
+
+	def self.do_who
+		current_client.puts "Level\tName\n"
+		current_client.puts "-" * MAX_WIDTH
+		MudServer.players.each do |player|
+			current_client.puts "[#{player.level}]\t#{player.name}"
+		end
+	end
 end

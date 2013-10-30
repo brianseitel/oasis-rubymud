@@ -67,5 +67,8 @@
     },
     "colors": {
         "method": "do_colors"
+    },
+    "who": {
+        "method": "do_who"
     }
 }
