@@ -6,11 +6,23 @@
 class CommandInterpreter
 
 	# 
-	# Start a fight sequence between user and a target
-	# @param target [Mob or User] the entity the player wishes to fight
+	# Start a fight sequence between player and a target
+	# @param target [Mob or Player] the entity the player wishes to fight
 	# 
 	def self.do_attack(target)
-		current_client.puts "You attempt to kill yourself with a spatula. You fail spectacularly."
+		target = target.downcase
+		World.mobs.each do |mob|
+			if (mob.room.id == current_player.room_id)
+				len = target.length
+				mobname = mob.name[0..len].downcase
+				if (mobname == target)
+					combat = Combat.new(current_player, mob)
+					if (combat)
+						World.combats << Combat.new(current_player, mob)
+					end
+				end
+			end
+		end
 	end
 
 	def self.do_colors
@@ -26,13 +38,13 @@ class CommandInterpreter
 	end
 
 	# 
-	# Allow the user to look at a target. Targets may be Mobs or Users.
-	# @param  target = nil [Mob or User] the target at which the user wishes to look
+	# Allow the player to look at a target. Targets may be Mobs or Players.
+	# @param  target = nil [Mob or Player] the target at which the player wishes to look
 	def self.do_look(target = nil)
 		targObj = nil
 		# if it's a room or there's no target, just display the room 
 		if (target.nil? or target.instance_of? Room)
-			Room.display (target.nil? ? current_thread.room : target)
+			Room.display(target.nil? ? current_thread.room : target)
 			return
 
 		# if we have a target, try and find it
@@ -47,7 +59,7 @@ class CommandInterpreter
 			if (!targObj)
 				people = Room.people_in current_thread.room
 				people.each do |person|
-					if (person.username.downcase == target.downcase)
+					if (person.name.downcase == target.downcase)
 						targObj = person
 					end
 				end
@@ -62,7 +74,7 @@ class CommandInterpreter
 	end
 
 	# 
-	# Move the user from one room to another.
+	# Move the player from one room to another.
 	# @param  direction [string] The direction through which to move. Acceptable values include: north, south, east, west, up, down
 	# 
 	def self.do_move(direction)
@@ -73,7 +85,7 @@ class CommandInterpreter
 
 			if (new_room)
 				current_thread.room = new_room
-				current_user.room_id = new_room.id
+				current_player.room_id = new_room.id
 			end
 		else
 			current_client.puts "You can't move that way, dummy!\n"
@@ -88,16 +100,18 @@ class CommandInterpreter
 			else
 				cardinality = "the #{direction}"
 		end
-		room.broadcast "#{current_user.username} leaves to #{cardinality}.\n"
+
+		current_player.room_id = new_room.id
+		room.broadcast "#{current_player.name} leaves to #{cardinality}.\n"
 		Room.display new_room
-		new_room.broadcast "#{current_user.username} enters from #{cardinality}.\n"
+		new_room.broadcast "#{current_player.name} enters from #{cardinality}.\n"
 	end
 
 	def self.do_score
-		current_user.show_score
+		current_player.show_score
 	end
 
 	def self.do_stats
-		current_user.show_stats
+		current_player.show_stats
 	end
 end

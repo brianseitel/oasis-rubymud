@@ -71,12 +71,12 @@ class Room < ActiveRecord::Base
 	# @param  room Room The room whose people we want to display
 	# 
 	def self.show_people(room)
-		users = self.people_in room
+		players = self.people_in room
 
 		output = []
-		if (users.uniq.length > 0)
-			users.each do |u|
-				output << "#{u.username} is here."
+		if (players.uniq.length > 0)
+			players.each do |u|
+				output << "#{u.name} is here."
 			end
 		end
 
@@ -89,15 +89,15 @@ class Room < ActiveRecord::Base
 	# 
 	# @return Array List of players in the room
 	def self.people_in(room)
-		users = []
+		players = []
 		MudServer.clients.each do |connection|
-			user = connection.user
-			if (user.id != current_user.id && 
-				user.room_id == room.id)
-				users << user
+			player = connection.player
+			if (player.id != current_player.id && 
+				player.room_id == room.id)
+				players << player
 			end
 		end
-		return users
+		return players
 	end
 
 	# 
@@ -108,9 +108,9 @@ class Room < ActiveRecord::Base
 	def broadcast(message, include_player = false)
 		connections = []
 		MudServer.clients.each do |connection|
-			user = connection.user
-			if (user.room_id == self.id)
-				if (include_player || (current_user && current_user.id != user.id))
+			player = connection.player
+			if (player.room_id == self.id)
+				if (include_player || (current_player && current_player.id != player.id))
 					connection.client.puts message
 				end
 			end

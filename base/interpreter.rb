@@ -81,6 +81,20 @@ class Interpreter
 		command
 	end
 	
+	def self.guess_mob(target)
+		World.mobs.each do |mob|
+			if (mob.name == target)
+				return mob
+			end
+
+			len = target.length
+			mobname = mob.name[0..len]
+			if (mobname == target)
+				return mob
+			end
+		end
+	end
+	
 	# 
 	# Load commands from commands.json file
 	# 

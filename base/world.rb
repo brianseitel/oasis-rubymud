@@ -9,6 +9,11 @@ class World
 	@@tick_length = 10
 
 	@@mobs = []
+	@@combats = []
+
+	def self.combats
+		@@combats
+	end
 
 	# 
 	# A list of all the mobs that have been spawned
@@ -31,6 +36,8 @@ class World
 			World.mobs.each do |mob|
 				mob.update
 			end
+
+			Combat.update_violence
 		end
 
 		@@last_time = Time.now

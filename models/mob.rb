@@ -1,5 +1,5 @@
 require 'active_record'
-
+require 'active_support'
 # 
 # The Mob model. "Mob" is short for "mobile", which basically just means that it's a mobile object in the game. Mobs are usually monsters, though they can be NPCs as well.
 # 
@@ -8,8 +8,48 @@ require 'active_record'
 class Mob < ActiveRecord::Base
 	attr_accessor :room
 
-	@room = nil
+	# 
+	# If hit points are below zero, this mob is dead. Seeya.
+	# 
+	# @return Boolean whether the mob is dead or not
+	def is_dead?
+		if (self.hit_points <= 0)
+			return true
+		end
+		return false
+	end
 
+	# 
+	# Broadcast to the room that this mob is dead, then delete the mob from the world.
+	# 
+	def die
+		self.room.broadcast "#{self.name} is DEAD!!!"
+		World.mobs.each do |mob|
+			if (mob == self)
+				World.mobs.delete(mob)
+				return
+			end
+		end
+	end
+
+	# 
+	# Mobs don't gain experience, so this is just a placeholder for now.
+	# 
+	# @todo Change it so that Mobs don't even get this far
+	def gain_exp
+
+	end
+
+	def stats
+		stats = {
+			"strength" => 12,
+			"constitution" => 12,
+			"intelligence" => 12,
+			"dexterity" => 12,
+			"charisma" => 12,
+			"wisdom" => 12
+		}
+	end
 	# 
 	# The update lifecycle of a mob. Currently just whether or not the mob moves around. If so, move it.
 	# 

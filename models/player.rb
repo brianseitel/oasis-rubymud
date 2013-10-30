@@ -1,16 +1,17 @@
 require 'active_record'
 
 # 
-# The User model that keeps track of everything a player does.
+# The Player model that keeps track of everything a player does.
 # 
 # @author [brianseitel]
 # 
-class User < ActiveRecord::Base
+class Player < ActiveRecord::Base
 	serialize :stats, JSON
 	
 	after_create :setup_new_character
 
 	public
+
 		# 
 		# Display score screen, including name, race, class, gender, health, mana, stats, armor, etc
 		# 
@@ -20,7 +21,7 @@ class User < ActiveRecord::Base
 			## Set the vars
 			tnl = ((self.level * 1000) - self.experience)
 			params = {
-				:username => self.username,
+				:name => self.name,
 				:level => "Level #{self.level}",
 				:tnl => "#{tnl} TNL",
 				:stats => self.stats,
@@ -28,7 +29,7 @@ class User < ActiveRecord::Base
 			}
 
 			# Calculate distance between words at top of table
-			params[:spaces1] = " " * ((MAX_WIDTH - params[:username].to_s.length - params[:level].to_s.length - params[:tnl].to_s.length) / 2).floor
+			params[:spaces1] = " " * ((MAX_WIDTH - params[:name].to_s.length - params[:level].to_s.length - params[:tnl].to_s.length) / 2).floor
 
 			# Calculate the distance between stat and value on table
 			splits = {}
@@ -38,7 +39,7 @@ class User < ActiveRecord::Base
 			params[:splits] = splits
 
 			# output to socket
-			current_client.puts "\n" + View.render_template('user.score', params) + "\n"
+			current_client.puts "\n" + View.render_template('player.score', params) + "\n"
 		end
 
 		# 
@@ -48,6 +49,23 @@ class User < ActiveRecord::Base
 			self.stats
 		end
 		
+		def gain_exp(victim)
+			experience = victim.level * Random.rand(50) + Random.rand(100)
+			if (current_player == self)
+				current_client.puts "You have KILLED #{victim.name}!!\n"
+				current_client.puts "You gain #{experience} experience points!"
+			end
+			self.experience += experience
+			self.save
+		end
+
+		def is_dead
+			if (self.hit_points <= 0)
+				return true
+			end
+			return false
+		end
+
 		# 
 		# Show a list of player's stats in a table format
 		# 
@@ -66,7 +84,7 @@ class User < ActiveRecord::Base
 		end
 
 		# 
-		# Show status prompt to the user.
+		# Show status prompt to the player.
 		# 
 		def show_status_prompt
 			stats = {
@@ -76,7 +94,7 @@ class User < ActiveRecord::Base
 				:max_mana => self.max_mana,
 				:tnl => (self.level * 1000) - self.experience
 			}
-			current_client.print "\n" + View.render_template('user.status_prompt', stats) + " "
+			current_client.print "\n" + View.render_template('player.status_prompt', stats) + " "
 		end
 
 	private

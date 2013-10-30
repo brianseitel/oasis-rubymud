@@ -19,12 +19,12 @@ def current_client
 end
 
 # 
-# Get the user connected to this socket
+# Get the player connected to this socket
 # 
-# @return User The user connected to this socket
-def current_user
+# @return Player The player connected to this socket
+def current_player
 	if current_thread
-		return current_thread.user
+		return current_thread.player
 	else
 		return false
 	end
@@ -38,8 +38,10 @@ end
 # 
 class MudServer
 	@@clients = []
+	@@players = []
 	@@game_over = false
 
+	
 	# 
 	# A global accessor for the list of all clients connected to the MudServer
 	# 
@@ -63,7 +65,7 @@ class MudServer
 			World.update
 		end
 
-		# Wait for users!
+		# Wait for players!
 		loop do 
 			Thread.new(server.accept) do |client|
 				@connection = Client.new(client)
@@ -73,16 +75,16 @@ class MudServer
 
 				self.show_welcome
 
-				while (!@connection.user)
-					@user = self.login
-					if (@user)
-						@connection.user = @user
-						@connection.room = Room.find(@user.room_id)
-						@connection.area = Area.find(@user.area_id)
+				while (!@connection.player)
+					@player = self.login
+					if (@player)
+						@connection.player = @player
+						@connection.room = Room.find(@player.room_id)
+						@connection.area = Area.find(@player.area_id)
 					end
 				end
 
-				client.puts "\nWelcome, #{@user.username}!\n"
+				client.puts "\nWelcome, #{@player.name}!\n"
 
 				self.game_loop
 			end
@@ -109,10 +111,10 @@ class MudServer
 	# Accepts input and then passes that input into the Interpreter class
 	# 
 	def self.await_input
-		current_user.show_status_prompt
+		current_player.show_status_prompt
 		while (@input = current_client.gets.chomp("\r\n"))
 			Interpreter.interpret(@input);
-			current_user.show_status_prompt
+			current_player.show_status_prompt
 		end
 	end
 
@@ -124,14 +126,14 @@ class MudServer
 	end
 
 		# 
-	# This is the logic that signs up a new user
-	# @param  username String username
+	# This is the logic that signs up a new player
+	# @param  name String name
 	# 
-	# @return User the newly created user
-	def self.do_new(username)
+	# @return Player the newly created player
+	def self.do_new(name)
 		@input = ""
 		while (@input.downcase != "y" && @input.downcase != "n")
-			current_client.puts "Are you a new user? [y/n]\n"
+			current_client.puts "Are you a new player? [y/n]\n"
 			@input = current_client.gets.chomp("\r\n")
 		end
 
@@ -151,44 +153,44 @@ class MudServer
 			@confirm = current_client.gets.chomp("\r\n")
 		end
 
-		user = User.create(:username => username, :password => @password, :stats => [])
-		return user
+		player = Player.create(:name => name, :password => @password, :stats => [])
+		return player
 	end
 
 	# 
-	# The logic that asks a user to log in. If not found, it redirects to the New User flow. If found, it returns a User type.
+	# The logic that asks a player to log in. If not found, it redirects to the New Player flow. If found, it returns a Player type.
 	# 
-	# @return User the user that logged in
+	# @return Player the player that logged in
 	def self.login
 		found = false
 		while (!found)
 			current_client.puts "What's your name?\n"
 			@input = current_client.gets.chomp("\r\n")
-			@user = User.find_by username: @input
-			if (@user)
+			@player = Player.find_by name: @input
+			if (@player)
 				current_client.puts "Enter password: "
 				@password = current_client.gets.chomp("\r\n")
 
-				@user = User.find_by username: @input, password: @password
+				@player = Player.find_by name: @input, password: @password
 
-				if (@user)
+				if (@player)
 					found = true
 				else
 					current_client.puts "Invalid password.\n\n"
 				end
 			else
-				@user = self.do_new(@input)
-				if (@user)
+				@player = self.do_new(@input)
+				if (@player)
 					found = true
 				end
 			end
 		end
-		return @user
+		return @player
 	end
 end
 
 # 
-# The base Client class that contains basic data about the connected client, such as the User, Room, and Area connected to it.
+# The base Client class that contains basic data about the connected client, such as the Player, Room, and Area connected to it.
 # 
 # @author [brianseitel]
 # 
@@ -196,7 +198,7 @@ class Client
 	attr_accessor :area
 	attr_accessor :client
 	attr_accessor :room
-	attr_accessor :user
+	attr_accessor :player
 
 	def initialize(client_arg)
 		@client = client_arg

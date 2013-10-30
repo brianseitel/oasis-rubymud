@@ -2,13 +2,8 @@ require 'mysql2'
 require 'active_record'
 
 # Change the following to reflect your database settings
-ActiveRecord::Base.establish_connection(
-  adapter:  'mysql2', # or 'postgresql' or 'sqlite3'
-  host:     'localhost',
-  database: 'oasis_mud',
-  username: 'root',
-  password: ''
-)
+connection_details = YAML::load(File.open('config/database.yml'))
+ActiveRecord::Base.establish_connection(connection_details)
 
 # 
 # A class to handle most DB and DB-like actions, such as loading data, populating DB, etc.

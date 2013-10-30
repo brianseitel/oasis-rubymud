@@ -1,7 +1,7 @@
 class SetupMigration < ActiveRecord::Migration
   def self.up
-  	create_table :users do |t|
-  		t.string :username, :null => false
+  	create_table :players do |t|
+  		t.string :name, :null => false
   		t.string :password, :null => false
   		t.integer :area_id
   		t.integer :room_id
@@ -39,7 +39,7 @@ class SetupMigration < ActiveRecord::Migration
   end
 
   def self.down
-  	drop_table :users
+  	drop_table :players
   	drop_table :areas
   	drop_table :rooms
   	drop_table :mobs
