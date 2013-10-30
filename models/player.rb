@@ -6,8 +6,9 @@ require 'active_record'
 # @author [brianseitel]
 # 
 class Player < ActiveRecord::Base
+	attr_accessor :client
+
 	serialize :stats, JSON
-	
 	after_create :setup_new_character
 
 	public

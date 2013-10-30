@@ -50,6 +50,14 @@ class MudServer
 	end
 
 	# 
+	# A global accessor for the list of all players connected to the MudServer
+	# 
+	# @return [type] [description]
+	def self.players
+		@@players
+	end
+
+	# 
 	# This method starts up a TCP server, loads DB data, spawns mobs, starts time, and accepts incoming sockets.
 	# 
 	def self.startup
@@ -77,6 +85,8 @@ class MudServer
 
 				while (!@connection.player)
 					@player = self.login
+					@player.client = @connection
+					self.players << @player
 					if (@player)
 						@connection.player = @player
 						@connection.room = Room.find(@player.room_id)
