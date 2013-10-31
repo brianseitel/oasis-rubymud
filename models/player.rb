@@ -115,10 +115,6 @@ class Player < ActiveRecord::Base
 		# Show status prompt to the player.
 		# 
 		def show_status_prompt
-			if (self.state == STATE_FIGHTING)
-				return
-			end
-
 			stats = {
 				:hp => self.hit_points,
 				:maxhp => self.max_hit_points,
