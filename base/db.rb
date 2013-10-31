@@ -32,7 +32,7 @@ class DB
 		conn.execute("TRUNCATE areas")
 		conn.execute("TRUNCATE rooms")
 
-		file = File.read(DATA_DIR + "areas.json")
+		file = File.read(setting('DATA_DIR') + "areas.json")
 		areas = JSON.parse(file)
 
 		areas.each do |name, data|
@@ -51,7 +51,7 @@ class DB
 		conn = ActiveRecord::Base.connection
 		conn.execute("TRUNCATE mobs")
 
-		file = File.read(DATA_DIR + "mobs.json")
+		file = File.read(setting('DATA_DIR') + "mobs.json")
 		mobs = JSON.parse(file)
 
 		mobs['mobs'].each do |data|

@@ -4,10 +4,19 @@ end
 Dir["models/*.rb"].each do |file|
 	require File.dirname(__FILE__) + "/#{file}"
 end
+Dir["modules/*.rb"].each do |file|
+	require File.dirname(__FILE__) + "/#{file}"
+end
 
-DATA_DIR = File.expand_path(File.dirname(__FILE__)) + "/data/"
-VIEW_DIR = File.expand_path(File.dirname(__FILE__)) + '/views/'
-MAX_WIDTH = 80
+
+
+def setting(key)
+	config = YAML::load(File.open('config/app.yml'))
+	if (config.include? key)
+		return config[key]
+	end
+	return nil
+end
 
 logger = Logger::new(STDOUT)
 logger.sev_threshold = Logger::DEBUG

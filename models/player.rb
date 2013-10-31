@@ -56,16 +56,16 @@ class Player < ActiveRecord::Base
 				:level => "Level #{self.level}",
 				:tnl => "#{tnl} TNL",
 				:stats => self.stats,
-				:dashes => "-" * MAX_WIDTH
+				:dashes => "-" * setting('max_width')
 			}
 
 			# Calculate distance between words at top of table
-			params[:spaces1] = " " * ((MAX_WIDTH - params[:name].to_s.length - params[:level].to_s.length - params[:tnl].to_s.length) / 2).floor
+			params[:spaces1] = " " * ((setting('max_width') - params[:name].to_s.length - params[:level].to_s.length - params[:tnl].to_s.length) / 2).floor
 
 			# Calculate the distance between stat and value on table
 			splits = {}
 			self.stats.each do |name, value|
-				splits[name] = " " * (MAX_WIDTH - name.to_s.length - value.to_s.length)
+				splits[name] = " " * (setting('max_width') - name.to_s.length - value.to_s.length)
 			end
 			params[:splits] = splits
 

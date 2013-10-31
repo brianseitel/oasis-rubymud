@@ -1,0 +1,14 @@
+# Directories
+data_dir: 'data/'
+view_dir: 'views/'
+
+# Output constants
+max_width: 80
+
+# Time keeping
+pulse_per_second: 4
+pulse_violence: 12
+pulse_mob: 16
+pulse_tick: 120
+pulse_area: 500
+
