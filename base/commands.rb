@@ -25,10 +25,16 @@ class CommandInterpreter
 		end
 	end
 
+	# 
+	# Helper method to show color options
+	# 
 	def self.do_colors
 		current_client.puts String.colors
 	end
 
+	# 
+	# Commit suicide
+	# 
 	def self.do_die
 		current_player.die
 	end
@@ -37,8 +43,21 @@ class CommandInterpreter
 	# The player quits the game
 	# 
 	def self.do_exit
-		current_client.puts "Bye bye"
-		current_client.close
+		MudServer.players.each do |player|
+			if (player == current_player)
+				MudServer.players.delete player
+			end
+		end
+
+		MudServer.clients.each do |client|
+			if (client.client == current_client)
+				client.client.puts "Bye bye!"
+				client.client.close
+				MudServer.clients.delete client
+			end
+		end
+
+		Thread.current.kill
 	end
 
 	# 
