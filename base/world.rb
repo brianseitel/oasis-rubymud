@@ -111,6 +111,9 @@ class World
 	# 
 	def update_players
 		print "[UPDATE] Players\n".cyan
+		MudServer.players.each do |player|
+			player.show_status_prompt
+		end
 	end
 
 	# 
