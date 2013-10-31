@@ -30,7 +30,7 @@ class Room < ActiveRecord::Base
 	# @return Array An array of mobs in the room
 	def self.mobs_in_room(room)
 		results = []
-		World.mobs.each do |mob|
+		$world.mobs.each do |mob|
 			if (mob.room.id == room.id)
 				results << mob
 			end
@@ -109,6 +109,8 @@ class Room < ActiveRecord::Base
 		connections = []
 		MudServer.clients.each do |connection|
 			player = connection.player
+			pp connection
+			pp player
 			if (player.room_id == self.id)
 				if (include_player || (current_player && current_player.id != player.id))
 					connection.client.puts message

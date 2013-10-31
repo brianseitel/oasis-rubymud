@@ -8,8 +8,6 @@ Dir["modules/*.rb"].each do |file|
 	require File.dirname(__FILE__) + "/#{file}"
 end
 
-
-
 def setting(key)
 	config = YAML::load(File.open('config/app.yml'))
 	if (config.include? key)
@@ -18,6 +16,7 @@ def setting(key)
 	return nil
 end
 
+$world = World.new
 logger = Logger::new(STDOUT)
 logger.sev_threshold = Logger::DEBUG
 

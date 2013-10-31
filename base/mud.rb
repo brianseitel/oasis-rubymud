@@ -78,11 +78,11 @@ class MudServer
 
 		# Big bang
 		DB.load_data
-		World.spawn_mobs
+		$world.spawn_mobs
 
 		# Time starts now
 		Thread.start do
-			World.update
+			$world.update
 		end
 
 		# Wait for players!

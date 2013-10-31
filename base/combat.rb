@@ -34,7 +34,7 @@ class Combat
 		end
 
 		in_combat = false
-		World.combats.each do |combat|
+		$world.combats.each do |combat|
 			if (combat.player == @player)
 				in_combat = true
 				break;
@@ -48,15 +48,6 @@ class Combat
 
 		do_attack
 		return true
-	end
-
-	# 
-	# Update combat rounds regularly
-	# 
-	def self.update_violence
-		World.combats.each do |combat|
-			combat.do_attack
-		end
 	end
 
 	# 
@@ -129,10 +120,10 @@ class Combat
 	end
 
 	def combat_over
-		pp World.combats
-		World.combats.each do |combat|
+		pp $world.combats
+		$world.combats.each do |combat|
 			if (combat == self)
-				World.combats.delete combat
+				$world.combats.delete combat
 			end
 		end
 	end

@@ -82,7 +82,7 @@ class Interpreter
 	end
 	
 	def self.guess_mob(target)
-		World.mobs.each do |mob|
+		$world.mobs.each do |mob|
 			if (mob.name == target)
 				return mob
 			end

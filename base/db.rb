@@ -25,14 +25,14 @@ class DB
 	end
 
 	# 
-	# Load the areas from the areas.json file in the DATA_DIR directory. This truncates the ```areas``` and ```rooms``` tables and fills them up again.
+	# Load the areas from the areas.json file in the data_dir directory. This truncates the ```areas``` and ```rooms``` tables and fills them up again.
 	# 
 	def self.load_areas
 		conn = ActiveRecord::Base.connection
 		conn.execute("TRUNCATE areas")
 		conn.execute("TRUNCATE rooms")
 
-		file = File.read(setting('DATA_DIR') + "areas.json")
+		file = File.read(setting('data_dir') + "areas.json")
 		areas = JSON.parse(file)
 
 		areas.each do |name, data|
@@ -45,13 +45,13 @@ class DB
 	end
 
 	# 
-	# Load the mobs from the mobs.json file in the DATA_DIR directory. This truncates the ```mobs``` table and fills it up again.
+	# Load the mobs from the mobs.json file in the data_dir directory. This truncates the ```mobs``` table and fills it up again.
 	# 
 	def self.load_mobs
 		conn = ActiveRecord::Base.connection
 		conn.execute("TRUNCATE mobs")
 
-		file = File.read(setting('DATA_DIR') + "mobs.json")
+		file = File.read(setting('data_dir') + "mobs.json")
 		mobs = JSON.parse(file)
 
 		mobs['mobs'].each do |data|

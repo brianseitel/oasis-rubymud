@@ -18,13 +18,13 @@ class Mob < ActiveRecord::Base
 
 
 	# 
-	# Broadcast to the room that this mob is dead, then delete the mob from the world.
+	# Broadcast to the room that this mob is dead, then delete the mob from the $world.
 	# 
 	def die
 		self.room.broadcast "#{self.name} is DEAD!!!"
-		World.mobs.each do |mob|
+		$world.mobs.each do |mob|
 			if (mob == self)
-				World.mobs.delete(mob)
+				$world.mobs.delete(mob)
 				return
 			end
 		end
@@ -48,6 +48,7 @@ class Mob < ActiveRecord::Base
 			"wisdom" => 12
 		}
 	end
+	
 	# 
 	# The update lifecycle of a mob. Currently just whether or not the mob moves around. If so, move it.
 	# 
@@ -87,6 +88,6 @@ class Mob < ActiveRecord::Base
 	# 
 	def spawn
 		@room = Room.find(self.starting_room_id)
-		World.mobs << self
+		$world.mobs << self
 	end
 end

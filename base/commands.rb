@@ -11,14 +11,14 @@ class CommandInterpreter
 	# 
 	def self.do_attack(target)
 		target = target.downcase
-		World.mobs.each do |mob|
+		$world.mobs.each do |mob|
 			if (mob.room.id == current_player.room_id)
 				len = target.length
 				mobname = mob.name[0..len].downcase
 				if (mobname == target)
 					combat = Combat.new(current_player, mob)
 					if (combat)
-						World.combats << combat
+						$world.combats << combat
 					end
 				end
 			end
