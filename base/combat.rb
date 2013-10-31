@@ -63,7 +63,7 @@ class Combat
 	# Begin the attack. Randomly determine who gets to attack first.
 	# 
 	# @todo  if this is the first attack, let the initiator hit first
-	# 
+	#
 	def do_attack
 		# If victim is dead or not in the room, skip
 		if (@victim.is_dead? || @victim.room.id != @player.room_id)
@@ -82,12 +82,15 @@ class Combat
 		end
 
 		if (@victim.is_dead?)
-			@player.gain_exp @victim
+			p = MudServer.get_player @player 
+			p.puts "You have KILLED #{victim.name}!!\n"
+			Level.gain_exp @player, @victim
 			@victim.die
-			World.combats.delete self
+			combat_over
 		elsif (@player.is_dead)
+			current_client.puts "#{attacker.name} has KILLED you!\n"
 			@player.die
-			World.combat.delete self
+			combat_over
 		end
 	end
 
@@ -123,11 +126,14 @@ class Combat
 			end
 			room.broadcast "#{attacker.name} swings at #{defender.name} and misses!\n"
 		end
+	end
 
-		if (defender.hit_points <= 0)
-			attacker.gain_exp defender
-			defender.die
-			World.combats.delete(self)
+	def combat_over
+		pp World.combats
+		World.combats.each do |combat|
+			if (combat == self)
+				World.combats.delete combat
+			end
 		end
 	end
 end

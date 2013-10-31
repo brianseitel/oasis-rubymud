@@ -18,7 +18,7 @@ class CommandInterpreter
 				if (mobname == target)
 					combat = Combat.new(current_player, mob)
 					if (combat)
-						World.combats << Combat.new(current_player, mob)
+						World.combats << combat
 					end
 				end
 			end

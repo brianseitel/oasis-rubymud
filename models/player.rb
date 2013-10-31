@@ -15,7 +15,6 @@ class Player < ActiveRecord::Base
 
 		def die
 			if (MudServer.logged_in? self)
-				self.client.puts "You have DIED!!! Fuck!"
 				self.hit_points = 1
 				self.mana = 1
 
@@ -78,16 +77,6 @@ class Player < ActiveRecord::Base
 		# 
 		def enhanced_stats
 			self.stats
-		end
-		
-		def gain_exp(victim)
-			experience = victim.level * Random.rand(50) + Random.rand(100)
-			if (current_player == self)
-				current_client.puts "You have KILLED #{victim.name}!!\n"
-				current_client.puts "You gain #{experience} experience points!"
-			end
-			self.experience += experience
-			self.save
 		end
 
 		def is_dead

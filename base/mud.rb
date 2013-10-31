@@ -53,6 +53,14 @@ class MudServer
 		MudServer.players.include? player
 	end
 
+	def self.get_player(player)
+		MudServer.players.each do |p|
+			if (player == p)
+				return p.client
+			end
+		end
+	end
+
 	# 
 	# A global accessor for the list of all players connected to the MudServer
 	# 
