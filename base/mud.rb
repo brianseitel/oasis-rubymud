@@ -56,7 +56,7 @@ class MudServer
 	def self.get_player(player)
 		MudServer.players.each do |p|
 			if (player == p)
-				return p.client
+				return p
 			end
 		end
 	end

@@ -20,7 +20,7 @@ class Level
 		experience = victim.level * Random.rand(50) + Random.rand(100)
 		p = MudServer.get_player player
 		if (p)
-			p.puts "You gain #{experience} experience points!"
+			p.client.puts "You gain #{experience} experience points!"
 		end
 
 		player.experience += experience

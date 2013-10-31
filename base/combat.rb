@@ -60,7 +60,7 @@ class Combat
 		if (@victim.is_dead? || @victim.room.id != @player.room_id)
 			return
 		end
-
+		@player.state = Player::STATE_FIGHTING
 		room = Room.find(@player.room_id)
 
 		# who goes first?
@@ -73,8 +73,11 @@ class Combat
 		end
 
 		if (@victim.is_dead?)
-			p = MudServer.get_player @player 
-			p.puts "You have KILLED #{victim.name}!!\n"
+			p = MudServer.get_player @player
+			if (p)
+				pp p
+				p.client.puts "You have KILLED #{victim.name}!!\n"
+			end
 			Level.gain_exp @player, @victim
 			@victim.die
 			combat_over
@@ -120,7 +123,7 @@ class Combat
 	end
 
 	def combat_over
-		pp $world.combats
+		@player.state = Player::STATE_STANDING
 		$world.combats.each do |combat|
 			if (combat == self)
 				$world.combats.delete combat

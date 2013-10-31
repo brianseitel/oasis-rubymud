@@ -108,12 +108,12 @@ class Room < ActiveRecord::Base
 	def broadcast(message, include_player = false)
 		connections = []
 		MudServer.clients.each do |connection|
-			player = connection.player
-			pp connection
-			pp player
-			if (player.room_id == self.id)
-				if (include_player || (current_player && current_player.id != player.id))
-					connection.client.puts message
+			if (connection.player)
+				player = connection.player
+				if (player.room_id == self.id)
+					if (include_player || (current_player && current_player.id != player.id))
+						connection.client.puts message
+					end
 				end
 			end
 		end

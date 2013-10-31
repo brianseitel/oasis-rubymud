@@ -7,6 +7,12 @@ require 'active_record'
 # 
 class Player < ActiveRecord::Base
 	attr_accessor :client
+	attr_accessor :state # Whether they're fighting, standing, dead, etc.
+
+	STATE_DEAD 		= 0
+	STATE_STANDING 	= 1
+	STATE_FIGHTING 	= 2
+	STATE_SLEEPING 	= 3
 
 	serialize :stats, JSON
 	after_create :setup_new_character
@@ -24,6 +30,8 @@ class Player < ActiveRecord::Base
 
 				self.experience -= tnl / 2
 				self.save
+
+				self.state = STATE_DEAD
 
 				self.goto_room(1)
 			end
@@ -107,6 +115,10 @@ class Player < ActiveRecord::Base
 		# Show status prompt to the player.
 		# 
 		def show_status_prompt
+			if (self.state == STATE_FIGHTING)
+				return
+			end
+
 			stats = {
 				:hp => self.hit_points,
 				:maxhp => self.max_hit_points,
@@ -139,5 +151,7 @@ class Player < ActiveRecord::Base
 			self.room_id = 1
 			self.area_id = 1
 			self.save
+
+			self.state = self.STATE_STANDING
 		end
 end

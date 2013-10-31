@@ -84,6 +84,22 @@ class CommandInterpreter
 	def self.do_move(direction)
 		room = current_thread.room
 
+		player = MudServer.get_player current_player
+
+		if (player.state != Player::STATE_STANDING)
+			case player.state
+				when Player::STATE_FIGHTING
+					current_client.puts "You're too busy fighting!\n"
+					return
+				when Player::STATE_SLEEPING
+					current_client.puts "Wake up first, dummy!\n"
+					return
+				when Player::STATE_DEAD
+					current_client.puts "You're dead, idiot!\n"
+					return
+			end
+		end
+
 		if (room.exits.has_key? direction)
 			new_room = Room.find(room.exits.values_at direction).first
 
