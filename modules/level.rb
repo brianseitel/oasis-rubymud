@@ -33,9 +33,9 @@ class Level
 
 	# 
 	# Does the player have enough experience to level? Possibly add other criteria here.
-	# @param result Boolean whether player has enough exp to level
+	# @param player Player the player we're checking
 	# 
-	# @return [type] [description]
+	# @return Boolean whether the player has enough xp to level
 	def self.enough_to_level?(player)
 		return player.experience > EXP_TO_LEVEL
 	end

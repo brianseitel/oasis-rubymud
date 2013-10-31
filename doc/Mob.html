@@ -1,0 +1,801 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Class: Mob
+  
+    &mdash; Documentation by YARD 0.8.7.2
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" charset="utf-8" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  hasFrames = window.top.frames.main ? true : false;
+  relpath = '';
+  framesUrl = "frames.html#!" + escape(window.location.href);
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div id="header">
+      <div id="menu">
+  
+    <a href="_index.html">Index (M)</a> &raquo;
+    
+    
+    <span class="title">Mob</span>
+  
+
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+      Class List
+    </a>
+  
+    <a class="full_list_link" id="method_list_link"
+        href="method_list.html">
+      Method List
+    </a>
+  
+    <a class="full_list_link" id="file_list_link"
+        href="file_list.html">
+      File List
+    </a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+
+    <iframe id="search_frame"></iframe>
+
+    <div id="content"><h1>Class: Mob
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName">ActiveRecord::Base</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">ActiveRecord::Base</li>
+          
+            <li class="next">Mob</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">models/mob.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>The Mob model. "Mob" is short for "mobile", which basically just means that
+it's a mobile object in the game. Mobs are usually monsters, though they
+can be NPCs as well.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Author:</p>
+<ul class="author">
+  
+    <li>
+      
+      
+      
+      
+        
+        <div class='inline'><dl class="rdoc-list"><dt>brianseitel</dt>
+<dd></dd></dl>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+
+
+
+  <h2>Instance Attribute Summary <small>(<a href="#" class="summary_toggle">collapse</a>)</small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#room-instance_method" title="#room (instance method)">- (Object) <strong>room</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute room.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#die-instance_method" title="#die (instance method)">- (Object) <strong>die</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Broadcast to the room that this mob is dead, then delete the mob from the
+$world.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#do_move-instance_method" title="#do_move (instance method)">- (Object) <strong>do_move</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Analyze the exits in the current room and decide whether to move or not.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gain_exp-instance_method" title="#gain_exp (instance method)">- (Object) <strong>gain_exp</strong>(victim) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Mobs don't gain experience, so this is just a placeholder for now.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_dead%3F-instance_method" title="#is_dead? (instance method)">- (Boolean) <strong>is_dead?</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>If hit points are below zero, this mob is dead.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#spawn-instance_method" title="#spawn (instance method)">- (Object) <strong>spawn</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Spawn a new instance of this mob in its starting room and add the mob to
+the world mob list.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#stats-instance_method" title="#stats (instance method)">- (Object) <strong>stats</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#update-instance_method" title="#update (instance method)">- (Object) <strong>update</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The update lifecycle of a mob.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="room=-instance_method"></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="room-instance_method">
+  
+    - (<tt>Object</tt>) <strong>room</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute room</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+9
+10
+11</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'models/mob.rb', line 9</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_room'>room</span>
+  <span class='ivar'>@room</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="die-instance_method">
+  
+    - (<tt>Object</tt>) <strong>die</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Broadcast to the room that this mob is dead, then delete the mob from the
+$world.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+23
+24
+25
+26
+27
+28
+29
+30
+31</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'models/mob.rb', line 23</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_die'>die</span>
+	<span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_room'>room</span><span class='period'>.</span><span class='id identifier rubyid_broadcast'>broadcast</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span><span class='tstring_content'> is DEAD!!!</span><span class='tstring_end'>&quot;</span></span>
+	<span class='gvar'>$world</span><span class='period'>.</span><span class='id identifier rubyid_mobs'>mobs</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_mob'>mob</span><span class='op'>|</span>
+		<span class='kw'>if</span> <span class='lparen'>(</span><span class='id identifier rubyid_mob'>mob</span> <span class='op'>==</span> <span class='kw'>self</span><span class='rparen'>)</span>
+			<span class='gvar'>$world</span><span class='period'>.</span><span class='id identifier rubyid_mobs'>mobs</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span><span class='lparen'>(</span><span class='id identifier rubyid_mob'>mob</span><span class='rparen'>)</span>
+			<span class='kw'>return</span>
+		<span class='kw'>end</span>
+	<span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="do_move-instance_method">
+  
+    - (<tt>Object</tt>) <strong>do_move</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note todo">
+    <strong>TODO:</strong>
+    <div class='inline'>
+<p>Add “sneak” support</p>
+</div>
+  </div>
+
+
+<p>Analyze the exits in the current room and decide whether to move or not.
+Also, broadcast the move to the room.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'models/mob.rb', line 67</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_do_move'>do_move</span>
+	<span class='id identifier rubyid_possible_moves'>possible_moves</span> <span class='op'>=</span> <span class='ivar'>@room</span><span class='period'>.</span><span class='id identifier rubyid_exits'>exits</span><span class='period'>.</span><span class='id identifier rubyid_keys'>keys</span>
+	<span class='id identifier rubyid_choice'>choice</span> <span class='op'>=</span> <span class='const'>Random</span><span class='period'>.</span><span class='id identifier rubyid_rand'>rand</span><span class='lparen'>(</span><span class='id identifier rubyid_possible_moves'>possible_moves</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span><span class='rparen'>)</span>
+	
+	<span class='kw'>case</span> <span class='id identifier rubyid_possible_moves'>possible_moves</span><span class='lbracket'>[</span><span class='id identifier rubyid_choice'>choice</span><span class='rbracket'>]</span>
+		<span class='kw'>when</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>up</span><span class='tstring_end'>&quot;</span></span>
+			<span class='id identifier rubyid_cardinality'>cardinality</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>above</span><span class='tstring_end'>&quot;</span></span>
+		<span class='kw'>when</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>down</span><span class='tstring_end'>&quot;</span></span>
+			<span class='id identifier rubyid_cardinality'>cardinality</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>down</span><span class='tstring_end'>&quot;</span></span>
+		<span class='kw'>else</span>
+			<span class='id identifier rubyid_cardinality'>cardinality</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>the </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_possible_moves'>possible_moves</span><span class='lbracket'>[</span><span class='id identifier rubyid_choice'>choice</span><span class='rbracket'>]</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span>
+	<span class='kw'>end</span>
+
+	<span class='ivar'>@room</span><span class='period'>.</span><span class='id identifier rubyid_broadcast'>broadcast</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span><span class='tstring_content'> leaves to </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_cardinality'>cardinality</span><span class='rbrace'>}</span><span class='tstring_content'>.</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='kw'>true</span>
+	<span class='ivar'>@room</span> <span class='op'>=</span> <span class='const'>Room</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='ivar'>@room</span><span class='period'>.</span><span class='id identifier rubyid_exits'>exits</span><span class='period'>.</span><span class='id identifier rubyid_values_at'>values_at</span> <span class='id identifier rubyid_possible_moves'>possible_moves</span><span class='lbracket'>[</span><span class='id identifier rubyid_choice'>choice</span><span class='rbracket'>]</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_first'>first</span>
+	<span class='ivar'>@room</span><span class='period'>.</span><span class='id identifier rubyid_broadcast'>broadcast</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span><span class='tstring_content'> enters from </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_cardinality'>cardinality</span><span class='rbrace'>}</span><span class='tstring_content'>.\n</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='kw'>true</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gain_exp-instance_method">
+  
+    - (<tt>Object</tt>) <strong>gain_exp</strong>(victim) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note todo">
+    <strong>TODO:</strong>
+    <div class='inline'>
+<p>Change it so that Mobs don’t even get this far</p>
+</div>
+  </div>
+
+
+<p>Mobs don't gain experience, so this is just a placeholder for now.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+37
+38
+39</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'models/mob.rb', line 37</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_gain_exp'>gain_exp</span><span class='lparen'>(</span><span class='id identifier rubyid_victim'>victim</span><span class='rparen'>)</span>
+
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_dead?-instance_method">
+  
+    - (<tt>Boolean</tt>) <strong>is_dead?</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>If hit points are below zero, this mob is dead. Seeya.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Boolean whether the mob is dead or not</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+15
+16
+17</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'models/mob.rb', line 15</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_is_dead?'>is_dead?</span>
+	<span class='kw'>return</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_hit_points'>hit_points</span> <span class='op'>&lt;=</span> <span class='int'>0</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="spawn-instance_method">
+  
+    - (<tt>Object</tt>) <strong>spawn</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Spawn a new instance of this mob in its starting room and add the mob to
+the world mob list.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+89
+90
+91
+92</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'models/mob.rb', line 89</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_spawn'>spawn</span>
+	<span class='ivar'>@room</span> <span class='op'>=</span> <span class='const'>Room</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_starting_room_id'>starting_room_id</span><span class='rparen'>)</span>
+	<span class='gvar'>$world</span><span class='period'>.</span><span class='id identifier rubyid_mobs'>mobs</span> <span class='op'>&lt;&lt;</span> <span class='kw'>self</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="stats-instance_method">
+  
+    - (<tt>Object</tt>) <strong>stats</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'models/mob.rb', line 41</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_stats'>stats</span>
+	<span class='id identifier rubyid_stats'>stats</span> <span class='op'>=</span> <span class='lbrace'>{</span>
+		<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>strength</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='int'>12</span><span class='comma'>,</span>
+		<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>constitution</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='int'>12</span><span class='comma'>,</span>
+		<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>intelligence</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='int'>12</span><span class='comma'>,</span>
+		<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>dexterity</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='int'>12</span><span class='comma'>,</span>
+		<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>charisma</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='int'>12</span><span class='comma'>,</span>
+		<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>wisdom</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='int'>12</span>
+	<span class='rbrace'>}</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="update-instance_method">
+  
+    - (<tt>Object</tt>) <strong>update</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note todo">
+    <strong>TODO:</strong>
+    <div class='inline'>
+<p>If aggressive mob, determine whether to attack player</p>
+</div>
+  </div>
+
+
+<p>The update lifecycle of a mob. Currently just whether or not the mob moves
+around. If so, move it.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+56
+57
+58
+59
+60
+61</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'models/mob.rb', line 56</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_update'>update</span>
+	<span class='id identifier rubyid_chance'>chance</span> <span class='op'>=</span> <span class='const'>Random</span><span class='period'>.</span><span class='id identifier rubyid_rand'>rand</span><span class='lparen'>(</span><span class='int'>2</span><span class='rparen'>)</span>
+	<span class='kw'>if</span> <span class='lparen'>(</span><span class='id identifier rubyid_chance'>chance</span> <span class='op'>==</span> <span class='int'>1</span><span class='rparen'>)</span>
+		<span class='id identifier rubyid_do_move'>do_move</span>
+	<span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+    <div id="footer">
+  Generated on Thu Oct 31 16:15:41 2013 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.8.7.2 (ruby-1.9.3).
+</div>
+
+  </body>
+</html>

@@ -1,0 +1,1109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Class: World
+  
+    &mdash; Documentation by YARD 0.8.7.2
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" charset="utf-8" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  hasFrames = window.top.frames.main ? true : false;
+  relpath = '';
+  framesUrl = "frames.html#!" + escape(window.location.href);
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div id="header">
+      <div id="menu">
+  
+    <a href="_index.html">Index (W)</a> &raquo;
+    
+    
+    <span class="title">World</span>
+  
+
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+      Class List
+    </a>
+  
+    <a class="full_list_link" id="method_list_link"
+        href="method_list.html">
+      Method List
+    </a>
+  
+    <a class="full_list_link" id="file_list_link"
+        href="file_list.html">
+      File List
+    </a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+
+    <iframe id="search_frame"></iframe>
+
+    <div id="content"><h1>Class: World
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">World</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">base/world.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>The base world class that keeps track of things going on the world, such as
+time and all of the mobs present.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Author:</p>
+<ul class="author">
+  
+    <li>
+      
+      
+      
+      
+        
+        <div class='inline'><dl class="rdoc-list"><dt>brianseitel</dt>
+<dd></dd></dl>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+  <h2>Constant Summary</h2>
+  
+    <dl class="constants">
+      
+        <dt id="last_time-classvariable" class="">@@last_time =
+          
+        </dt>
+        <dd><pre class="code"><span class='kw'>nil</span></pre></dd>
+      
+        <dt id="current_time-classvariable" class="">@@current_time =
+          
+        </dt>
+        <dd><pre class="code"><span class='kw'>nil</span></pre></dd>
+      
+        <dt id="mobs-classvariable" class="">@@mobs =
+          
+        </dt>
+        <dd><pre class="code"><span class='lbracket'>[</span><span class='rbracket'>]</span></pre></dd>
+      
+        <dt id="combats-classvariable" class="">@@combats =
+          
+        </dt>
+        <dd><pre class="code"><span class='lbracket'>[</span><span class='rbracket'>]</span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#combats-instance_method" title="#combats (instance method)">- (Object) <strong>combats</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#do_pulse-instance_method" title="#do_pulse (instance method)">- (Object) <strong>do_pulse</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Update to the next pulse of time and take appropriate actions.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">- (World) <strong>initialize</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>A new instance of World.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#mobs-instance_method" title="#mobs (instance method)">- (Object) <strong>mobs</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>A list of all the mobs that have been spawned.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#respawn_mobs-instance_method" title="#respawn_mobs (instance method)">- (Object) <strong>respawn_mobs</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Respawn any mobs that were killed.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#spawn_mobs-instance_method" title="#spawn_mobs (instance method)">- (Object) <strong>spawn_mobs</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Spawns all of the mobs into their starting positions.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#update-instance_method" title="#update (instance method)">- (Object) <strong>update</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Do a pulse on a regular basis.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#update_area-instance_method" title="#update_area (instance method)">- (Object) <strong>update_area</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Update the area once per pulse.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#update_mobs-instance_method" title="#update_mobs (instance method)">- (Object) <strong>update_mobs</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Update all mobs once per pulse.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#update_objects-instance_method" title="#update_objects (instance method)">- (Object) <strong>update_objects</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Update objects once per pulse.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#update_players-instance_method" title="#update_players (instance method)">- (Object) <strong>update_players</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Update players once per pulse.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#update_violence-instance_method" title="#update_violence (instance method)">- (Object) <strong>update_violence</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Update combat rounds once per pulse.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    - (<tt><span class='object_link'><a href="" title="World (class)">World</a></span></tt>) <strong>initialize</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns a new instance of World</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'base/world.rb', line 13</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span>
+	<span class='ivar'>@pulse_tick</span> <span class='op'>=</span> <span class='id identifier rubyid_setting'>setting</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>pulse_tick</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span>
+	<span class='ivar'>@pulse_mob</span> <span class='op'>=</span> <span class='id identifier rubyid_setting'>setting</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>pulse_mob</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span>
+	<span class='ivar'>@pulse_second</span> <span class='op'>=</span> <span class='id identifier rubyid_setting'>setting</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>pulse_second</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span>
+	<span class='ivar'>@pulse_violence</span> <span class='op'>=</span> <span class='id identifier rubyid_setting'>setting</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>pulse_violence</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span>
+	<span class='ivar'>@pulse_area</span> <span class='op'>=</span> <span class='id identifier rubyid_setting'>setting</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>pulse_area</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span>
+
+	<span class='cvar'>@@last_time</span> <span class='op'>=</span> <span class='const'>Time</span><span class='period'>.</span><span class='id identifier rubyid_now'>now</span>
+	<span class='cvar'>@@current_time</span> <span class='op'>=</span> <span class='const'>Time</span><span class='period'>.</span><span class='id identifier rubyid_now'>now</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="combats-instance_method">
+  
+    - (<tt>Object</tt>) <strong>combats</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+24
+25
+26</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'base/world.rb', line 24</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_combats'>combats</span>
+	<span class='cvar'>@@combats</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="do_pulse-instance_method">
+  
+    - (<tt>Object</tt>) <strong>do_pulse</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Update to the next pulse of time and take appropriate actions</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'base/world.rb', line 58</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_do_pulse'>do_pulse</span>
+
+	<span class='kw'>if</span> <span class='lparen'>(</span><span class='lparen'>(</span><span class='ivar'>@pulse_area</span> <span class='op'>-=</span> <span class='int'>1</span><span class='rparen'>)</span> <span class='op'>&lt;=</span> <span class='int'>0</span><span class='rparen'>)</span>
+		<span class='id identifier rubyid_min'>min</span> <span class='op'>=</span> <span class='id identifier rubyid_setting'>setting</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>pulse_area</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span> <span class='op'>/</span> <span class='int'>2</span>
+		<span class='id identifier rubyid_max'>max</span> <span class='op'>=</span> <span class='int'>3</span> <span class='op'>*</span> <span class='id identifier rubyid_setting'>setting</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>pulse_area</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span> <span class='op'>/</span> <span class='int'>2</span>
+		<span class='ivar'>@pulse_area</span> <span class='op'>=</span> <span class='const'>Random</span><span class='period'>.</span><span class='id identifier rubyid_rand'>rand</span><span class='lparen'>(</span><span class='id identifier rubyid_min'>min</span><span class='op'>..</span><span class='id identifier rubyid_max'>max</span><span class='rparen'>)</span>
+		<span class='id identifier rubyid_update_area'>update_area</span>
+	<span class='kw'>end</span>
+
+	<span class='kw'>if</span> <span class='lparen'>(</span><span class='lparen'>(</span><span class='ivar'>@pulse_mob</span> <span class='op'>-=</span> <span class='int'>1</span><span class='rparen'>)</span> <span class='op'>&lt;=</span> <span class='int'>0</span><span class='rparen'>)</span>
+		<span class='id identifier rubyid_min'>min</span> <span class='op'>=</span> <span class='id identifier rubyid_setting'>setting</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>pulse_mob</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span> <span class='op'>/</span> <span class='int'>2</span>
+		<span class='id identifier rubyid_max'>max</span> <span class='op'>=</span> <span class='int'>3</span> <span class='op'>*</span> <span class='id identifier rubyid_setting'>setting</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>pulse_mob</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span> <span class='op'>/</span> <span class='int'>2</span>
+		<span class='ivar'>@pulse_mob</span> <span class='op'>=</span> <span class='const'>Random</span><span class='period'>.</span><span class='id identifier rubyid_rand'>rand</span><span class='lparen'>(</span><span class='id identifier rubyid_min'>min</span><span class='op'>..</span><span class='id identifier rubyid_max'>max</span><span class='rparen'>)</span>
+		<span class='id identifier rubyid_update_mobs'>update_mobs</span>
+	<span class='kw'>end</span>
+	
+	<span class='kw'>if</span> <span class='lparen'>(</span><span class='lparen'>(</span><span class='ivar'>@pulse_violence</span> <span class='op'>-=</span> <span class='int'>1</span><span class='rparen'>)</span> <span class='op'>&lt;=</span> <span class='int'>0</span><span class='rparen'>)</span>
+		<span class='ivar'>@pulse_violence</span> <span class='op'>=</span> <span class='id identifier rubyid_setting'>setting</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>pulse_violence</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span>
+		<span class='id identifier rubyid_update_violence'>update_violence</span>
+	<span class='kw'>end</span>
+
+	<span class='kw'>if</span> <span class='lparen'>(</span><span class='lparen'>(</span><span class='ivar'>@pulse_tick</span> <span class='op'>-=</span> <span class='int'>1</span><span class='rparen'>)</span> <span class='op'>&lt;=</span> <span class='int'>0</span><span class='rparen'>)</span> 
+		<span class='id identifier rubyid_min'>min</span> <span class='op'>=</span> <span class='id identifier rubyid_setting'>setting</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>pulse_tick</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span> <span class='op'>/</span> <span class='int'>2</span>
+		<span class='id identifier rubyid_max'>max</span> <span class='op'>=</span> <span class='int'>3</span> <span class='op'>*</span> <span class='id identifier rubyid_setting'>setting</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>pulse_tick</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span> <span class='op'>/</span> <span class='int'>2</span>
+		<span class='ivar'>@pulse_tick</span> <span class='op'>=</span> <span class='const'>Random</span><span class='period'>.</span><span class='id identifier rubyid_rand'>rand</span><span class='lparen'>(</span><span class='id identifier rubyid_min'>min</span><span class='op'>..</span><span class='id identifier rubyid_max'>max</span><span class='rparen'>)</span>
+		<span class='id identifier rubyid_update_players'>update_players</span>
+		<span class='id identifier rubyid_update_objects'>update_objects</span>
+	<span class='kw'>end</span>
+
+	<span class='cvar'>@@last_time</span> <span class='op'>=</span> <span class='const'>Time</span><span class='period'>.</span><span class='id identifier rubyid_now'>now</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="mobs-instance_method">
+  
+    - (<tt>Object</tt>) <strong>mobs</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>A list of all the mobs that have been spawned</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+31
+32
+33</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'base/world.rb', line 31</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_mobs'>mobs</span>
+	<span class='cvar'>@@mobs</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="respawn_mobs-instance_method">
+  
+    - (<tt>Object</tt>) <strong>respawn_mobs</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Respawn any mobs that were killed. Only one mob per ID can exist at any
+given time. Maybe rethink this later, but for now it makes sense.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'base/world.rb', line 148</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_respawn_mobs'>respawn_mobs</span>
+	<span class='const'>Mob</span><span class='period'>.</span><span class='id identifier rubyid_find_each'>find_each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_mob'>mob</span><span class='op'>|</span>
+		<span class='kw'>if</span> <span class='lparen'>(</span><span class='op'>!</span><span class='gvar'>$world</span><span class='period'>.</span><span class='id identifier rubyid_mobs'>mobs</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span> <span class='id identifier rubyid_mob'>mob</span><span class='rparen'>)</span>
+			<span class='comment'># 50/50 shot it gets respawned this tick
+</span>			<span class='kw'>if</span> <span class='lparen'>(</span><span class='const'>Random</span><span class='period'>.</span><span class='id identifier rubyid_rand'>rand</span><span class='lparen'>(</span><span class='int'>2</span><span class='rparen'>)</span> <span class='op'>==</span> <span class='int'>1</span><span class='rparen'>)</span>
+				<span class='id identifier rubyid_mob'>mob</span><span class='period'>.</span><span class='id identifier rubyid_spawn'>spawn</span>
+				<span class='id identifier rubyid_mob'>mob</span><span class='period'>.</span><span class='id identifier rubyid_room'>room</span><span class='period'>.</span><span class='id identifier rubyid_broadcast'>broadcast</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_mob'>mob</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span><span class='tstring_content'> appears in a poof of smoke!</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='kw'>true</span>
+			<span class='kw'>end</span>
+		<span class='kw'>end</span>
+	<span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="spawn_mobs-instance_method">
+  
+    - (<tt>Object</tt>) <strong>spawn_mobs</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Spawns all of the mobs into their starting positions</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+139
+140
+141
+142
+143</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'base/world.rb', line 139</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_spawn_mobs'>spawn_mobs</span>
+	<span class='const'>Mob</span><span class='period'>.</span><span class='id identifier rubyid_find_each'>find_each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_mob'>mob</span><span class='op'>|</span>
+		<span class='id identifier rubyid_mob'>mob</span><span class='period'>.</span><span class='id identifier rubyid_spawn'>spawn</span>
+	<span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="update-instance_method">
+  
+    - (<tt>Object</tt>) <strong>update</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Do a pulse on a regular basis. This is independent of performance and based
+on time. If enough time has passed, we trigger a pulse</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'base/world.rb', line 39</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_update'>update</span>
+	<span class='kw'>while</span> <span class='lparen'>(</span><span class='kw'>true</span><span class='rparen'>)</span>
+		<span class='cvar'>@@last_time</span> <span class='op'>=</span> <span class='cvar'>@@current_time</span>
+		
+		<span class='id identifier rubyid_do_pulse'>do_pulse</span>
+		<span class='kw'>while</span> <span class='lparen'>(</span><span class='kw'>true</span><span class='rparen'>)</span>
+			<span class='id identifier rubyid_change'>change</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='const'>Time</span><span class='period'>.</span><span class='id identifier rubyid_now'>now</span><span class='period'>.</span><span class='id identifier rubyid_tv_sec'>tv_sec</span>  <span class='op'>-</span> <span class='cvar'>@@last_time</span><span class='period'>.</span><span class='id identifier rubyid_tv_sec'>tv_sec</span>  <span class='rparen'>)</span> <span class='op'>*</span> <span class='int'>1000</span> <span class='op'>*</span> <span class='int'>1000</span> <span class='op'>+</span> <span class='lparen'>(</span> <span class='const'>Time</span><span class='period'>.</span><span class='id identifier rubyid_now'>now</span><span class='period'>.</span><span class='id identifier rubyid_tv_usec'>tv_usec</span> <span class='op'>-</span> <span class='cvar'>@@last_time</span><span class='period'>.</span><span class='id identifier rubyid_tv_usec'>tv_usec</span> <span class='rparen'>)</span><span class='semicolon'>;</span>
+			<span class='kw'>if</span> <span class='lparen'>(</span> <span class='id identifier rubyid_change'>change</span> <span class='op'>&gt;=</span> <span class='int'>1000000</span> <span class='op'>/</span> <span class='id identifier rubyid_setting'>setting</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>pulse_per_second</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span><span class='rparen'>)</span>
+				<span class='kw'>break</span><span class='semicolon'>;</span>
+			<span class='kw'>end</span>
+		<span class='kw'>end</span>
+
+		<span class='cvar'>@@last_time</span> <span class='op'>=</span> <span class='const'>Time</span><span class='period'>.</span><span class='id identifier rubyid_now'>now</span>
+	<span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="update_area-instance_method">
+  
+    - (<tt>Object</tt>) <strong>update_area</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note todo">
+    <strong>TODO:</strong>
+    <div class='inline'>
+<p>respawn objects</p>
+</div>
+  </div>
+
+
+<p>Update the area once per pulse. For now, this is just respawning monster</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+94
+95
+96
+97</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'base/world.rb', line 94</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_update_area'>update_area</span>
+	<span class='id identifier rubyid_print'>print</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[UPDATE] Area\n</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_green'>green</span>
+	<span class='gvar'>$world</span><span class='period'>.</span><span class='id identifier rubyid_respawn_mobs'>respawn_mobs</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="update_mobs-instance_method">
+  
+    - (<tt>Object</tt>) <strong>update_mobs</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Update all mobs once per pulse.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+102
+103
+104
+105
+106
+107</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'base/world.rb', line 102</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_update_mobs'>update_mobs</span>
+	<span class='id identifier rubyid_print'>print</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[UPDATE] Mobs\n</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_red'>red</span>
+	<span class='gvar'>$world</span><span class='period'>.</span><span class='id identifier rubyid_mobs'>mobs</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_mob'>mob</span><span class='op'>|</span>
+		<span class='id identifier rubyid_mob'>mob</span><span class='period'>.</span><span class='id identifier rubyid_update'>update</span>
+	<span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="update_objects-instance_method">
+  
+    - (<tt>Object</tt>) <strong>update_objects</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Update objects once per pulse. Decay corpses, and so on</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+122
+123
+124</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'base/world.rb', line 122</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_update_objects'>update_objects</span>
+	<span class='id identifier rubyid_print'>print</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[UPDATE] Objects\n</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_white'>white</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="update_players-instance_method">
+  
+    - (<tt>Object</tt>) <strong>update_players</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Update players once per pulse. Increase health, mana, etc.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+112
+113
+114
+115
+116
+117</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'base/world.rb', line 112</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_update_players'>update_players</span>
+	<span class='id identifier rubyid_print'>print</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[UPDATE] Players\n</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_cyan'>cyan</span>
+	<span class='const'>MudServer</span><span class='period'>.</span><span class='id identifier rubyid_players'>players</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_player'>player</span><span class='op'>|</span>
+		<span class='id identifier rubyid_player'>player</span><span class='period'>.</span><span class='id identifier rubyid_show_status_prompt'>show_status_prompt</span>
+	<span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="update_violence-instance_method">
+  
+    - (<tt>Object</tt>) <strong>update_violence</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Update combat rounds once per pulse.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+129
+130
+131
+132
+133
+134</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'base/world.rb', line 129</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_update_violence'>update_violence</span>
+	<span class='id identifier rubyid_print'>print</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[UPDATE] Combat\n</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_yellow'>yellow</span>
+	<span class='gvar'>$world</span><span class='period'>.</span><span class='id identifier rubyid_combats'>combats</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_combat'>combat</span><span class='op'>|</span>
+		<span class='id identifier rubyid_combat'>combat</span><span class='period'>.</span><span class='id identifier rubyid_do_attack'>do_attack</span>
+	<span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+    <div id="footer">
+  Generated on Thu Oct 31 16:15:41 2013 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.8.7.2 (ruby-1.9.3).
+</div>
+
+  </body>
+</html>

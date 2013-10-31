@@ -1,0 +1,883 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Class: Combat
+  
+    &mdash; Documentation by YARD 0.8.7.2
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" charset="utf-8" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  hasFrames = window.top.frames.main ? true : false;
+  relpath = '';
+  framesUrl = "frames.html#!" + escape(window.location.href);
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div id="header">
+      <div id="menu">
+  
+    <a href="_index.html">Index (C)</a> &raquo;
+    
+    
+    <span class="title">Combat</span>
+  
+
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+      Class List
+    </a>
+  
+    <a class="full_list_link" id="method_list_link"
+        href="method_list.html">
+      Method List
+    </a>
+  
+    <a class="full_list_link" id="file_list_link"
+        href="file_list.html">
+      File List
+    </a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+
+    <iframe id="search_frame"></iframe>
+
+    <div id="content"><h1>Class: Combat
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Combat</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">base/combat.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note todo">
+    <strong>TODO:</strong>
+    <div class='inline'>
+<p>Differentiate between PC and NPC combats</p>
+</div>
+  </div>
+
+  <div class="note todo">
+    <strong>TODO:</strong>
+    <div class='inline'>
+<p>Create corpses</p>
+</div>
+  </div>
+
+  <div class="note todo">
+    <strong>TODO:</strong>
+    <div class='inline'>
+<p>Account for the effects of spells</p>
+</div>
+  </div>
+
+  <div class="note todo">
+    <strong>TODO:</strong>
+    <div class='inline'>
+<p>Account for armor in defense</p>
+</div>
+  </div>
+
+  <div class="note todo">
+    <strong>TODO:</strong>
+    <div class='inline'>
+<p>Account for weapons in office</p>
+</div>
+  </div>
+
+  <div class="note todo">
+    <strong>TODO:</strong>
+    <div class='inline'>
+<p>Figure out a better way to handle hit percentages and such</p>
+</div>
+  </div>
+
+
+<p>Base Combat class. Handles initializing a combat scenario, updating combat
+events, calculating damage, and soon.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Author:</p>
+<ul class="author">
+  
+    <li>
+      
+      
+      
+      
+        
+        <div class='inline'><dl class="rdoc-list"><dt>brianseitel</dt>
+<dd></dd></dl>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+
+
+
+  <h2>Instance Attribute Summary <small>(<a href="#" class="summary_toggle">collapse</a>)</small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#player-instance_method" title="#player (instance method)">- (Object) <strong>player</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute player.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#victim-instance_method" title="#victim (instance method)">- (Object) <strong>victim</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute victim.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#combat_over-instance_method" title="#combat_over (instance method)">- (Object) <strong>combat_over</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#do_attack-instance_method" title="#do_attack (instance method)">- (Object) <strong>do_attack</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Begin the attack.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#do_damage-instance_method" title="#do_damage (instance method)">- (type) <strong>do_damage</strong>(attacker, defender, room) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Calculate and deal damage to victim.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">- (Object) <strong>initialize</strong>(player, victim) </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Start up a combat, involving a player and a victim.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    - (<tt>Object</tt>) <strong>initialize</strong>(player, victim) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Start up a combat, involving a player and a victim.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>player</span>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Player The player initiating the attack</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>victim</span>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Player|Mob The victim of the attack</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'base/combat.rb', line 27</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_player'>player</span><span class='comma'>,</span> <span class='id identifier rubyid_victim'>victim</span><span class='rparen'>)</span>
+	<span class='ivar'>@player</span> <span class='op'>=</span> <span class='id identifier rubyid_player'>player</span>
+	<span class='ivar'>@victim</span> <span class='op'>=</span> <span class='id identifier rubyid_victim'>victim</span>
+
+	<span class='kw'>if</span> <span class='lparen'>(</span><span class='ivar'>@player</span> <span class='op'>==</span> <span class='ivar'>@victim</span><span class='rparen'>)</span>
+		<span class='id identifier rubyid_current_client'>current_client</span><span class='period'>.</span><span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>You hit yourself! Ouch!\n</span><span class='tstring_end'>&quot;</span></span>
+		<span class='kw'>return</span> <span class='kw'>false</span>
+	<span class='kw'>end</span>
+
+	<span class='id identifier rubyid_in_combat'>in_combat</span> <span class='op'>=</span> <span class='kw'>false</span>
+	<span class='gvar'>$world</span><span class='period'>.</span><span class='id identifier rubyid_combats'>combats</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_combat'>combat</span><span class='op'>|</span>
+		<span class='kw'>if</span> <span class='lparen'>(</span><span class='id identifier rubyid_combat'>combat</span><span class='period'>.</span><span class='id identifier rubyid_player'>player</span> <span class='op'>==</span> <span class='ivar'>@player</span><span class='rparen'>)</span>
+			<span class='id identifier rubyid_in_combat'>in_combat</span> <span class='op'>=</span> <span class='kw'>true</span>
+			<span class='kw'>break</span><span class='semicolon'>;</span>
+		<span class='kw'>end</span>
+	<span class='kw'>end</span>
+
+	<span class='kw'>if</span> <span class='lparen'>(</span><span class='id identifier rubyid_in_combat'>in_combat</span><span class='rparen'>)</span>
+		<span class='id identifier rubyid_current_client'>current_client</span><span class='period'>.</span><span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>You are doing the best you can!\n</span><span class='tstring_end'>&quot;</span></span>
+		<span class='kw'>return</span> <span class='kw'>false</span>
+	<span class='kw'>end</span>
+
+	<span class='id identifier rubyid_do_attack'>do_attack</span>
+	<span class='kw'>return</span> <span class='kw'>true</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="player=-instance_method"></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="player-instance_method">
+  
+    - (<tt>Object</tt>) <strong>player</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute player</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+15
+16
+17</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'base/combat.rb', line 15</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_player'>player</span>
+  <span class='ivar'>@player</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="victim=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="victim-instance_method">
+  
+    - (<tt>Object</tt>) <strong>victim</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute victim</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+16
+17
+18</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'base/combat.rb', line 16</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_victim'>victim</span>
+  <span class='ivar'>@victim</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="combat_over-instance_method">
+  
+    - (<tt>Object</tt>) <strong>combat_over</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+125
+126
+127
+128
+129
+130
+131
+132</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'base/combat.rb', line 125</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_combat_over'>combat_over</span>
+	<span class='ivar'>@player</span><span class='period'>.</span><span class='id identifier rubyid_state'>state</span> <span class='op'>=</span> <span class='const'>Player</span><span class='op'>::</span><span class='const'>STATE_STANDING</span>
+	<span class='gvar'>$world</span><span class='period'>.</span><span class='id identifier rubyid_combats'>combats</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_combat'>combat</span><span class='op'>|</span>
+		<span class='kw'>if</span> <span class='lparen'>(</span><span class='id identifier rubyid_combat'>combat</span> <span class='op'>==</span> <span class='kw'>self</span><span class='rparen'>)</span>
+			<span class='gvar'>$world</span><span class='period'>.</span><span class='id identifier rubyid_combats'>combats</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span> <span class='id identifier rubyid_combat'>combat</span>
+		<span class='kw'>end</span>
+	<span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="do_attack-instance_method">
+  
+    - (<tt>Object</tt>) <strong>do_attack</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note todo">
+    <strong>TODO:</strong>
+    <div class='inline'>
+<p>if this is the first attack, let the initiator hit first</p>
+</div>
+  </div>
+
+
+<p>Begin the attack. Randomly determine who gets to attack first.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'base/combat.rb', line 58</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_do_attack'>do_attack</span>
+	<span class='comment'># If victim is dead or not in the room, skip
+</span>	<span class='kw'>if</span> <span class='lparen'>(</span><span class='ivar'>@victim</span><span class='period'>.</span><span class='id identifier rubyid_is_dead?'>is_dead?</span> <span class='op'>||</span> <span class='ivar'>@victim</span><span class='period'>.</span><span class='id identifier rubyid_room'>room</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span> <span class='op'>!=</span> <span class='ivar'>@player</span><span class='period'>.</span><span class='id identifier rubyid_room_id'>room_id</span><span class='rparen'>)</span>
+		<span class='kw'>return</span>
+	<span class='kw'>end</span>
+	<span class='ivar'>@player</span><span class='period'>.</span><span class='id identifier rubyid_state'>state</span> <span class='op'>=</span> <span class='const'>Player</span><span class='op'>::</span><span class='const'>STATE_FIGHTING</span>
+	<span class='id identifier rubyid_room'>room</span> <span class='op'>=</span> <span class='const'>Room</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='ivar'>@player</span><span class='period'>.</span><span class='id identifier rubyid_room_id'>room_id</span><span class='rparen'>)</span>
+
+	<span class='comment'># who goes first?
+</span>	<span class='kw'>if</span> <span class='lparen'>(</span><span class='const'>Random</span><span class='period'>.</span><span class='id identifier rubyid_rand'>rand</span><span class='lparen'>(</span><span class='int'>2</span><span class='rparen'>)</span> <span class='op'>==</span> <span class='int'>1</span><span class='rparen'>)</span>
+		<span class='id identifier rubyid_do_damage'>do_damage</span><span class='lparen'>(</span><span class='ivar'>@player</span><span class='comma'>,</span> <span class='ivar'>@victim</span><span class='comma'>,</span> <span class='id identifier rubyid_room'>room</span><span class='rparen'>)</span>
+		<span class='id identifier rubyid_do_damage'>do_damage</span><span class='lparen'>(</span><span class='ivar'>@victim</span><span class='comma'>,</span> <span class='ivar'>@player</span><span class='comma'>,</span> <span class='id identifier rubyid_room'>room</span><span class='rparen'>)</span>
+	<span class='kw'>else</span>
+		<span class='id identifier rubyid_do_damage'>do_damage</span><span class='lparen'>(</span><span class='ivar'>@victim</span><span class='comma'>,</span> <span class='ivar'>@player</span><span class='comma'>,</span> <span class='id identifier rubyid_room'>room</span><span class='rparen'>)</span>
+		<span class='id identifier rubyid_do_damage'>do_damage</span><span class='lparen'>(</span><span class='ivar'>@player</span><span class='comma'>,</span> <span class='ivar'>@victim</span><span class='comma'>,</span> <span class='id identifier rubyid_room'>room</span><span class='rparen'>)</span>
+	<span class='kw'>end</span>
+
+	<span class='kw'>if</span> <span class='lparen'>(</span><span class='ivar'>@victim</span><span class='period'>.</span><span class='id identifier rubyid_is_dead?'>is_dead?</span><span class='rparen'>)</span>
+		<span class='id identifier rubyid_p'>p</span> <span class='op'>=</span> <span class='const'>MudServer</span><span class='period'>.</span><span class='id identifier rubyid_get_player'>get_player</span> <span class='ivar'>@player</span>
+		<span class='kw'>if</span> <span class='lparen'>(</span><span class='id identifier rubyid_p'>p</span><span class='rparen'>)</span>
+			<span class='id identifier rubyid_pp'>pp</span> <span class='id identifier rubyid_p'>p</span>
+			<span class='id identifier rubyid_p'>p</span><span class='period'>.</span><span class='id identifier rubyid_client'>client</span><span class='period'>.</span><span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>You have KILLED </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_victim'>victim</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span><span class='tstring_content'>!!\n</span><span class='tstring_end'>&quot;</span></span>
+		<span class='kw'>end</span>
+		<span class='const'>Level</span><span class='period'>.</span><span class='id identifier rubyid_gain_exp'>gain_exp</span> <span class='ivar'>@player</span><span class='comma'>,</span> <span class='ivar'>@victim</span>
+		<span class='ivar'>@victim</span><span class='period'>.</span><span class='id identifier rubyid_die'>die</span>
+		<span class='id identifier rubyid_combat_over'>combat_over</span>
+	<span class='kw'>elsif</span> <span class='lparen'>(</span><span class='ivar'>@player</span><span class='period'>.</span><span class='id identifier rubyid_is_dead'>is_dead</span><span class='rparen'>)</span>
+		<span class='id identifier rubyid_current_client'>current_client</span><span class='period'>.</span><span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_attacker'>attacker</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span><span class='tstring_content'> has KILLED you!\n</span><span class='tstring_end'>&quot;</span></span>
+		<span class='ivar'>@player</span><span class='period'>.</span><span class='id identifier rubyid_die'>die</span>
+		<span class='id identifier rubyid_combat_over'>combat_over</span>
+	<span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="do_damage-instance_method">
+  
+    - (<tt>type</tt>) <strong>do_damage</strong>(attacker, defender, room) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Calculate and deal damage to victim</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>attacker</span>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Player|Mob The entity doing the attacking</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>defender</span>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Player|Mob The entity defending itself</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>room</span>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Room The room in which the combat occurs</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>type</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><dl class="rdoc-list"><dt>description</dt>
+<dd></dd></dl>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'base/combat.rb', line 98</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_do_damage'>do_damage</span><span class='lparen'>(</span><span class='id identifier rubyid_attacker'>attacker</span><span class='comma'>,</span> <span class='id identifier rubyid_defender'>defender</span><span class='comma'>,</span> <span class='id identifier rubyid_room'>room</span><span class='rparen'>)</span>
+	<span class='kw'>if</span> <span class='lparen'>(</span><span class='id identifier rubyid_defender'>defender</span><span class='period'>.</span><span class='id identifier rubyid_is_dead?'>is_dead?</span> <span class='op'>||</span> <span class='id identifier rubyid_attacker'>attacker</span><span class='period'>.</span><span class='id identifier rubyid_is_dead?'>is_dead?</span><span class='rparen'>)</span> 
+		<span class='kw'>return</span>
+	<span class='kw'>end</span>
+
+	<span class='id identifier rubyid_attacker_dmg'>attacker_dmg</span> <span class='op'>=</span> <span class='id identifier rubyid_attacker'>attacker</span><span class='period'>.</span><span class='id identifier rubyid_stats'>stats</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>strength</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span> <span class='op'>+</span> <span class='const'>Random</span><span class='period'>.</span><span class='id identifier rubyid_rand'>rand</span><span class='lparen'>(</span><span class='id identifier rubyid_attacker'>attacker</span><span class='period'>.</span><span class='id identifier rubyid_stats'>stats</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>strength</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span><span class='rparen'>)</span>
+	<span class='id identifier rubyid_diff'>diff</span> <span class='op'>=</span> <span class='id identifier rubyid_attacker'>attacker</span><span class='period'>.</span><span class='id identifier rubyid_level'>level</span> <span class='op'>-</span> <span class='id identifier rubyid_defender'>defender</span><span class='period'>.</span><span class='id identifier rubyid_level'>level</span> <span class='op'>&gt;</span> <span class='int'>0</span> <span class='op'>?</span> <span class='id identifier rubyid_attacker'>attacker</span><span class='period'>.</span><span class='id identifier rubyid_level'>level</span> <span class='op'>-</span> <span class='id identifier rubyid_defender'>defender</span><span class='period'>.</span><span class='id identifier rubyid_level'>level</span> <span class='op'>:</span> <span class='int'>2</span> 
+	<span class='id identifier rubyid_its_a_hit'>its_a_hit</span> <span class='op'>=</span> <span class='const'>Random</span><span class='period'>.</span><span class='id identifier rubyid_rand'>rand</span><span class='lparen'>(</span><span class='id identifier rubyid_diff'>diff</span><span class='rparen'>)</span>
+
+	<span class='kw'>if</span> <span class='lparen'>(</span><span class='id identifier rubyid_its_a_hit'>its_a_hit</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_attacker_dmg'>attacker_dmg</span> <span class='op'>&gt;</span> <span class='int'>0</span><span class='rparen'>)</span>
+		<span class='id identifier rubyid_defender'>defender</span><span class='period'>.</span><span class='id identifier rubyid_hit_points'>hit_points</span> <span class='op'>-=</span> <span class='id identifier rubyid_attacker_dmg'>attacker_dmg</span>
+		<span class='kw'>if</span> <span class='lparen'>(</span><span class='id identifier rubyid_attacker'>attacker</span> <span class='op'>==</span> <span class='id identifier rubyid_current_player'>current_player</span><span class='rparen'>)</span>
+			<span class='id identifier rubyid_current_client'>current_client</span><span class='period'>.</span><span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>You hit </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_defender'>defender</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span><span class='tstring_content'> for </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_attacker_dmg'>attacker_dmg</span><span class='rbrace'>}</span><span class='tstring_content'> damage!\n</span><span class='tstring_end'>&quot;</span></span>
+		<span class='kw'>elsif</span> <span class='lparen'>(</span><span class='id identifier rubyid_defender'>defender</span> <span class='op'>==</span> <span class='id identifier rubyid_current_player'>current_player</span><span class='rparen'>)</span>
+			<span class='id identifier rubyid_current_client'>current_client</span><span class='period'>.</span><span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_attacker'>attacker</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span><span class='tstring_content'> hits you for </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_attacker_dmg'>attacker_dmg</span><span class='rbrace'>}</span><span class='tstring_content'> damage!\n</span><span class='tstring_end'>&quot;</span></span>
+		<span class='kw'>end</span>
+		<span class='id identifier rubyid_room'>room</span><span class='period'>.</span><span class='id identifier rubyid_broadcast'>broadcast</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_attacker'>attacker</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span><span class='tstring_content'> hits </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_defender'>defender</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span><span class='tstring_content'> for </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_attacker_dmg'>attacker_dmg</span><span class='rbrace'>}</span><span class='tstring_content'> damage!\n</span><span class='tstring_end'>&quot;</span></span>
+	<span class='kw'>else</span>
+		<span class='kw'>if</span> <span class='lparen'>(</span><span class='id identifier rubyid_attacker'>attacker</span> <span class='op'>==</span> <span class='id identifier rubyid_current_player'>current_player</span><span class='rparen'>)</span>
+			<span class='id identifier rubyid_current_client'>current_client</span><span class='period'>.</span><span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>You swing at </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_defender'>defender</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span><span class='tstring_content'> and miss!\n</span><span class='tstring_end'>&quot;</span></span>
+		<span class='kw'>elsif</span> <span class='lparen'>(</span><span class='id identifier rubyid_defender'>defender</span> <span class='op'>==</span> <span class='id identifier rubyid_current_player'>current_player</span><span class='rparen'>)</span>
+			<span class='id identifier rubyid_current_client'>current_client</span><span class='period'>.</span><span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_attacker'>attacker</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span><span class='tstring_content'> swings at you and misses!\n</span><span class='tstring_end'>&quot;</span></span>
+		<span class='kw'>end</span>
+		<span class='id identifier rubyid_room'>room</span><span class='period'>.</span><span class='id identifier rubyid_broadcast'>broadcast</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_attacker'>attacker</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span><span class='tstring_content'> swings at </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_defender'>defender</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span><span class='tstring_content'> and misses!\n</span><span class='tstring_end'>&quot;</span></span>
+	<span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+    <div id="footer">
+  Generated on Thu Oct 31 16:15:41 2013 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.8.7.2 (ruby-1.9.3).
+</div>
+
+  </body>
+</html>
