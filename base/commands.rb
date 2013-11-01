@@ -82,7 +82,7 @@ class CommandInterpreter
 
 		# if we have a target, try and find it
 		elsif (target.instance_of? String)
-			mobs = Room.mobs_in_room current_thread.room
+			mobs = Room.mobs_in current_thread.room
 			mobs.each do |mob|
 				if (mob.name.downcase == target.downcase)
 					targObj = mob
@@ -152,6 +152,27 @@ class CommandInterpreter
 		room.broadcast "#{current_player.name} leaves to #{cardinality}.\n"
 		Room.display new_room
 		new_room.broadcast "#{current_player.name} enters from #{cardinality}.\n"
+	end
+
+	def self.do_scan
+		room = Room.find(current_player.room_id)
+
+		exits = {}
+		room.exits.as_json.each do |direction, room_id|
+			target_room = Room.find(room_id)
+			exits[direction] = Room.people_in(target_room) + Room.mobs_in(target_room)
+		end
+
+		exits.each do |direction, entities|
+			current_client.puts "#{direction}:\n"
+			if (entities.length > 0)
+				entities.each do |entity|
+					current_client.puts "  #{entity.name} is here.\n"
+				end
+			else
+				current_client.puts "  (no one)\n"
+			end
+		end
 	end
 
 	# 

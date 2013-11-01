@@ -28,7 +28,7 @@ class Room < ActiveRecord::Base
 	# @param  room Room The room to search
 	# 
 	# @return Array An array of mobs in the room
-	def self.mobs_in_room(room)
+	def self.mobs_in(room)
 		results = []
 		$world.mobs.each do |mob|
 			if (mob.room.id == room.id)
@@ -44,7 +44,7 @@ class Room < ActiveRecord::Base
 	# 
 	# @return String all of the mobs
 	def self.show_mobs(room)
-		results = self.mobs_in_room room
+		results = self.mobs_in room
 
 		output = []
 		results.each do |mob|
