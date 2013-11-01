@@ -38,6 +38,15 @@ class Mob < ActiveRecord::Base
 
 	end
 
+	def in_combat
+		$world.combats.each do |combat|
+			if (combat.player == self || combat.victim == self)
+				return true
+			end
+		end
+		return false
+	end
+
 	def stats
 		stats = {
 			"strength" => 12,
@@ -65,6 +74,9 @@ class Mob < ActiveRecord::Base
 	# 
 	# @todo Add "sneak" support
 	def do_move
+		if (in_combat)
+			return
+		end
 		possible_moves = @room.exits.keys
 		choice = Random.rand(possible_moves.length)
 		

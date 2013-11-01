@@ -74,17 +74,29 @@ class Combat
 
 		if (@victim.is_dead?)
 			p = MudServer.get_player @player
-			if (p)
-				pp p
-				p.client.puts "You have KILLED #{victim.name}!!\n"
+			if (p.instance_of? Player)
+				p.client.puts "You have KILLED #{@victim.name}!!\n"
+			else
+				p = MudServer.get_player @victim
+				if (p.instance_of? Player)
+					p.client.puts "You have KILLED #{@victim.name}!\n"
+				end
 			end
+			combat_over
 			Level.gain_exp @player, @victim
 			@victim.die
-			combat_over
 		elsif (@player.is_dead)
-			current_client.puts "#{attacker.name} has KILLED you!\n"
-			@player.die
+			p = MudServer.get_player @victim
+			if (p.instance_of? Player)
+				p.client.puts "#{@victim.name} has KILLED you!\n"
+			else
+				p = MudServer.get_player @player
+				if (p.instance_of? Player)
+					p.client.puts "#{@victim.name} has KILLED you!\n"
+				end
+			end
 			combat_over
+			@player.die
 		end
 	end
 
@@ -127,6 +139,7 @@ class Combat
 		$world.combats.each do |combat|
 			if (combat == self)
 				$world.combats.delete combat
+				combat = nil
 			end
 		end
 	end
