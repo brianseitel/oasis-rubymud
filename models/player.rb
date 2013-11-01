@@ -25,8 +25,7 @@ class Player < ActiveRecord::Base
 				self.mana = 1
 
 				# take a hit in XP for dying. 1/2 of TNL usually.
-				tnl = ((self.level+1) * 1000) - self.experience
-				tnl = tnl > 1000 ? 250 : tnl
+				tnl = Level.til_next self
 
 				self.experience -= tnl / 2
 				self.save
@@ -57,7 +56,7 @@ class Player < ActiveRecord::Base
 			output = []
 
 			## Set the vars
-			tnl = ((self.level * 1000) - self.experience)
+			tnl = Level.til_next self
 			params = {
 				:name => self.name,
 				:level => "Level #{self.level}",
@@ -139,7 +138,10 @@ class Player < ActiveRecord::Base
 				:max_mana => self.max_mana,
 				:tnl => (self.level * 1000) - self.experience
 			}
-			current_client.print "\n" + View.render_template('player.status_prompt', stats) + " "
+			p = MudServer.get_player self
+			if (p)
+				p.client.print "\n" + View.render_template('player.status_prompt', stats) + " "
+			end
 		end
 
 	private

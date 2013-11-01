@@ -67,4 +67,8 @@ class Level
 			end
 		end
 	end
+
+	def self.til_next(player)
+		return EXP_TO_LEVEL - player.experience
+	end
 end
