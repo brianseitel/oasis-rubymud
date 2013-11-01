@@ -1,0 +1,10 @@
+{
+	"items": [
+		{
+			"name": "squeaky monkey",
+			"short_description": "a small black gorilla",
+			"long_description": "A small, black gorilla lays there. If you poke it, it squeaks. Miko fucking loves this thing.",
+			"room_id": 6
+		}
+	]
+}

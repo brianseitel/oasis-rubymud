@@ -20,6 +20,7 @@ class DB
 		
 		self.load_areas
 		self.load_mobs
+		self.load_items
 		# self.load_commands
 		# self.load_socials
 	end
@@ -56,6 +57,21 @@ class DB
 
 		mobs['mobs'].each do |data|
 			Mob.create(data)
+		end
+	end
+
+	# 
+	# Load the objects from items.json in the data_dir directory. This truncates the ```items``` table and fills it up again.
+	# 
+	def self.load_items
+		conn = ActiveRecord::Base.connection
+		conn.execute("TRUNCATE items")
+
+		file = File.read(setting('data_dir') + "items.json")
+		items = JSON.parse(file)
+
+		items['items'].each do |item|
+			Item.create(item)
 		end
 	end
 end

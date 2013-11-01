@@ -9,6 +9,7 @@ class World
 
 	@@mobs = []
 	@@combats = []
+	@@items = []
 
 	def initialize
 		@pulse_tick = setting('pulse_tick')
@@ -34,6 +35,10 @@ class World
 	# 
 	def mobs
 		@@mobs
+	end
+
+	def items
+		@@items
 	end
 
 	# 
@@ -98,6 +103,7 @@ class World
 	def update_area
 		print "[UPDATE] Area\n".green
 		$world.respawn_mobs
+		$world.respawn_objects
 	end
 
 	# 
@@ -158,6 +164,22 @@ class World
 				if (Random.rand(2) == 1)
 					mob.spawn
 					mob.room.broadcast "#{mob.name} appears in a poof of smoke!", true
+				end
+			end
+		end
+	end
+
+	def spawn_items
+		Item.find_each do |item|
+			item.spawn
+		end
+	end
+
+	def respawn_items
+		Item.find_each do |item|
+			if (!$world.items.include? obj)
+				if (Random.rand(2) == 1)
+					item.spawn
 				end
 			end
 		end
