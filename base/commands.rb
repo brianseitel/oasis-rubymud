@@ -111,7 +111,7 @@ class CommandInterpreter
 	# @param  direction [string] The direction through which to move. Acceptable values include: north, south, east, west, up, down
 	# 
 	def self.do_move(direction)
-		room = current_thread.room
+		room = Room.find(current_player.room_id)
 
 		player = MudServer.get_player current_player
 
@@ -133,7 +133,6 @@ class CommandInterpreter
 			new_room = Room.find(room.exits.values_at direction).first
 
 			if (new_room)
-				current_thread.room = new_room
 				current_player.room_id = new_room.id
 			end
 		else
@@ -150,7 +149,6 @@ class CommandInterpreter
 				cardinality = "the #{direction}"
 		end
 
-		current_player.room_id = new_room.id
 		room.broadcast "#{current_player.name} leaves to #{cardinality}.\n"
 		Room.display new_room
 		new_room.broadcast "#{current_player.name} enters from #{cardinality}.\n"
