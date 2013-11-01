@@ -112,6 +112,8 @@ class World
 	def update_players
 		print "[UPDATE] Players\n".cyan
 		MudServer.players.each do |player|
+			player.recover_health
+			player.recover_mana
 			player.show_status_prompt
 		end
 	end

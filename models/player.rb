@@ -94,6 +94,23 @@ class Player < ActiveRecord::Base
 			return false
 		end
 
+		def recover_health
+			percentage = Random.rand(5..15)
+			increase = (percentage.to_f / 100.0).to_f
+			hp = self.max_hit_points
+			new_hp = self.hit_points + (hp * increase)
+			self.hit_points = [new_hp, self.max_hit_points].min
+			self.save
+		end
+
+		def recover_mana
+			percentage = (Random.rand(5..15).to_f / 100.0)
+			mana = self.max_mana
+			new_mana = self.mana + (mana * percentage)
+			self.mana = [new_mana, self.max_mana].min
+			self.save
+		end
+
 		# 
 		# Show a list of player's stats in a table format
 		# 
