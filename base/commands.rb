@@ -154,6 +154,10 @@ class CommandInterpreter
 		new_room.broadcast "#{current_player.name} enters from #{cardinality}.\n"
 	end
 
+	# 
+	# Scan the exits to see if anyone is around
+	# 
+	# @todo Determine visibility of entities in other rooms
 	def self.do_scan
 		room = Room.find(current_player.room_id)
 
