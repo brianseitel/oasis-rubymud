@@ -90,11 +90,12 @@ class Room < ActiveRecord::Base
 	# @return Array List of players in the room
 	def self.people_in(room)
 		players = []
-		MudServer.clients.each do |connection|
-			player = connection.player
-			if (player.id != current_player.id && 
-				player.room_id == room.id)
-				players << player
+		MudServer.players.each do |player|
+			if (!player.nil?)
+				if (player.id != current_player.id && 
+					player.room_id == room.id)
+					players << player
+				end
 			end
 		end
 		return players
