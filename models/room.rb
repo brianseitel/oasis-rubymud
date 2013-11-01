@@ -13,12 +13,12 @@ class Room < ActiveRecord::Base
 	# @param  room Room The room to display
 	# 
 	def self.display(room)
+		occupants = self.show_mobs(room).to_s.white + self.show_people(room).to_s.cyan + self.show_items(room).to_s.white
 		params = {
 			:title => room.title,
 			:description => room.description,
 			:exits => self.show_exits(room),
-			:mobs => self.show_mobs(room),
-			:people => self.show_people(room)
+			:occupants => occupants
 		}
 		current_client.puts View.render_template('room.display_room', params)
 	end
@@ -64,6 +64,18 @@ class Room < ActiveRecord::Base
 		end
 
 		return "Exits: " + results.join(" ")
+	end
+
+	def self.show_items(room)
+		results = []
+		$world.items.each do |item|
+			if (item.room_id == room.id)
+				name = item.short_description.slice(0,1).capitalize + item.short_description.slice(1..-1)
+				results << name + " is here."
+			end
+		end
+
+		return results.join("\n")
 	end
 
 	# 
