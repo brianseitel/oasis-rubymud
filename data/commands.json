@@ -3,7 +3,7 @@
         "method": "do_attack"
     },
     "kill": {
-        "method": "do_kill"
+        "method": "do_attack"
     },
     "quit": {
         "method": "do_exit"
@@ -70,5 +70,8 @@
     },
     "who": {
         "method": "do_who"
+    },
+    "stand": {
+        "method": "do_stand"
     }
 }

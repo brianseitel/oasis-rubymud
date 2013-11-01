@@ -150,6 +150,11 @@ class CommandInterpreter
 		current_player.show_score
 	end
 
+	def self.do_stand
+		current_player.state = Player::STATE_STANDING
+		current_client.puts "You stand up.\n"
+	end
+
 	def self.do_stats
 		current_player.show_stats
 	end
