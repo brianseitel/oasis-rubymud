@@ -19,6 +19,10 @@ class Player < ActiveRecord::Base
 
 	public
 
+		# 
+		# The player is dead. Reset them to 1/1 and send them back to room 1.
+		# 
+		# @todo Change this to a "revive" method and make "die" disable user input for 1 tick
 		def die
 			if (MudServer.logged_in? self)
 				self.hit_points = 1
@@ -36,10 +40,18 @@ class Player < ActiveRecord::Base
 			end
 		end
 
+		# 
+		# Determine whether the player is dead or not
+		# 
+		# @return Boolean Return true if the player is dead
 		def is_dead?
 			return self.state == STATE_DEAD
 		end
 
+		# 
+		# Transport the user instantly to another room by Room or Room ID
+		# @param  room Room|Integer the room to which to transport the user
+		# 
 		def goto_room(room)
 			if (!room.instance_of? Room)
 				room = Room.find(room)
@@ -48,10 +60,11 @@ class Player < ActiveRecord::Base
 			player = MudServer.get_player self
 			player.room_id = room.id
 			player.save
-			
+
 			room.broadcast "#{self.name} appears in a ray of light from the sky.\n"
 			Room.display room
 		end
+
 		# 
 		# Display score screen, including name, race, class, gender, health, mana, stats, armor, etc
 		# 
@@ -89,13 +102,10 @@ class Player < ActiveRecord::Base
 			self.stats
 		end
 
-		def is_dead
-			if (self.hit_points <= 0)
-				return true
-			end
-			return false
-		end
-
+		# 
+		# Recover a pseudo-random amount of health. Usually happens once per tick.
+		# 
+		# @todo Take into account any magical effects
 		def recover_health
 			percentage = Random.rand(5..15)
 			increase = (percentage.to_f / 100.0).to_f
@@ -105,6 +115,10 @@ class Player < ActiveRecord::Base
 			self.save
 		end
 
+		# 
+		# Recover a pseudo-random amount of mana. Usually happens once per tick.
+		# 
+		# @todo Take into account magical effects
 		def recover_mana
 			percentage = (Random.rand(5..15).to_f / 100.0)
 			mana = self.max_mana

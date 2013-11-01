@@ -134,6 +134,9 @@ class Combat
 		end
 	end
 
+	# 
+	# End combat and remove it from the world's combat queue
+	# 
 	def combat_over
 		@player.state = Player::STATE_STANDING
 		$world.combats.each do |combat|

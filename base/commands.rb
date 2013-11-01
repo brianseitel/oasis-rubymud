@@ -39,9 +39,15 @@ class CommandInterpreter
 		current_player.die
 	end
 
+	# 
+	# Instantly transport user to new room. DEV ONLY
+	# @param  room_id Integer The room ID to which to transport the user
+	# 
+	# @todo restrict to Immortals only
 	def self.do_goto(room_id)
 		current_player.goto_room(room_id)
 	end
+
 	# 
 	# The player quits the game
 	# 
@@ -150,19 +156,32 @@ class CommandInterpreter
 		new_room.broadcast "#{current_player.name} enters from #{cardinality}.\n"
 	end
 
+	# 
+	# Command to show the score
+	# 
 	def self.do_score
 		current_player.show_score
 	end
 
+	# 
+	# Command to make the player stand up
+	# 
+	# @todo Show error messages, depending on player state. If player is dead, they can't stand up, etc.
 	def self.do_stand
 		current_player.state = Player::STATE_STANDING
 		current_client.puts "You stand up.\n"
 	end
 
+	# 
+	# Show stats screen
+	# 
 	def self.do_stats
 		current_player.show_stats
 	end
 
+	# 
+	# Show a list of all active players
+	# 
 	def self.do_who
 		current_client.puts "Level\tName\n"
 		current_client.puts "-" * setting('max_width')
