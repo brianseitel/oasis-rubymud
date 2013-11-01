@@ -94,7 +94,7 @@
   
   
     <dt class="r2 last">Defined in:</dt>
-    <dd class="r2 last">base/combat.rb</dd>
+    <dd class="r2 last">modules/combat.rb</dd>
   
 </dl>
 <div class="clear"></div>
@@ -437,7 +437,7 @@ events, calculating damage, and soon.</p>
 51</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'base/combat.rb', line 27</span>
+      <pre class="code"><span class="info file"># File 'modules/combat.rb', line 27</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_player'>player</span><span class='comma'>,</span> <span class='id identifier rubyid_victim'>victim</span><span class='rparen'>)</span>
 	<span class='ivar'>@player</span> <span class='op'>=</span> <span class='id identifier rubyid_player'>player</span>
@@ -507,7 +507,7 @@ events, calculating damage, and soon.</p>
 17</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'base/combat.rb', line 15</span>
+      <pre class="code"><span class="info file"># File 'modules/combat.rb', line 15</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_player'>player</span>
   <span class='ivar'>@player</span>
@@ -550,7 +550,7 @@ events, calculating damage, and soon.</p>
 18</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'base/combat.rb', line 16</span>
+      <pre class="code"><span class="info file"># File 'modules/combat.rb', line 16</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_victim'>victim</span>
   <span class='ivar'>@victim</span>
@@ -604,7 +604,7 @@ events, calculating damage, and soon.</p>
 148</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'base/combat.rb', line 140</span>
+      <pre class="code"><span class="info file"># File 'modules/combat.rb', line 140</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_combat_over'>combat_over</span>
 	<span class='ivar'>@player</span><span class='period'>.</span><span class='id identifier rubyid_state'>state</span> <span class='op'>=</span> <span class='const'>Player</span><span class='op'>::</span><span class='const'>STATE_STANDING</span>
@@ -700,7 +700,7 @@ events, calculating damage, and soon.</p>
 101</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'base/combat.rb', line 58</span>
+      <pre class="code"><span class="info file"># File 'modules/combat.rb', line 58</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_do_attack'>do_attack</span>
 	<span class='comment'># If victim is dead or not in the room, skip
@@ -875,7 +875,7 @@ events, calculating damage, and soon.</p>
 135</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'base/combat.rb', line 110</span>
+      <pre class="code"><span class="info file"># File 'modules/combat.rb', line 110</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_do_damage'>do_damage</span><span class='lparen'>(</span><span class='id identifier rubyid_attacker'>attacker</span><span class='comma'>,</span> <span class='id identifier rubyid_defender'>defender</span><span class='comma'>,</span> <span class='id identifier rubyid_room'>room</span><span class='rparen'>)</span>
 	<span class='kw'>if</span> <span class='lparen'>(</span><span class='id identifier rubyid_defender'>defender</span><span class='period'>.</span><span class='id identifier rubyid_is_dead?'>is_dead?</span> <span class='op'>||</span> <span class='id identifier rubyid_attacker'>attacker</span><span class='period'>.</span><span class='id identifier rubyid_is_dead?'>is_dead?</span><span class='rparen'>)</span> 
@@ -913,7 +913,7 @@ events, calculating damage, and soon.</p>
 </div>
 
     <div id="footer">
-  Generated on Fri Nov  1 14:11:30 2013 by
+  Generated on Fri Nov  1 14:41:47 2013 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.2 (ruby-1.9.3).
 </div>

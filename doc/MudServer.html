@@ -442,16 +442,16 @@ time, and accepts incoming sockets.</p>
       <pre class="lines">
 
 
-145
 146
 147
 148
 149
 150
-151</pre>
+151
+152</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'base/mud.rb', line 145</span>
+      <pre class="code"><span class="info file"># File 'base/mud.rb', line 146</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_await_input'>await_input</span>
 	<span class='id identifier rubyid_current_player'>current_player</span><span class='period'>.</span><span class='id identifier rubyid_show_status_prompt'>show_status_prompt</span>
@@ -570,7 +570,6 @@ time, and accepts incoming sockets.</p>
       <pre class="lines">
 
 
-165
 166
 167
 168
@@ -595,10 +594,11 @@ time, and accepts incoming sockets.</p>
 187
 188
 189
-190</pre>
+190
+191</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'base/mud.rb', line 165</span>
+      <pre class="code"><span class="info file"># File 'base/mud.rb', line 166</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_do_new'>do_new</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
 	<span class='ivar'>@input</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span>
@@ -657,7 +657,6 @@ time, and accepts incoming sockets.</p>
       <pre class="lines">
 
 
-130
 131
 132
 133
@@ -667,10 +666,11 @@ time, and accepts incoming sockets.</p>
 137
 138
 139
-140</pre>
+140
+141</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'base/mud.rb', line 130</span>
+      <pre class="code"><span class="info file"># File 'base/mud.rb', line 131</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_game_loop'>game_loop</span>
 	<span class='id identifier rubyid_input'>input</span> <span class='op'>=</span> <span class='kw'>nil</span>
@@ -899,7 +899,6 @@ New Player flow. If found, it returns a Player type.</p>
       <pre class="lines">
 
 
-196
 197
 198
 199
@@ -924,10 +923,11 @@ New Player flow. If found, it returns a Player type.</p>
 218
 219
 220
-221</pre>
+221
+222</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'base/mud.rb', line 196</span>
+      <pre class="code"><span class="info file"># File 'base/mud.rb', line 197</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_login'>login</span>
 	<span class='id identifier rubyid_found'>found</span> <span class='op'>=</span> <span class='kw'>false</span>
@@ -1045,12 +1045,12 @@ New Player flow. If found, it returns a Player type.</p>
       <pre class="lines">
 
 
-156
 157
-158</pre>
+158
+159</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'base/mud.rb', line 156</span>
+      <pre class="code"><span class="info file"># File 'base/mud.rb', line 157</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_show_welcome'>show_welcome</span>
 	<span class='id identifier rubyid_current_client'>current_client</span><span class='period'>.</span><span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n\n**** Welcome to Oasis! ***\n\n</span><span class='tstring_end'>&quot;</span></span>
@@ -1127,7 +1127,8 @@ time, and accepts incoming sockets.</p>
 122
 123
 124
-125</pre>
+125
+126</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'base/mud.rb', line 85</span>
@@ -1139,7 +1140,8 @@ time, and accepts incoming sockets.</p>
 	<span class='comment'># Big bang
 </span>	<span class='const'>DB</span><span class='period'>.</span><span class='id identifier rubyid_load_data'>load_data</span>
 	<span class='gvar'>$world</span><span class='period'>.</span><span class='id identifier rubyid_spawn_mobs'>spawn_mobs</span>
-
+	<span class='gvar'>$world</span><span class='period'>.</span><span class='id identifier rubyid_spawn_items'>spawn_items</span>
+	
 	<span class='comment'># Time starts now
 </span>	<span class='const'>Thread</span><span class='period'>.</span><span class='id identifier rubyid_start'>start</span> <span class='kw'>do</span>
 		<span class='gvar'>$world</span><span class='period'>.</span><span class='id identifier rubyid_update'>update</span>
@@ -1183,7 +1185,7 @@ time, and accepts incoming sockets.</p>
 </div>
 
     <div id="footer">
-  Generated on Fri Nov  1 14:11:30 2013 by
+  Generated on Fri Nov  1 14:41:46 2013 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.2 (ruby-1.9.3).
 </div>

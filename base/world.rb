@@ -169,12 +169,18 @@ class World
 		end
 	end
 
+	# 
+	# Spawn all items into their starting positions
+	# 
 	def spawn_items
 		Item.find_each do |item|
 			item.spawn
 		end
 	end
 
+	# 
+	# Respawn any items that are no longer in their starting positions. Only one item per ID can exist on the ground at any given time.
+	# 
 	def respawn_items
 		Item.find_each do |item|
 			if (!$world.items.include? obj)
@@ -184,5 +190,4 @@ class World
 			end
 		end
 	end
-
 end

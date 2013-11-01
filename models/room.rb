@@ -42,6 +42,7 @@ class Room < ActiveRecord::Base
 	# Display all of the mobs in the room
 	# @param  room Room The room to display
 	# 
+	# @return String all of the mobs
 	def self.show_mobs(room)
 		results = self.mobs_in_room room
 
@@ -57,6 +58,7 @@ class Room < ActiveRecord::Base
 	# Display all of the available exits in the room
 	# @param  room Room The room whose exits we want to display
 	# 
+	# @return String all of the exits
 	def self.show_exits(room)
 		results = []
 		room.exits.as_json.each do |direction, id|
@@ -66,6 +68,11 @@ class Room < ActiveRecord::Base
 		return "Exits: " + results.join(" ")
 	end
 
+	# 
+	# Display all of the items on the ground
+	# @param  room Room The room whose items we want to display
+	# 
+	# @return String all of the items
 	def self.show_items(room)
 		results = []
 		$world.items.each do |item|
@@ -82,6 +89,7 @@ class Room < ActiveRecord::Base
 	# Show all of the people in the room
 	# @param  room Room The room whose people we want to display
 	# 
+	# @return String all of the people
 	def self.show_people(room)
 		players = self.people_in room
 

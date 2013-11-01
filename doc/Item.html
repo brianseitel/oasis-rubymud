@@ -4,7 +4,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>
-  Class: Area
+  Class: Item
   
     &mdash; Documentation by YARD 0.8.7.2
   
@@ -31,10 +31,10 @@
     <div id="header">
       <div id="menu">
   
-    <a href="_index.html">Index (A)</a> &raquo;
+    <a href="_index.html">Index (I)</a> &raquo;
     
     
-    <span class="title">Area</span>
+    <span class="title">Item</span>
   
 
   <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
@@ -63,7 +63,7 @@
 
     <iframe id="search_frame"></iframe>
 
-    <div id="content"><h1>Class: Area
+    <div id="content"><h1>Class: Item
   
   
   
@@ -80,7 +80,7 @@
           
             <li class="next">ActiveRecord::Base</li>
           
-            <li class="next">Area</li>
+            <li class="next">Item</li>
           
         </ul>
         <a href="#" class="inheritanceTree">show all</a>
@@ -96,7 +96,7 @@
   
   
     <dt class="r2 last">Defined in:</dt>
-    <dd class="r2 last">models/area.rb</dd>
+    <dd class="r2 last">models/item.rb</dd>
   
 </dl>
 <div class="clear"></div>
@@ -104,7 +104,7 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     
-<p>Represents an Area object and can contain rooms.</p>
+<p>Represents an Item in the game.</p>
 
 
   </div>
@@ -135,8 +135,92 @@
 
 
 
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#spawn-instance_method" title="#spawn (instance method)">- (Object) <strong>spawn</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
 
   
+    <span class="summary_desc"><div class='inline'>
+<p>Spawn an item in its starting room.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="spawn-instance_method">
+  
+    - (<tt>Object</tt>) <strong>spawn</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Spawn an item in its starting room</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+11
+12
+13
+14</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'models/item.rb', line 11</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_spawn'>spawn</span>
+	<span class='ivar'>@room</span> <span class='op'>=</span> <span class='const'>Room</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_room_id'>room_id</span><span class='rparen'>)</span>
+	<span class='gvar'>$world</span><span class='period'>.</span><span class='id identifier rubyid_items'>items</span> <span class='op'>&lt;&lt;</span> <span class='kw'>self</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
 
 </div>
 

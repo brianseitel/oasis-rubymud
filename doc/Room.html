@@ -244,6 +244,30 @@ people.</p>
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#show_items-class_method" title="show_items (class method)">+ (Object) <strong>show_items</strong>(room) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Display all of the items on the ground.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#show_mobs-class_method" title="show_mobs (class method)">+ (Object) <strong>show_mobs</strong>(room) </a>
     
 
@@ -393,12 +417,12 @@ people.</p>
       <pre class="code"><span class="info file"># File 'models/room.rb', line 15</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_display'>display</span><span class='lparen'>(</span><span class='id identifier rubyid_room'>room</span><span class='rparen'>)</span>
+	<span class='id identifier rubyid_occupants'>occupants</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_show_mobs'>show_mobs</span><span class='lparen'>(</span><span class='id identifier rubyid_room'>room</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='period'>.</span><span class='id identifier rubyid_white'>white</span> <span class='op'>+</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_show_people'>show_people</span><span class='lparen'>(</span><span class='id identifier rubyid_room'>room</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='period'>.</span><span class='id identifier rubyid_cyan'>cyan</span> <span class='op'>+</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_show_items'>show_items</span><span class='lparen'>(</span><span class='id identifier rubyid_room'>room</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='period'>.</span><span class='id identifier rubyid_white'>white</span>
 	<span class='id identifier rubyid_params'>params</span> <span class='op'>=</span> <span class='lbrace'>{</span>
 		<span class='symbol'>:title</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_room'>room</span><span class='period'>.</span><span class='id identifier rubyid_title'>title</span><span class='comma'>,</span>
 		<span class='symbol'>:description</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_room'>room</span><span class='period'>.</span><span class='id identifier rubyid_description'>description</span><span class='comma'>,</span>
 		<span class='symbol'>:exits</span> <span class='op'>=&gt;</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_show_exits'>show_exits</span><span class='lparen'>(</span><span class='id identifier rubyid_room'>room</span><span class='rparen'>)</span><span class='comma'>,</span>
-		<span class='symbol'>:mobs</span> <span class='op'>=&gt;</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_show_mobs'>show_mobs</span><span class='lparen'>(</span><span class='id identifier rubyid_room'>room</span><span class='rparen'>)</span><span class='comma'>,</span>
-		<span class='symbol'>:people</span> <span class='op'>=&gt;</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_show_people'>show_people</span><span class='lparen'>(</span><span class='id identifier rubyid_room'>room</span><span class='rparen'>)</span>
+		<span class='symbol'>:occupants</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_occupants'>occupants</span>
 	<span class='rbrace'>}</span>
 	<span class='id identifier rubyid_current_client'>current_client</span><span class='period'>.</span><span class='id identifier rubyid_puts'>puts</span> <span class='const'>View</span><span class='period'>.</span><span class='id identifier rubyid_render_template'>render_template</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>room.display_room</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
@@ -562,21 +586,21 @@ people.</p>
       <pre class="lines">
 
 
-91
-92
-93
-94
-95
-96
-97
-98
-99
-100
-101
-102</pre>
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'models/room.rb', line 91</span>
+      <pre class="code"><span class="info file"># File 'models/room.rb', line 111</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_people_in'>people_in</span><span class='lparen'>(</span><span class='id identifier rubyid_room'>room</span><span class='rparen'>)</span>
 	<span class='id identifier rubyid_players'>players</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
@@ -634,6 +658,24 @@ people.</p>
   
 </ul>
 
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        
+        <div class='inline'>
+<p>String all of the exits</p>
+</div>
+      
+    </li>
+  
+</ul>
 
 </div><table class="source_code">
   <tr>
@@ -641,17 +683,17 @@ people.</p>
       <pre class="lines">
 
 
-60
-61
 62
 63
 64
 65
 66
-67</pre>
+67
+68
+69</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'models/room.rb', line 60</span>
+      <pre class="code"><span class="info file"># File 'models/room.rb', line 62</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_show_exits'>show_exits</span><span class='lparen'>(</span><span class='id identifier rubyid_room'>room</span><span class='rparen'>)</span>
 	<span class='id identifier rubyid_results'>results</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
@@ -660,6 +702,101 @@ people.</p>
 	<span class='kw'>end</span>
 
 	<span class='kw'>return</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Exits: </span><span class='tstring_end'>&quot;</span></span> <span class='op'>+</span> <span class='id identifier rubyid_results'>results</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> </span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="show_items-class_method">
+  
+    + (<tt>Object</tt>) <strong>show_items</strong>(room) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Display all of the items on the ground</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>room</span>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Room The room whose items we want to display</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        
+        <div class='inline'>
+<p>String all of the items</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'models/room.rb', line 76</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_show_items'>show_items</span><span class='lparen'>(</span><span class='id identifier rubyid_room'>room</span><span class='rparen'>)</span>
+	<span class='id identifier rubyid_results'>results</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+	<span class='gvar'>$world</span><span class='period'>.</span><span class='id identifier rubyid_items'>items</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_item'>item</span><span class='op'>|</span>
+		<span class='kw'>if</span> <span class='lparen'>(</span><span class='id identifier rubyid_item'>item</span><span class='period'>.</span><span class='id identifier rubyid_room_id'>room_id</span> <span class='op'>==</span> <span class='id identifier rubyid_room'>room</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
+			<span class='id identifier rubyid_name'>name</span> <span class='op'>=</span> <span class='id identifier rubyid_item'>item</span><span class='period'>.</span><span class='id identifier rubyid_short_description'>short_description</span><span class='period'>.</span><span class='id identifier rubyid_slice'>slice</span><span class='lparen'>(</span><span class='int'>0</span><span class='comma'>,</span><span class='int'>1</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_capitalize'>capitalize</span> <span class='op'>+</span> <span class='id identifier rubyid_item'>item</span><span class='period'>.</span><span class='id identifier rubyid_short_description'>short_description</span><span class='period'>.</span><span class='id identifier rubyid_slice'>slice</span><span class='lparen'>(</span><span class='int'>1</span><span class='op'>..</span><span class='op'>-</span><span class='int'>1</span><span class='rparen'>)</span>
+			<span class='id identifier rubyid_results'>results</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_name'>name</span> <span class='op'>+</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> is here.</span><span class='tstring_end'>&quot;</span></span>
+		<span class='kw'>end</span>
+	<span class='kw'>end</span>
+
+	<span class='kw'>return</span> <span class='id identifier rubyid_results'>results</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -705,6 +842,24 @@ people.</p>
   
 </ul>
 
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        
+        <div class='inline'>
+<p>String all of the mobs</p>
+</div>
+      
+    </li>
+  
+</ul>
 
 </div><table class="source_code">
   <tr>
@@ -712,7 +867,6 @@ people.</p>
       <pre class="lines">
 
 
-45
 46
 47
 48
@@ -721,10 +875,11 @@ people.</p>
 51
 52
 53
-54</pre>
+54
+55</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'models/room.rb', line 45</span>
+      <pre class="code"><span class="info file"># File 'models/room.rb', line 46</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_show_mobs'>show_mobs</span><span class='lparen'>(</span><span class='id identifier rubyid_room'>room</span><span class='rparen'>)</span>
 	<span class='id identifier rubyid_results'>results</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_mobs_in_room'>mobs_in_room</span> <span class='id identifier rubyid_room'>room</span>
@@ -780,6 +935,24 @@ people.</p>
   
 </ul>
 
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        
+        <div class='inline'>
+<p>String all of the people</p>
+</div>
+      
+    </li>
+  
+</ul>
 
 </div><table class="source_code">
   <tr>
@@ -787,21 +960,21 @@ people.</p>
       <pre class="lines">
 
 
-73
-74
-75
-76
-77
-78
-79
-80
-81
-82
-83
-84</pre>
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'models/room.rb', line 73</span>
+      <pre class="code"><span class="info file"># File 'models/room.rb', line 93</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_show_people'>show_people</span><span class='lparen'>(</span><span class='id identifier rubyid_room'>room</span><span class='rparen'>)</span>
 	<span class='id identifier rubyid_players'>players</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_people_in'>people_in</span> <span class='id identifier rubyid_room'>room</span>
@@ -890,23 +1063,23 @@ people.</p>
       <pre class="lines">
 
 
-109
-110
-111
-112
-113
-114
-115
-116
-117
-118
-119
-120
-121
-122</pre>
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'models/room.rb', line 109</span>
+      <pre class="code"><span class="info file"># File 'models/room.rb', line 129</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_broadcast'>broadcast</span><span class='lparen'>(</span><span class='id identifier rubyid_message'>message</span><span class='comma'>,</span> <span class='id identifier rubyid_include_player'>include_player</span> <span class='op'>=</span> <span class='kw'>false</span><span class='rparen'>)</span>
 	<span class='id identifier rubyid_connections'>connections</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
@@ -932,7 +1105,7 @@ people.</p>
 </div>
 
     <div id="footer">
-  Generated on Fri Nov  1 14:11:30 2013 by
+  Generated on Fri Nov  1 14:41:46 2013 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.2 (ruby-1.9.3).
 </div>
