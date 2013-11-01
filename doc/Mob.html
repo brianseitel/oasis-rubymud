@@ -253,6 +253,28 @@ $world.</p>
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#in_combat-instance_method" title="#in_combat (instance method)">- (Object) <strong>in_combat</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#is_dead%3F-instance_method" title="#is_dead? (instance method)">- (Boolean) <strong>is_dead?</strong> </a>
     
 
@@ -492,15 +514,6 @@ Also, broadcast the move to the room.</p>
       <pre class="lines">
 
 
-67
-68
-69
-70
-71
-72
-73
-74
-75
 76
 77
 78
@@ -508,12 +521,27 @@ Also, broadcast the move to the room.</p>
 80
 81
 82
-83</pre>
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'models/mob.rb', line 67</span>
+      <pre class="code"><span class="info file"># File 'models/mob.rb', line 76</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_do_move'>do_move</span>
+	<span class='kw'>if</span> <span class='lparen'>(</span><span class='id identifier rubyid_in_combat'>in_combat</span><span class='rparen'>)</span>
+		<span class='kw'>return</span>
+	<span class='kw'>end</span>
 	<span class='id identifier rubyid_possible_moves'>possible_moves</span> <span class='op'>=</span> <span class='ivar'>@room</span><span class='period'>.</span><span class='id identifier rubyid_exits'>exits</span><span class='period'>.</span><span class='id identifier rubyid_keys'>keys</span>
 	<span class='id identifier rubyid_choice'>choice</span> <span class='op'>=</span> <span class='const'>Random</span><span class='period'>.</span><span class='id identifier rubyid_rand'>rand</span><span class='lparen'>(</span><span class='id identifier rubyid_possible_moves'>possible_moves</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span><span class='rparen'>)</span>
 	
@@ -578,6 +606,46 @@ Also, broadcast the move to the room.</p>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_gain_exp'>gain_exp</span><span class='lparen'>(</span><span class='id identifier rubyid_victim'>victim</span><span class='rparen'>)</span>
 
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="in_combat-instance_method">
+  
+    - (<tt>Object</tt>) <strong>in_combat</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+41
+42
+43
+44
+45
+46
+47
+48</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'models/mob.rb', line 41</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_in_combat'>in_combat</span>
+	<span class='gvar'>$world</span><span class='period'>.</span><span class='id identifier rubyid_combats'>combats</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_combat'>combat</span><span class='op'>|</span>
+		<span class='kw'>if</span> <span class='lparen'>(</span><span class='id identifier rubyid_combat'>combat</span><span class='period'>.</span><span class='id identifier rubyid_player'>player</span> <span class='op'>==</span> <span class='kw'>self</span> <span class='op'>||</span> <span class='id identifier rubyid_combat'>combat</span><span class='period'>.</span><span class='id identifier rubyid_victim'>victim</span> <span class='op'>==</span> <span class='kw'>self</span><span class='rparen'>)</span>
+			<span class='kw'>return</span> <span class='kw'>true</span>
+		<span class='kw'>end</span>
+	<span class='kw'>end</span>
+	<span class='kw'>return</span> <span class='kw'>false</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -670,13 +738,13 @@ the world mob list.</p>
       <pre class="lines">
 
 
-89
-90
-91
-92</pre>
+101
+102
+103
+104</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'models/mob.rb', line 89</span>
+      <pre class="code"><span class="info file"># File 'models/mob.rb', line 101</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_spawn'>spawn</span>
 	<span class='ivar'>@room</span> <span class='op'>=</span> <span class='const'>Room</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_starting_room_id'>starting_room_id</span><span class='rparen'>)</span>
@@ -702,19 +770,19 @@ the world mob list.</p>
       <pre class="lines">
 
 
-41
-42
-43
-44
-45
-46
-47
-48
-49
-50</pre>
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'models/mob.rb', line 41</span>
+      <pre class="code"><span class="info file"># File 'models/mob.rb', line 50</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_stats'>stats</span>
 	<span class='id identifier rubyid_stats'>stats</span> <span class='op'>=</span> <span class='lbrace'>{</span>
@@ -766,15 +834,15 @@ around. If so, move it.</p>
       <pre class="lines">
 
 
-56
-57
-58
-59
-60
-61</pre>
+65
+66
+67
+68
+69
+70</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'models/mob.rb', line 56</span>
+      <pre class="code"><span class="info file"># File 'models/mob.rb', line 65</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update'>update</span>
 	<span class='id identifier rubyid_chance'>chance</span> <span class='op'>=</span> <span class='const'>Random</span><span class='period'>.</span><span class='id identifier rubyid_rand'>rand</span><span class='lparen'>(</span><span class='int'>2</span><span class='rparen'>)</span>
@@ -792,7 +860,7 @@ around. If so, move it.</p>
 </div>
 
     <div id="footer">
-  Generated on Thu Oct 31 16:15:41 2013 by
+  Generated on Fri Nov  1 14:11:30 2013 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.2 (ruby-1.9.3).
 </div>

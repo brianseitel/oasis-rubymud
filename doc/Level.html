@@ -254,6 +254,28 @@ level up screen.</p>
 </li>
 
       
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#til_next-class_method" title="til_next (class method)">+ (Object) <strong>til_next</strong>(player) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
     </ul>
   
 
@@ -603,12 +625,42 @@ level up screen</p>
 </table>
 </div>
     
+      <div class="method_details ">
+  <h3 class="signature " id="til_next-class_method">
+  
+    + (<tt>Object</tt>) <strong>til_next</strong>(player) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+71
+72
+73</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'modules/level.rb', line 71</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_til_next'>til_next</span><span class='lparen'>(</span><span class='id identifier rubyid_player'>player</span><span class='rparen'>)</span>
+	<span class='kw'>return</span> <span class='const'>EXP_TO_LEVEL</span> <span class='op'>-</span> <span class='id identifier rubyid_player'>player</span><span class='period'>.</span><span class='id identifier rubyid_experience'>experience</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
   </div>
 
 </div>
 
     <div id="footer">
-  Generated on Thu Oct 31 16:15:41 2013 by
+  Generated on Fri Nov  1 14:11:30 2013 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.2 (ruby-1.9.3).
 </div>

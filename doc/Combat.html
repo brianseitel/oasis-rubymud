@@ -261,7 +261,9 @@ events, calculating damage, and soon.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>End combat and remove it from the world's combat queue.</p>
+</div></span>
   
 </li>
 
@@ -574,29 +576,42 @@ events, calculating damage, and soon.</p>
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>End combat and remove it from the world's combat queue</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-125
-126
-127
-128
-129
-130
-131
-132</pre>
+140
+141
+142
+143
+144
+145
+146
+147
+148</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'base/combat.rb', line 125</span>
+      <pre class="code"><span class="info file"># File 'base/combat.rb', line 140</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_combat_over'>combat_over</span>
 	<span class='ivar'>@player</span><span class='period'>.</span><span class='id identifier rubyid_state'>state</span> <span class='op'>=</span> <span class='const'>Player</span><span class='op'>::</span><span class='const'>STATE_STANDING</span>
 	<span class='gvar'>$world</span><span class='period'>.</span><span class='id identifier rubyid_combats'>combats</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_combat'>combat</span><span class='op'>|</span>
 		<span class='kw'>if</span> <span class='lparen'>(</span><span class='id identifier rubyid_combat'>combat</span> <span class='op'>==</span> <span class='kw'>self</span><span class='rparen'>)</span>
 			<span class='gvar'>$world</span><span class='period'>.</span><span class='id identifier rubyid_combats'>combats</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span> <span class='id identifier rubyid_combat'>combat</span>
+			<span class='id identifier rubyid_combat'>combat</span> <span class='op'>=</span> <span class='kw'>nil</span>
 		<span class='kw'>end</span>
 	<span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -670,7 +685,19 @@ events, calculating damage, and soon.</p>
 86
 87
 88
-89</pre>
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'base/combat.rb', line 58</span>
@@ -694,17 +721,29 @@ events, calculating damage, and soon.</p>
 
 	<span class='kw'>if</span> <span class='lparen'>(</span><span class='ivar'>@victim</span><span class='period'>.</span><span class='id identifier rubyid_is_dead?'>is_dead?</span><span class='rparen'>)</span>
 		<span class='id identifier rubyid_p'>p</span> <span class='op'>=</span> <span class='const'>MudServer</span><span class='period'>.</span><span class='id identifier rubyid_get_player'>get_player</span> <span class='ivar'>@player</span>
-		<span class='kw'>if</span> <span class='lparen'>(</span><span class='id identifier rubyid_p'>p</span><span class='rparen'>)</span>
-			<span class='id identifier rubyid_pp'>pp</span> <span class='id identifier rubyid_p'>p</span>
-			<span class='id identifier rubyid_p'>p</span><span class='period'>.</span><span class='id identifier rubyid_client'>client</span><span class='period'>.</span><span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>You have KILLED </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_victim'>victim</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span><span class='tstring_content'>!!\n</span><span class='tstring_end'>&quot;</span></span>
+		<span class='kw'>if</span> <span class='lparen'>(</span><span class='id identifier rubyid_p'>p</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span> <span class='const'>Player</span><span class='rparen'>)</span>
+			<span class='id identifier rubyid_p'>p</span><span class='period'>.</span><span class='id identifier rubyid_client'>client</span><span class='period'>.</span><span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>You have KILLED </span><span class='embexpr_beg'>#{</span><span class='ivar'>@victim</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span><span class='tstring_content'>!!\n</span><span class='tstring_end'>&quot;</span></span>
+		<span class='kw'>else</span>
+			<span class='id identifier rubyid_p'>p</span> <span class='op'>=</span> <span class='const'>MudServer</span><span class='period'>.</span><span class='id identifier rubyid_get_player'>get_player</span> <span class='ivar'>@victim</span>
+			<span class='kw'>if</span> <span class='lparen'>(</span><span class='id identifier rubyid_p'>p</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span> <span class='const'>Player</span><span class='rparen'>)</span>
+				<span class='id identifier rubyid_p'>p</span><span class='period'>.</span><span class='id identifier rubyid_client'>client</span><span class='period'>.</span><span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>You have KILLED </span><span class='embexpr_beg'>#{</span><span class='ivar'>@victim</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span><span class='tstring_content'>!\n</span><span class='tstring_end'>&quot;</span></span>
+			<span class='kw'>end</span>
 		<span class='kw'>end</span>
+		<span class='id identifier rubyid_combat_over'>combat_over</span>
 		<span class='const'>Level</span><span class='period'>.</span><span class='id identifier rubyid_gain_exp'>gain_exp</span> <span class='ivar'>@player</span><span class='comma'>,</span> <span class='ivar'>@victim</span>
 		<span class='ivar'>@victim</span><span class='period'>.</span><span class='id identifier rubyid_die'>die</span>
-		<span class='id identifier rubyid_combat_over'>combat_over</span>
 	<span class='kw'>elsif</span> <span class='lparen'>(</span><span class='ivar'>@player</span><span class='period'>.</span><span class='id identifier rubyid_is_dead'>is_dead</span><span class='rparen'>)</span>
-		<span class='id identifier rubyid_current_client'>current_client</span><span class='period'>.</span><span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_attacker'>attacker</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span><span class='tstring_content'> has KILLED you!\n</span><span class='tstring_end'>&quot;</span></span>
-		<span class='ivar'>@player</span><span class='period'>.</span><span class='id identifier rubyid_die'>die</span>
+		<span class='id identifier rubyid_p'>p</span> <span class='op'>=</span> <span class='const'>MudServer</span><span class='period'>.</span><span class='id identifier rubyid_get_player'>get_player</span> <span class='ivar'>@victim</span>
+		<span class='kw'>if</span> <span class='lparen'>(</span><span class='id identifier rubyid_p'>p</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span> <span class='const'>Player</span><span class='rparen'>)</span>
+			<span class='id identifier rubyid_p'>p</span><span class='period'>.</span><span class='id identifier rubyid_client'>client</span><span class='period'>.</span><span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='ivar'>@victim</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span><span class='tstring_content'> has KILLED you!\n</span><span class='tstring_end'>&quot;</span></span>
+		<span class='kw'>else</span>
+			<span class='id identifier rubyid_p'>p</span> <span class='op'>=</span> <span class='const'>MudServer</span><span class='period'>.</span><span class='id identifier rubyid_get_player'>get_player</span> <span class='ivar'>@player</span>
+			<span class='kw'>if</span> <span class='lparen'>(</span><span class='id identifier rubyid_p'>p</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span> <span class='const'>Player</span><span class='rparen'>)</span>
+				<span class='id identifier rubyid_p'>p</span><span class='period'>.</span><span class='id identifier rubyid_client'>client</span><span class='period'>.</span><span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='ivar'>@victim</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span><span class='tstring_content'> has KILLED you!\n</span><span class='tstring_end'>&quot;</span></span>
+			<span class='kw'>end</span>
+		<span class='kw'>end</span>
 		<span class='id identifier rubyid_combat_over'>combat_over</span>
+		<span class='ivar'>@player</span><span class='period'>.</span><span class='id identifier rubyid_die'>die</span>
 	<span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -808,18 +847,6 @@ events, calculating damage, and soon.</p>
       <pre class="lines">
 
 
-98
-99
-100
-101
-102
-103
-104
-105
-106
-107
-108
-109
 110
 111
 112
@@ -833,10 +860,22 @@ events, calculating damage, and soon.</p>
 120
 121
 122
-123</pre>
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'base/combat.rb', line 98</span>
+      <pre class="code"><span class="info file"># File 'base/combat.rb', line 110</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_do_damage'>do_damage</span><span class='lparen'>(</span><span class='id identifier rubyid_attacker'>attacker</span><span class='comma'>,</span> <span class='id identifier rubyid_defender'>defender</span><span class='comma'>,</span> <span class='id identifier rubyid_room'>room</span><span class='rparen'>)</span>
 	<span class='kw'>if</span> <span class='lparen'>(</span><span class='id identifier rubyid_defender'>defender</span><span class='period'>.</span><span class='id identifier rubyid_is_dead?'>is_dead?</span> <span class='op'>||</span> <span class='id identifier rubyid_attacker'>attacker</span><span class='period'>.</span><span class='id identifier rubyid_is_dead?'>is_dead?</span><span class='rparen'>)</span> 
@@ -874,7 +913,7 @@ events, calculating damage, and soon.</p>
 </div>
 
     <div id="footer">
-  Generated on Thu Oct 31 16:15:41 2013 by
+  Generated on Fri Nov  1 14:11:30 2013 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.2 (ruby-1.9.3).
 </div>

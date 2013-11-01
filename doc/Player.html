@@ -246,7 +246,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>The player is dead.</p>
+</div></span>
   
 </li>
 
@@ -292,29 +294,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#is_dead-instance_method" title="#is_dead (instance method)">- (Object) <strong>is_dead</strong> </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Transport the user instantly to another room by Room or Room ID.</p>
+</div></span>
   
 </li>
 
@@ -336,7 +318,57 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Determine whether the player is dead or not.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#recover_health-instance_method" title="#recover_health (instance method)">- (Object) <strong>recover_health</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Recover a pseudo-random amount of health.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#recover_mana-instance_method" title="#recover_mana (instance method)">- (Object) <strong>recover_mana</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Recover a pseudo-random amount of mana.</p>
+</div></span>
   
 </li>
 
@@ -524,16 +556,32 @@ stats, armor, etc.</p>
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note todo">
+    <strong>TODO:</strong>
+    <div class='inline'>
+<p>Change this to a “revive” method and make “die” disable user input for 1
+tick</p>
+</div>
+  </div>
+
+
+<p>The player is dead. Reset them to 1/1 and send them back to room 1.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-22
-23
-24
-25
 26
 27
 28
@@ -546,10 +594,13 @@ stats, armor, etc.</p>
 35
 36
 37
-38</pre>
+38
+39
+40
+41</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'models/player.rb', line 22</span>
+      <pre class="code"><span class="info file"># File 'models/player.rb', line 26</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_die'>die</span>
 	<span class='kw'>if</span> <span class='lparen'>(</span><span class='const'>MudServer</span><span class='period'>.</span><span class='id identifier rubyid_logged_in?'>logged_in?</span> <span class='kw'>self</span><span class='rparen'>)</span>
@@ -557,8 +608,7 @@ stats, armor, etc.</p>
 		<span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_mana'>mana</span> <span class='op'>=</span> <span class='int'>1</span>
 
 		<span class='comment'># take a hit in XP for dying. 1/2 of TNL usually.
-</span>		<span class='id identifier rubyid_tnl'>tnl</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_level'>level</span><span class='op'>+</span><span class='int'>1</span><span class='rparen'>)</span> <span class='op'>*</span> <span class='int'>1000</span><span class='rparen'>)</span> <span class='op'>-</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_experience'>experience</span>
-		<span class='id identifier rubyid_tnl'>tnl</span> <span class='op'>=</span> <span class='id identifier rubyid_tnl'>tnl</span> <span class='op'>&gt;</span> <span class='int'>1000</span> <span class='op'>?</span> <span class='int'>250</span> <span class='op'>:</span> <span class='id identifier rubyid_tnl'>tnl</span>
+</span>		<span class='id identifier rubyid_tnl'>tnl</span> <span class='op'>=</span> <span class='const'>Level</span><span class='period'>.</span><span class='id identifier rubyid_til_next'>til_next</span> <span class='kw'>self</span>
 
 		<span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_experience'>experience</span> <span class='op'>-=</span> <span class='id identifier rubyid_tnl'>tnl</span> <span class='op'>/</span> <span class='int'>2</span>
 		<span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span>
@@ -599,12 +649,12 @@ stats, armor, etc.</p>
       <pre class="lines">
 
 
-86
-87
-88</pre>
+101
+102
+103</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'models/player.rb', line 86</span>
+      <pre class="code"><span class="info file"># File 'models/player.rb', line 101</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_enhanced_stats'>enhanced_stats</span>
 	<span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_stats'>stats</span>
@@ -623,69 +673,70 @@ stats, armor, etc.</p>
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Transport the user instantly to another room by Room or Room ID</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>room</span>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Room|Integer the room to which to transport the user</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-44
-45
-46
-47
-48
-49
-50
-51
-52</pre>
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'models/player.rb', line 44</span>
+      <pre class="code"><span class="info file"># File 'models/player.rb', line 55</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_goto_room'>goto_room</span><span class='lparen'>(</span><span class='id identifier rubyid_room'>room</span><span class='rparen'>)</span>
 	<span class='kw'>if</span> <span class='lparen'>(</span><span class='op'>!</span><span class='id identifier rubyid_room'>room</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span> <span class='const'>Room</span><span class='rparen'>)</span>
 		<span class='id identifier rubyid_room'>room</span> <span class='op'>=</span> <span class='const'>Room</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='id identifier rubyid_room'>room</span><span class='rparen'>)</span>
 	<span class='kw'>end</span>
 
-	<span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_room_id'>room_id</span> <span class='op'>=</span> <span class='id identifier rubyid_room'>room</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span>
+	<span class='id identifier rubyid_player'>player</span> <span class='op'>=</span> <span class='const'>MudServer</span><span class='period'>.</span><span class='id identifier rubyid_get_player'>get_player</span> <span class='kw'>self</span>
+	<span class='id identifier rubyid_player'>player</span><span class='period'>.</span><span class='id identifier rubyid_room_id'>room_id</span> <span class='op'>=</span> <span class='id identifier rubyid_room'>room</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span>
+	<span class='id identifier rubyid_player'>player</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span>
+
 	<span class='id identifier rubyid_room'>room</span><span class='period'>.</span><span class='id identifier rubyid_broadcast'>broadcast</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span><span class='tstring_content'> appears in a ray of light from the sky.\n</span><span class='tstring_end'>&quot;</span></span>
 	<span class='const'>Room</span><span class='period'>.</span><span class='id identifier rubyid_display'>display</span> <span class='id identifier rubyid_room'>room</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
-  <h3 class="signature " id="is_dead-instance_method">
-  
-    - (<tt>Object</tt>) <strong>is_dead</strong> 
-  
-
-  
-
-  
-</h3><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-90
-91
-92
-93
-94
-95</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'models/player.rb', line 90</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_is_dead'>is_dead</span>
-	<span class='kw'>if</span> <span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_hit_points'>hit_points</span> <span class='op'>&lt;=</span> <span class='int'>0</span><span class='rparen'>)</span>
-		<span class='kw'>return</span> <span class='kw'>true</span>
-	<span class='kw'>end</span>
-	<span class='kw'>return</span> <span class='kw'>false</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -704,6 +755,8 @@ stats, armor, etc.</p>
 </h3><div class="docstring">
   <div class="discussion">
     
+<p>Determine whether the player is dead or not</p>
+
 
   </div>
 </div>
@@ -719,6 +772,11 @@ stats, armor, etc.</p>
       
       
       
+        &mdash;
+        <div class='inline'>
+<p>Boolean Return true if the player is dead</p>
+</div>
+      
     </li>
   
 </ul>
@@ -729,15 +787,131 @@ stats, armor, etc.</p>
       <pre class="lines">
 
 
-40
-41
-42</pre>
+47
+48
+49</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'models/player.rb', line 40</span>
+      <pre class="code"><span class="info file"># File 'models/player.rb', line 47</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_is_dead?'>is_dead?</span>
-	<span class='kw'>return</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_hit_points'>hit_points</span> <span class='op'>&lt;=</span> <span class='int'>0</span>
+	<span class='kw'>return</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_state'>state</span> <span class='op'>==</span> <span class='const'>STATE_DEAD</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="recover_health-instance_method">
+  
+    - (<tt>Object</tt>) <strong>recover_health</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note todo">
+    <strong>TODO:</strong>
+    <div class='inline'>
+<p>Take into account any magical effects</p>
+</div>
+  </div>
+
+
+<p>Recover a pseudo-random amount of health. Usually happens once per tick.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+109
+110
+111
+112
+113
+114
+115
+116</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'models/player.rb', line 109</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_recover_health'>recover_health</span>
+	<span class='id identifier rubyid_percentage'>percentage</span> <span class='op'>=</span> <span class='const'>Random</span><span class='period'>.</span><span class='id identifier rubyid_rand'>rand</span><span class='lparen'>(</span><span class='int'>5</span><span class='op'>..</span><span class='int'>15</span><span class='rparen'>)</span>
+	<span class='id identifier rubyid_increase'>increase</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_percentage'>percentage</span><span class='period'>.</span><span class='id identifier rubyid_to_f'>to_f</span> <span class='op'>/</span> <span class='float'>100.0</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_f'>to_f</span>
+	<span class='id identifier rubyid_hp'>hp</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_max_hit_points'>max_hit_points</span>
+	<span class='id identifier rubyid_new_hp'>new_hp</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_hit_points'>hit_points</span> <span class='op'>+</span> <span class='lparen'>(</span><span class='id identifier rubyid_hp'>hp</span> <span class='op'>*</span> <span class='id identifier rubyid_increase'>increase</span><span class='rparen'>)</span>
+	<span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_hit_points'>hit_points</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='id identifier rubyid_new_hp'>new_hp</span><span class='comma'>,</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_max_hit_points'>max_hit_points</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_min'>min</span>
+	<span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="recover_mana-instance_method">
+  
+    - (<tt>Object</tt>) <strong>recover_mana</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note todo">
+    <strong>TODO:</strong>
+    <div class='inline'>
+<p>Take into account magical effects</p>
+</div>
+  </div>
+
+
+<p>Recover a pseudo-random amount of mana. Usually happens once per tick.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+122
+123
+124
+125
+126
+127
+128</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'models/player.rb', line 122</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_recover_mana'>recover_mana</span>
+	<span class='id identifier rubyid_percentage'>percentage</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='const'>Random</span><span class='period'>.</span><span class='id identifier rubyid_rand'>rand</span><span class='lparen'>(</span><span class='int'>5</span><span class='op'>..</span><span class='int'>15</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_f'>to_f</span> <span class='op'>/</span> <span class='float'>100.0</span><span class='rparen'>)</span>
+	<span class='id identifier rubyid_mana'>mana</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_max_mana'>max_mana</span>
+	<span class='id identifier rubyid_new_mana'>new_mana</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_mana'>mana</span> <span class='op'>+</span> <span class='lparen'>(</span><span class='id identifier rubyid_mana'>mana</span> <span class='op'>*</span> <span class='id identifier rubyid_percentage'>percentage</span><span class='rparen'>)</span>
+	<span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_mana'>mana</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='id identifier rubyid_new_mana'>new_mana</span><span class='comma'>,</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_max_mana'>max_mana</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_min'>min</span>
+	<span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -771,21 +945,6 @@ stats, armor, etc</p>
       <pre class="lines">
 
 
-56
-57
-58
-59
-60
-61
-62
-63
-64
-65
-66
-67
-68
-69
-70
 71
 72
 73
@@ -796,16 +955,31 @@ stats, armor, etc</p>
 78
 79
 80
-81</pre>
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'models/player.rb', line 56</span>
+      <pre class="code"><span class="info file"># File 'models/player.rb', line 71</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_show_score'>show_score</span>
 	<span class='id identifier rubyid_output'>output</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
 
 	<span class='comment'>## Set the vars
-</span>	<span class='id identifier rubyid_tnl'>tnl</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_level'>level</span> <span class='op'>*</span> <span class='int'>1000</span><span class='rparen'>)</span> <span class='op'>-</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_experience'>experience</span><span class='rparen'>)</span>
+</span>	<span class='id identifier rubyid_tnl'>tnl</span> <span class='op'>=</span> <span class='const'>Level</span><span class='period'>.</span><span class='id identifier rubyid_til_next'>til_next</span> <span class='kw'>self</span>
 	<span class='id identifier rubyid_params'>params</span> <span class='op'>=</span> <span class='lbrace'>{</span>
 		<span class='symbol'>:name</span> <span class='op'>=&gt;</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
 		<span class='symbol'>:level</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Level </span><span class='embexpr_beg'>#{</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_level'>level</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
@@ -858,22 +1032,22 @@ stats, armor, etc</p>
       <pre class="lines">
 
 
-100
-101
-102
-103
-104
-105
-106
-107
-108
-109
-110
-111
-112</pre>
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'models/player.rb', line 100</span>
+      <pre class="code"><span class="info file"># File 'models/player.rb', line 133</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_show_stats'>show_stats</span>
 	<span class='id identifier rubyid_output'>output</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
@@ -919,29 +1093,24 @@ stats, armor, etc</p>
       <pre class="lines">
 
 
-117
-118
-119
-120
-121
-122
-123
-124
-125
-126
-127
-128
-129
-130</pre>
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'models/player.rb', line 117</span>
+      <pre class="code"><span class="info file"># File 'models/player.rb', line 150</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_show_status_prompt'>show_status_prompt</span>
-	<span class='kw'>if</span> <span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_state'>state</span> <span class='op'>==</span> <span class='const'>STATE_FIGHTING</span><span class='rparen'>)</span>
-		<span class='kw'>return</span>
-	<span class='kw'>end</span>
-
 	<span class='id identifier rubyid_stats'>stats</span> <span class='op'>=</span> <span class='lbrace'>{</span>
 		<span class='symbol'>:hp</span> <span class='op'>=&gt;</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_hit_points'>hit_points</span><span class='comma'>,</span>
 		<span class='symbol'>:maxhp</span> <span class='op'>=&gt;</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_max_hit_points'>max_hit_points</span><span class='comma'>,</span>
@@ -949,7 +1118,10 @@ stats, armor, etc</p>
 		<span class='symbol'>:max_mana</span> <span class='op'>=&gt;</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_max_mana'>max_mana</span><span class='comma'>,</span>
 		<span class='symbol'>:tnl</span> <span class='op'>=&gt;</span> <span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_level'>level</span> <span class='op'>*</span> <span class='int'>1000</span><span class='rparen'>)</span> <span class='op'>-</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_experience'>experience</span>
 	<span class='rbrace'>}</span>
-	<span class='id identifier rubyid_current_client'>current_client</span><span class='period'>.</span><span class='id identifier rubyid_print'>print</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n</span><span class='tstring_end'>&quot;</span></span> <span class='op'>+</span> <span class='const'>View</span><span class='period'>.</span><span class='id identifier rubyid_render_template'>render_template</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>player.status_prompt</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='id identifier rubyid_stats'>stats</span><span class='rparen'>)</span> <span class='op'>+</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> </span><span class='tstring_end'>&quot;</span></span>
+	<span class='id identifier rubyid_p'>p</span> <span class='op'>=</span> <span class='const'>MudServer</span><span class='period'>.</span><span class='id identifier rubyid_get_player'>get_player</span> <span class='kw'>self</span>
+	<span class='kw'>if</span> <span class='lparen'>(</span><span class='id identifier rubyid_p'>p</span><span class='rparen'>)</span>
+		<span class='id identifier rubyid_p'>p</span><span class='period'>.</span><span class='id identifier rubyid_client'>client</span><span class='period'>.</span><span class='id identifier rubyid_print'>print</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n</span><span class='tstring_end'>&quot;</span></span> <span class='op'>+</span> <span class='const'>View</span><span class='period'>.</span><span class='id identifier rubyid_render_template'>render_template</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>player.status_prompt</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='id identifier rubyid_stats'>stats</span><span class='rparen'>)</span> <span class='op'>+</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> </span><span class='tstring_end'>&quot;</span></span>
+	<span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -961,7 +1133,7 @@ stats, armor, etc</p>
 </div>
 
     <div id="footer">
-  Generated on Thu Oct 31 16:15:41 2013 by
+  Generated on Fri Nov  1 14:11:30 2013 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.2 (ruby-1.9.3).
 </div>

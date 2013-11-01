@@ -572,18 +572,20 @@ people.</p>
 98
 99
 100
-101</pre>
+101
+102</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'models/room.rb', line 91</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_people_in'>people_in</span><span class='lparen'>(</span><span class='id identifier rubyid_room'>room</span><span class='rparen'>)</span>
 	<span class='id identifier rubyid_players'>players</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
-	<span class='const'>MudServer</span><span class='period'>.</span><span class='id identifier rubyid_clients'>clients</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_connection'>connection</span><span class='op'>|</span>
-		<span class='id identifier rubyid_player'>player</span> <span class='op'>=</span> <span class='id identifier rubyid_connection'>connection</span><span class='period'>.</span><span class='id identifier rubyid_player'>player</span>
-		<span class='kw'>if</span> <span class='lparen'>(</span><span class='id identifier rubyid_player'>player</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span> <span class='op'>!=</span> <span class='id identifier rubyid_current_player'>current_player</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span> <span class='op'>&amp;&amp;</span> 
-			<span class='id identifier rubyid_player'>player</span><span class='period'>.</span><span class='id identifier rubyid_room_id'>room_id</span> <span class='op'>==</span> <span class='id identifier rubyid_room'>room</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
-			<span class='id identifier rubyid_players'>players</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_player'>player</span>
+	<span class='const'>MudServer</span><span class='period'>.</span><span class='id identifier rubyid_players'>players</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_player'>player</span><span class='op'>|</span>
+		<span class='kw'>if</span> <span class='lparen'>(</span><span class='op'>!</span><span class='id identifier rubyid_player'>player</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span><span class='rparen'>)</span>
+			<span class='kw'>if</span> <span class='lparen'>(</span><span class='id identifier rubyid_player'>player</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span> <span class='op'>!=</span> <span class='id identifier rubyid_current_player'>current_player</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span> <span class='op'>&amp;&amp;</span> 
+				<span class='id identifier rubyid_player'>player</span><span class='period'>.</span><span class='id identifier rubyid_room_id'>room_id</span> <span class='op'>==</span> <span class='id identifier rubyid_room'>room</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
+				<span class='id identifier rubyid_players'>players</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_player'>player</span>
+			<span class='kw'>end</span>
 		<span class='kw'>end</span>
 	<span class='kw'>end</span>
 	<span class='kw'>return</span> <span class='id identifier rubyid_players'>players</span>
@@ -888,7 +890,6 @@ people.</p>
       <pre class="lines">
 
 
-108
 109
 110
 111
@@ -901,10 +902,11 @@ people.</p>
 118
 119
 120
-121</pre>
+121
+122</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'models/room.rb', line 108</span>
+      <pre class="code"><span class="info file"># File 'models/room.rb', line 109</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_broadcast'>broadcast</span><span class='lparen'>(</span><span class='id identifier rubyid_message'>message</span><span class='comma'>,</span> <span class='id identifier rubyid_include_player'>include_player</span> <span class='op'>=</span> <span class='kw'>false</span><span class='rparen'>)</span>
 	<span class='id identifier rubyid_connections'>connections</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
@@ -930,7 +932,7 @@ people.</p>
 </div>
 
     <div id="footer">
-  Generated on Thu Oct 31 16:15:41 2013 by
+  Generated on Fri Nov  1 14:11:30 2013 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.2 (ruby-1.9.3).
 </div>

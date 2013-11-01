@@ -21,6 +21,10 @@ class World
 		@@current_time = Time.now
 	end
 
+	# 
+	# Accessor for all the currently active combats in the world
+	# 
+	# @return Array all combats
 	def combats
 		@@combats
 	end

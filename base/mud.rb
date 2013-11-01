@@ -49,10 +49,20 @@ class MudServer
 		@@clients
 	end
 
+	# 
+	# Determine whether the player is logged in
+	# @param  player Player the player to check
+	# 
+	# @return Boolean whether the player is logged in or not
 	def self.logged_in?(player)
 		MudServer.players.include? player
 	end
 
+	# 
+	# Get the player from the world queue. If no player, return nil
+	# @param  player Player the player to fetch
+	# 
+	# @return Player the player
 	def self.get_player(player)
 		MudServer.players.each do |p|
 			if (player == p)

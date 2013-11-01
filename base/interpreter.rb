@@ -81,6 +81,11 @@ class Interpreter
 		command
 	end
 	
+	# 
+	# Guess the mob based on name.
+	# @param  target String Part or whole of mob's name
+	# 
+	# @return Mob the mob found
 	def self.guess_mob(target)
 		$world.mobs.each do |mob|
 			if (mob.name == target)
