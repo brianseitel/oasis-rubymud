@@ -36,6 +36,13 @@ class SetupMigration < ActiveRecord::Migration
       t.integer :max_hit_points
   	end
 
+    create_table :items do |t|
+      t.string :name, :null => false
+      t.string :short_description, :null => false
+      t.string :long_description, :null => false
+      t.integer :room_id
+    end
+
   end
 
   def self.down
@@ -43,5 +50,6 @@ class SetupMigration < ActiveRecord::Migration
   	drop_table :areas
   	drop_table :rooms
   	drop_table :mobs
+    drop_table :items
   end
 end
