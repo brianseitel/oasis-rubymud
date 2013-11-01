@@ -39,6 +39,9 @@ class CommandInterpreter
 		current_player.die
 	end
 
+	def self.do_goto(room_id)
+		current_player.goto_room(room_id)
+	end
 	# 
 	# The player quits the game
 	# 
@@ -67,7 +70,8 @@ class CommandInterpreter
 		targObj = nil
 		# if it's a room or there's no target, just display the room 
 		if (target.nil? or target.instance_of? Room)
-			Room.display(target.nil? ? current_thread.room : target)
+			room = Room.find(current_player.room_id)
+			Room.display(target.nil? ? room : target)
 			return
 
 		# if we have a target, try and find it

@@ -37,7 +37,7 @@ class Player < ActiveRecord::Base
 		end
 
 		def is_dead?
-			return self.hit_points <= 0
+			return self.state == STATE_DEAD
 		end
 
 		def goto_room(room)
@@ -45,7 +45,10 @@ class Player < ActiveRecord::Base
 				room = Room.find(room)
 			end
 
-			self.room_id = room.id
+			player = MudServer.get_player self
+			player.room_id = room.id
+			player.save
+			
 			room.broadcast "#{self.name} appears in a ray of light from the sky.\n"
 			Room.display room
 		end
