@@ -186,7 +186,7 @@ class MudServer
 			@confirm = current_client.gets.chomp("\r\n")
 		end
 
-		player = Player.create(:name => name, :password => @password, :stats => [])
+		player = Player.create(:name => name, :password => @password, :stats => [], :inventory => [])
 		return player
 	end
 

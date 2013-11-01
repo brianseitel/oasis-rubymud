@@ -15,9 +15,23 @@ class Player < ActiveRecord::Base
 	STATE_SLEEPING 	= 3
 
 	serialize :stats, JSON
+	serialize :inventory, JSON
 	after_create :setup_new_character
 
 	public
+
+		def room
+			room = Room.find(self.room_id)
+		end
+
+		def pickup_item(item)
+			player = MudServer.get_player self
+
+			player.client.puts "You pick up #{item.name}.\n"
+			player.room.broadcast "#{player.name} picks up #{item.name}.\n"
+			player.inventory[player.inventory.length+1] = item.as_json
+			player.save
+		end
 
 		# 
 		# The player is dead. Reset them to 1/1 and send them back to room 1.
@@ -184,6 +198,6 @@ class Player < ActiveRecord::Base
 			self.area_id = 1
 			self.save
 
-			self.state = self.STATE_STANDING
+			self.state = STATE_STANDING
 		end
 end

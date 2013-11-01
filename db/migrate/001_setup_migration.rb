@@ -6,6 +6,7 @@ class SetupMigration < ActiveRecord::Migration
   		t.integer :area_id
   		t.integer :room_id
       t.text :stats
+      t.text :inventory
       t.integer :experience
       t.integer :level
       t.integer :hit_points

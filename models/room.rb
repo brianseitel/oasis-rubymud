@@ -85,6 +85,17 @@ class Room < ActiveRecord::Base
 		return results.join("\n")
 	end
 
+	def self.items_in(room)
+		items = []
+		$world.items.each do |item|
+			if (item.room_id == room.id)
+				items << item
+			end
+		end
+
+		return items
+	end
+
 	# 
 	# Show all of the people in the room
 	# @param  room Room The room whose people we want to display

@@ -190,4 +190,14 @@ class World
 			end
 		end
 	end
+
+	def remove_item (item)
+		self.items.each do |i|
+			if (i == item)
+				self.items.delete item
+				item = nil
+			end
+		end
+	end
+
 end

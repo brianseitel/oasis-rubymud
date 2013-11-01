@@ -79,5 +79,11 @@
     },
     "scan": {
         "method": "do_scan"
+    },
+    "get": {
+        "method": "do_get"
+    },
+    "inventory": {
+        "method": "do_inventory"
     }
 }

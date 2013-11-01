@@ -13,7 +13,7 @@ class CommandInterpreter
 		target = target.downcase
 		$world.mobs.each do |mob|
 			if (mob.room.id == current_player.room_id)
-				len = target.length
+				len = target.length - 1
 				mobname = mob.name[0..len].downcase
 				if (mobname == target)
 					combat = Combat.new(current_player, mob)
@@ -40,12 +40,56 @@ class CommandInterpreter
 	end
 
 	# 
+	# Get an item from the ground. If successful, remove item from world and add to inventory.
+	# @param target String The name of the item we want to pick
+	#  
+	def self.do_get(target)
+		target = target.downcase
+		items = Room.items_in current_player.room
+		items.each do |item|
+			len = target.length - 1
+			itemname = item.name[0..len].downcase
+			if (itemname == target)
+				current_player.pickup_item(item)
+				$world.remove_item(item)
+			end
+		end
+	end
+
+	# 
 	# Instantly transport user to new room. DEV ONLY
 	# @param  room_id Integer The room ID to which to transport the user
 	# 
 	# @todo restrict to Immortals only
 	def self.do_goto(room_id)
 		current_player.goto_room(room_id)
+	end
+
+	# 
+	# Display the user's inventory
+	# 
+	# @todo Abstract to a View
+	def self.do_inventory
+		current_client.puts "\nYour Inventory:\n"
+		current_client.puts "-" * setting('max_width')
+		items = {}
+		counts = {}
+		if (current_player.inventory.length > 0)
+			current_player.inventory.each do |i, item|
+				if (items.keys.include? item['id'])
+					counts[item['id']] += 1
+				else
+					items[item['id']] = item
+					counts[item['id']] = 1
+				end
+			end
+			items.each do |i, item|
+				current_client.puts "#{item['name']}" + (counts[item['id']] > 1 ? " (#{counts[item['id']]})" : "")
+			end
+		else
+			current_client.puts "(nothing)\n"
+		end
+		current_client.puts "-" * setting('max_width')
 	end
 
 	# 
