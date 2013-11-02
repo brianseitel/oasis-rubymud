@@ -85,7 +85,7 @@ class Combat
 			combat_over
 			Level.gain_exp @player, @victim
 			@victim.die
-		elsif (@player.is_dead)
+		elsif (@player.is_dead?)
 			p = MudServer.get_player @victim
 			if (p.instance_of? Player)
 				p.client.puts "#{@victim.name} has KILLED you!\n"
