@@ -5,6 +5,15 @@
 # 
 class Item < ActiveRecord::Base
 
+	def self.load_data(data)
+		item = Item.new
+		data.each do |k, v|
+			item[k] = v
+		end
+
+		return item
+	end
+
 	# 
 	# Spawn an item in its starting room
 	# 

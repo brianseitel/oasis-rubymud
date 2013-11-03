@@ -83,6 +83,9 @@
     "get": {
         "method": "do_get"
     },
+    "drop": {
+        "method": "do_drop"
+    },
     "inventory": {
         "method": "do_inventory"
     }

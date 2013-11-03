@@ -9,8 +9,12 @@ class CommandInterpreter
 	# Start a fight sequence between player and a target
 	# @param target [Mob or Player] the entity the player wishes to fight
 	# 
-	def self.do_attack(target)
-		target = target.downcase
+	def self.do_attack(*args)
+		if (args.length == 0)
+			current_client.puts "Attack who?"
+			return
+		end
+		target = args[0].downcase
 		$world.mobs.each do |mob|
 			if (mob.room.id == current_player.room_id)
 				len = target.length - 1
@@ -20,9 +24,12 @@ class CommandInterpreter
 					if (combat)
 						$world.combats << combat
 					end
+					return
 				end
 			end
 		end
+
+		current_client.puts "#{target} isn't here, dummy!"
 	end
 
 	# 
@@ -39,19 +46,78 @@ class CommandInterpreter
 		current_player.die
 	end
 
+	def self.do_drop(*args)
+		if args.length == 0
+			current_client.puts "Drop what?"
+			return
+		else
+			if args[0].downcase == 'all' && args[1].nil?
+				current_player.inventory.all.each do |item|
+					current_player.drop_item item
+					$world.add_item(item)
+				end
+			elsif args[0].downcase == 'all' && !args[1].nil?
+				target = args[1].downcase
+				current_player.inventory.all.each do |item|
+					len = target.length - 1
+					itemname = item.name[0..len].downcase
+					if (itemname == target)
+						current_player.drop_item(item)
+						$world.add_item(item)
+					end
+				end
+			elsif args[0].downcase != 'all'
+				target = args[0].downcase
+				current_player.inventory.all.each do |item|
+					len = target.length - 1
+					itemname = item['name'][0..len].downcase
+					if (itemname == target)
+						current_player.drop_item(item)
+						$world.add_item(item)
+						return
+					end
+				end
+			end
+		end
+	end
+
 	# 
 	# Get an item from the ground. If successful, remove item from world and add to inventory.
 	# @param target String The name of the item we want to pick
 	#  
-	def self.do_get(target)
-		target = target.downcase
-		items = Room.items_in current_player.room
-		items.each do |item|
-			len = target.length - 1
-			itemname = item.name[0..len].downcase
-			if (itemname == target)
-				current_player.pickup_item(item)
-				$world.remove_item(item)
+	def self.do_get(*args)
+		if (args.length == 0)
+			current_client.puts "Get what?"
+			return
+		else
+			if (args[0].downcase == 'all' && args[1].nil?)
+				items = Room.items_in current_player.room
+				items.each do |item|
+					current_player.pickup_item item
+				end
+			elsif (args[0].downcase == 'all' && !args[1].nil?)
+				target = args[1].downcase
+				items = Room.items_in current_player.room
+				items.each do |item|
+					len = target.length - 1
+					itemname = item.name[0..len].downcase
+					if (itemname == target)
+						current_player.pickup_item(item)
+						$world.remove_item(item)
+					end
+				end
+			elsif (args[0].downcase != 'all')
+				target = args[0].downcase
+				items = Room.items_in current_player.room
+				items.each do |item|
+					len = target.length - 1
+					itemname = item.name[0..len].downcase
+					if (itemname == target)
+						current_player.pickup_item(item)
+						$world.remove_item(item)
+						return
+					end
+				end
 			end
 		end
 	end
@@ -74,8 +140,8 @@ class CommandInterpreter
 		current_client.puts "-" * setting('max_width')
 		items = {}
 		counts = {}
-		if (current_player.inventory.length > 0)
-			current_player.inventory.each do |i, item|
+		if (current_player.inventory.all.length > 0)
+			current_player.inventory.all.each do |item|
 				if (items.keys.include? item['id'])
 					counts[item['id']] += 1
 				else

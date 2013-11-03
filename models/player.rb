@@ -9,6 +9,8 @@ class Player < ActiveRecord::Base
 	attr_accessor :client
 	attr_accessor :state # Whether they're fighting, standing, dead, etc.
 
+	@inventory = {}
+
 	STATE_DEAD 		= 0
 	STATE_STANDING 	= 1
 	STATE_FIGHTING 	= 2
@@ -20,6 +22,12 @@ class Player < ActiveRecord::Base
 
 	public
 
+		def inventory
+			items = self.read_attribute("inventory")
+			@inventory = Inventory.new(items)
+			@inventory
+		end
+
 		def room
 			room = Room.find(self.room_id)
 		end
@@ -27,10 +35,21 @@ class Player < ActiveRecord::Base
 		def pickup_item(item)
 			player = MudServer.get_player self
 
-			player.client.puts "You pick up #{item.name}.\n"
-			player.room.broadcast "#{player.name} picks up #{item.name}.\n"
-			player.inventory[player.inventory.length+1] = item.as_json
+			player.client.puts "You pick up #{item['name']}.\n"
+			player.room.broadcast "#{player['name']} picks up #{item['name']}.\n"
+			player.inventory.add item
 			player.save
+		end
+
+		def drop_item(item)
+			player = MudServer.get_player self
+
+			player.client.puts "You drop #{item.name}.\n"
+			player.room.broadcast "#{player.name} drops #{item.name} to the ground.\n"
+			player.inventory.drop item
+			player.save
+
+			item.room_id = player.room_id
 		end
 
 		# 

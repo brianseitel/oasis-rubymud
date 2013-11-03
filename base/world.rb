@@ -103,7 +103,7 @@ class World
 	def update_area
 		print "[UPDATE] Area\n".green
 		$world.respawn_mobs
-		$world.respawn_objects
+		$world.respawn_items
 	end
 
 	# 
@@ -183,12 +183,16 @@ class World
 	# 
 	def respawn_items
 		Item.find_each do |item|
-			if (!$world.items.include? obj)
+			if (!$world.items.include? item)
 				if (Random.rand(2) == 1)
 					item.spawn
 				end
 			end
 		end
+	end
+
+	def add_item (item)
+		self.items << item
 	end
 
 	def remove_item (item)
