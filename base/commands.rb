@@ -51,32 +51,32 @@ class CommandInterpreter
 			current_client.puts "Drop what?"
 			return
 		else
+			dropped = false
 			if args[0].downcase == 'all' && args[1].nil?
 				current_player.inventory.all.each do |item|
 					current_player.drop_item item
 					$world.add_item(item)
+					dropped = true
 				end
 			elsif args[0].downcase == 'all' && !args[1].nil?
-				target = args[1].downcase
-				current_player.inventory.all.each do |item|
-					len = target.length - 1
-					itemname = item.name[0..len].downcase
-					if (itemname == target)
-						current_player.drop_item(item)
-						$world.add_item(item)
-					end
+				items = Util.guess_objects(args[0], current_player.inventory.all)
+				items.each do |item|
+					current_player.drop_item(item)
+					$world.add_item(item)
+					dropped = true
 				end
 			elsif args[0].downcase != 'all'
-				target = args[0].downcase
-				current_player.inventory.all.each do |item|
-					len = target.length - 1
-					itemname = item['name'][0..len].downcase
-					if (itemname == target)
-						current_player.drop_item(item)
-						$world.add_item(item)
-						return
-					end
+				items = Util.guess_objects(args[0], current_player.inventory.all)
+				items.each do |item|
+					current_player.drop_item(item)
+					$world.add_item(item)
+					dropped = true
+					break
 				end
+			end
+
+			if (dropped == false)
+				current_client.puts "You are not carrying that item!"
 			end
 		end
 	end
@@ -90,34 +90,33 @@ class CommandInterpreter
 			current_client.puts "Get what?"
 			return
 		else
+			dropped = false
+			items_in_room = Room.items_in current_player.room
+
 			if (args[0].downcase == 'all' && args[1].nil?)
-				items = Room.items_in current_player.room
-				items.each do |item|
+				items_in_room.each do |item|
 					current_player.pickup_item item
+					dropped = true
 				end
 			elsif (args[0].downcase == 'all' && !args[1].nil?)
-				target = args[1].downcase
-				items = Room.items_in current_player.room
+				items = Util.guess_objects(args[0], items_in_room)
 				items.each do |item|
-					len = target.length - 1
-					itemname = item.name[0..len].downcase
-					if (itemname == target)
-						current_player.pickup_item(item)
-						$world.remove_item(item)
-					end
+					current_player.pickup_item(item)
+					$world.remove_item(item)
+					dropped = true
 				end
 			elsif (args[0].downcase != 'all')
-				target = args[0].downcase
-				items = Room.items_in current_player.room
+				items = Util.guess_objects(args[0], items_in_room)
 				items.each do |item|
-					len = target.length - 1
-					itemname = item.name[0..len].downcase
-					if (itemname == target)
-						current_player.pickup_item(item)
-						$world.remove_item(item)
-						return
-					end
+					current_player.pickup_item(item)
+					$world.remove_item(item)
+					dropped = true
+					break
 				end
+			end
+
+			if (dropped == false)
+				current_client.puts "That isn't here!"
 			end
 		end
 	end
