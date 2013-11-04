@@ -88,5 +88,8 @@
     },
     "inventory": {
         "method": "do_inventory"
+    },
+    "cast": {
+        "method": "do_cast"
     }
 }

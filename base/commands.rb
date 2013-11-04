@@ -9,7 +9,7 @@ class CommandInterpreter
 	# Start a fight sequence between player and a target
 	# @param target [Mob or Player] the entity the player wishes to fight
 	# 
-	def self.do_attack(*args)
+	def self.do_attack(args)
 		if (args.length == 0)
 			current_client.puts "Attack who?"
 			return
@@ -46,7 +46,7 @@ class CommandInterpreter
 		current_player.die
 	end
 
-	def self.do_drop(*args)
+	def self.do_drop(args)
 		if args.length == 0
 			current_client.puts "Drop what?"
 			return
@@ -85,7 +85,7 @@ class CommandInterpreter
 	# Get an item from the ground. If successful, remove item from world and add to inventory.
 	# @param target String The name of the item we want to pick
 	#  
-	def self.do_get(*args)
+	def self.do_get(args)
 		if (args.length == 0)
 			current_client.puts "Get what?"
 			return
@@ -320,5 +320,9 @@ class CommandInterpreter
 		MudServer.players.each do |player|
 			current_client.puts "[#{player.level}]\t#{player.name}"
 		end
+	end
+
+	def self.do_cast(args)
+		Magic.do_cast(args)
 	end
 end

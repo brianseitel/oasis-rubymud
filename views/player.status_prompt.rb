@@ -1,1 +1,1 @@
-<%= @args[:hp].to_s.cyan %>/<%= @args[:maxhp].to_s.cyan %> <%= @args[:mana].to_s.white %>/<%= @args[:maxhp].to_s.white %> <%= @args[:tnl].to_s.yellow %>TNL>
+<%= @args[:hp].to_s.cyan %>/<%= @args[:maxhp].to_s.cyan %> <%= @args[:mana].to_s.white %>/<%= @args[:max_mana].to_s.white %> <%= @args[:tnl].to_s.yellow %>TNL>

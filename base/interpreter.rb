@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'json'
 require 'pp'
+require 'shellwords'
 
 # 
 # General interpreter class that routes actions to various sub-interpreters, such as CommandInterpreter and SocialInterpreter
@@ -24,8 +25,9 @@ class Interpreter
 		# Check commands first
 		actions = JSON.parse(commands)
 
-		command = self.getCommand(input)
-		target  = self.getTarget(input)
+		args 	= Shellwords.shellwords input
+
+		command = args.shift
 
 		command = self.guess_command command, actions
 
@@ -33,8 +35,8 @@ class Interpreter
 			if (key == command && CommandInterpreter.respond_to?(value['method']))
 				if (value['arg'])
 					return CommandInterpreter.send(value['method'], value['arg'])
-				elsif (target.length > 0)
-					return CommandInterpreter.send(value['method'], target)
+				elsif (args.length > 0)
+					return CommandInterpreter.send(value['method'], args)
 				else
 					return CommandInterpreter.send(value['method'])
 				end
@@ -47,7 +49,7 @@ class Interpreter
 
 		actions.each do |key, value|
 			if (key == command)
-				return SocialInterpreter.interpret(value, target)
+				return SocialInterpreter.interpret(value, args)
 			end
 		end
 

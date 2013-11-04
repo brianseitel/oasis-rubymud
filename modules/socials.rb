@@ -10,8 +10,9 @@ class SocialInterpreter
 	# @param  value [String] The social action to execute
 	# @param  target [Player OR Mob] The target entity upon which to perform the social action
 	#
-	def self.interpret(value, target)
-		if (target.length == 0 || target == current_player.name)
+	def self.interpret(value, args)
+		target = args[0]
+		if (target.nil? || target.length == 0 || target == current_player.name)
 			current_client.puts value['self']
 		else
 			found = false
